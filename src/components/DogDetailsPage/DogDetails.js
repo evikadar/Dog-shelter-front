@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import InfoBox from './InfoBox'
 import Description from './Description'
-import { container, infoBox, description, leftSide, rightSide, btn} from './styles'
+import { mainContainer, infoBox, description, leftSide, rightSide, btn} from './styles'
 
 export default () => {
     const [details, setDetails] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
     const RIGHT_SIDE_WIDTH = 450
     const LEFT_SIDE_WIDTH = 400
+    const ERROR_MSG = '500 server error'
 
     useEffect(() => {
         fetch(`http://localhost:8080/dogs`)
@@ -21,9 +22,9 @@ export default () => {
     return (
         <>
             {!isLoaded
-                ? ''
+                ? ERROR_MSG
                 :
-                <div style={container}>
+                <div style={mainContainer}>
                     <div style={leftSide(LEFT_SIDE_WIDTH)}>
                         <div>{details[0].name}</div>
                         <InfoBox style={infoBox} details={details[0]}/>

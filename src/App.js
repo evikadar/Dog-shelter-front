@@ -1,14 +1,28 @@
-import React, { Component } from 'react';
-import DogDetails from './components/DogDetailsPage/DogDetails';
+import React from 'react';
+import Navigation from "./components/Navigation/Navigation";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import Footer from './components/Footer'
+import DogDetails from "./components/DogDetailsPage/DogDetails";
+import LandingPage from "./components/LandingPage";
 
-class App extends Component {
-  render() {
+const App = () => {
     return (
-      <div className="App">
-        <DogDetails />
-      </div>
+        <Router>
+            <>
+                <div style={{height: 1000}}>
+                    <div className="App">
+                        <Navigation/>
+                    </div>
+
+                    <Switch>
+                        <Route exact path={'/'} component={LandingPage}/>
+                        <Route exact path={'/dog'} component={DogDetails}/>
+                    </Switch>
+                </div>
+                <Footer/>
+            </>
+        </Router>
     );
-  }
 }
 
 export default App;
