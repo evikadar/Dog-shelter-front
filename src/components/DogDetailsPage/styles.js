@@ -1,4 +1,4 @@
-export const container = {
+export const mainContainer = {
     padding: '100px 150px 50px 150px',
 }
 
