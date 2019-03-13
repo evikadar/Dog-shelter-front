@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 
 class DogList extends Component {
+    componentDidMount() {
+        this.getDogs();
+    }
+
     render() {
         return (
             <div className="card-columns">
@@ -31,6 +35,12 @@ class DogList extends Component {
             </div>
         </div>;
 
+    }
+
+    getDogs() {
+        fetch('http://localhost:8080/dogs')
+            .then(response => response.json())
+            .then(json => console.log(json))
     }
 }
 
