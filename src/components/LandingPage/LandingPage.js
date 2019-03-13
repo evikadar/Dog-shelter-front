@@ -26,14 +26,15 @@ class LandingPage extends React.Component {
                         {/*<button><NavLink exact activeClassName='active' to='/dog'>dog</NavLink></button>*/}
                     </div>
                 </div>
-
                 <div className="container">
-                    <h2 id="example-dogs-text">Added recently:</h2>
-                </div>
-                <div className="card-columns">
-                    {this.makeRandomDogs(0)}
-                    {this.makeRandomDogs(1)}
-                    {this.makeRandomDogs(2)}
+                    <div className="container">
+                        <h2 id="example-dogs-text">Recently added:</h2>
+                    </div>
+                    <div className="card-columns">
+                        {this.makeRandomDogs(0)}
+                        {this.makeRandomDogs(1)}
+                        {this.makeRandomDogs(2)}
+                    </div>
                 </div>
             </div>
         );

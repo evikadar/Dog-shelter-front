@@ -50,6 +50,10 @@
 }
 
 .example-dog-img {
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
+}
+
+.example-dog-cards {
+    text-align: center !important;
 }
