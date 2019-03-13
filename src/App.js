@@ -1,3 +1,4 @@
+import DogList from "./DogList";
 import React from 'react';
 import Navigation from "./components/Navigation/Navigation";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
@@ -19,12 +20,13 @@ const App = () => {
                         <Route exact path={'/'} component={LandingPage}/>
                         <Route exact path={'/dog'} component={DogDetails}/>
                         <Route exact path={'/shelter-index'} render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
+                        <Route exact path={"/dogs"} component={DogList}/>
                     </Switch>
                 </div>
                 <Footer/>
             </>
         </Router>
     );
-}
+};
 
 export default App;
