@@ -3,7 +3,7 @@ import Navigation from "./components/Navigation/Navigation";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Footer from './components/Footer'
 import DogDetails from "./components/DogDetailsPage/DogDetails";
-import LandingPage from "./components/LandingPage";
+import LandingPage from "./components/LandingPage/LandingPage";
 
 const App = () => {
     return (
@@ -23,6 +23,6 @@ const App = () => {
             </>
         </Router>
     );
-}
+};
 
 export default App;

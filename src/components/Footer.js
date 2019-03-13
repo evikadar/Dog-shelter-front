@@ -4,9 +4,9 @@ import React from 'react';
 const Footer = () => {
     return (
         <div>
-            This is the Footer
+            2019 © DogShelterProject
         </div>
     );
-}
+};
 
 export default Footer
