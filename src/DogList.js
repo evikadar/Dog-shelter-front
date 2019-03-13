@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 class DogList extends Component {
-    state = { data: []};
+    state = {data: []};
 
     componentDidMount() {
         this.getDogs();
@@ -10,32 +10,30 @@ class DogList extends Component {
     render() {
         return (
             <div className="card-columns">
-                {this.makeManyCards(12)}
+                {this.makeManyCards()}
             </div>
         )
     }
 
-    makeManyCards(nrOfDogs) {
+    makeManyCards() {
         var dogs2 = this.state.data;
         var dogs = [];
 
         try {
-            if(dogs2[0].name) {
+            if (dogs2[0].name) {
                 console.log(dogs2[0]);
                 for (var i = 0; i < dogs2.length; i++) {
                     dogs.push(
                         <div>
-                            <span className='oneDog' key={i}>{this.makeACard(dogs2[i].name, dogs2[i].age, "Spániel")}</span>
+                            <span className='oneDog'
+                                  key={i}>{this.makeACard(dogs2[i].name, dogs2[i].age, dogs2[i].breed)}</span>
                         </div>
                     )
                 }
             }
-        }catch(e){
+        } catch (e) {
             console.log(e);
         }
-
-
-
 
         return dogs;
     }
@@ -65,4 +63,5 @@ class DogList extends Component {
             });
     }
 }
+
 export default DogList;
