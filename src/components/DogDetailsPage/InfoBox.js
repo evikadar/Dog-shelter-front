@@ -10,7 +10,7 @@ export default props => {
                     <p>Age: {age ? age : ERROR_MSG}</p>
                     <p>Sex: {gender ? setSex(gender) : ERROR_MSG}</p>
                     <p>Size: {size ? size : ERROR_MSG}</p>
-                    <p>Neutered: {neutered ? setNeutered(neutered) : ERROR_MSG}</p>
+                    <p>Neutered: {neutered != undefined ? setNeutered(neutered) : ERROR_MSG}</p>
                     <p>Shelter: {shelter ? shelter.name : ERROR_MSG}</p>
             </div>
         )

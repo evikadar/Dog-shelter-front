@@ -29,7 +29,6 @@
     font-size: 20px;
     color: white;
     margin-left: 41% !important;
-
 }
 
 #example-dogs-text{
@@ -50,6 +49,17 @@
 }
 
 .example-dog-img {
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
+}
+
+.example-dog-cards {
+    text-align: center !important;
+}
+
+#footer {
+    position: absolute;
+    text-align: center;
+    bottom: -700px;
+    width: 100%;
 }
