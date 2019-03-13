@@ -9,6 +9,7 @@ export default props => {
     const RIGHT_SIDE_WIDTH = 450
     const LEFT_SIDE_WIDTH = 400
     const ERROR_MSG = '500 server error'
+    const ACTION_TITLE = 'Take me home!'
 
     useEffect(() => {
 
@@ -34,7 +35,7 @@ export default props => {
                     </div>
                     <div style={rightSide}>
                         <img src={`http://localhost:8080/img/${details.photoPath}`} height="400" width={RIGHT_SIDE_WIDTH} alt={"dog"}/>
-                        <button style={btn(RIGHT_SIDE_WIDTH)}>Action</button>
+                        <button style={btn(RIGHT_SIDE_WIDTH)}>{ACTION_TITLE}</button>
                     </div>
                 </div>
             }

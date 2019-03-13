@@ -9,8 +9,13 @@ export default props => {
 
         props.details.description ? (
         <div style={props.style}>DogDetails
+            <label>Dream Home:</label>
             <p>{dreamHome}</p>
+
+            <label>Personality Trait:</label>
             <p>{personalityTrait}</p>
+
+            <label>Special Features: </label>
             <p>{specialFeatures}</p>
         </div>
         )
