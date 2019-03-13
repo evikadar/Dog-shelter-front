@@ -6,12 +6,20 @@ export default props => {
 
         return (
             <div style={props.style}>
-                    <p>Breed {breed ? breed : ERROR_MSG}</p>
-                    <p>Age {age}</p>
-                    <p>Isboy {boy ? boy : ERROR_MSG}</p>
-                    <p>Size {size ? size : ERROR_MSG}</p>
-                    <p>Is neutered: {neutered ? neutered : ERROR_MSG}</p>
-                    <p>Shelter: {shelter ? shelter : ERROR_MSG}</p>
+                    <p>Breed: {breed ? breed : ERROR_MSG}</p>
+                    <p>Age: {age ? age : ERROR_MSG}</p>
+                    <p>Sex: {boy ? setSex(boy) : ERROR_MSG}</p>
+                    <p>Size: {size ? size : ERROR_MSG}</p>
+                    <p>Neutered: {neutered ? setNeutered(neutered) : ERROR_MSG}</p>
+                    <p>Shelter: {shelter ? shelter.name : ERROR_MSG}</p>
             </div>
         )
+}
+
+const setSex = isBoy => {
+    return isBoy ? 'Boy' : "Girl"
+}
+
+const setNeutered = neutered => {
+    return neutered ? 'Yes' : 'No'
 }
