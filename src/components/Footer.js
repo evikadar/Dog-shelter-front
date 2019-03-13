@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div>
+        <div id="footer">
             2019 © DogShelterProject
         </div>
     );
