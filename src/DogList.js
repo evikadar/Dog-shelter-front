@@ -9,9 +9,13 @@ class DogList extends Component {
 
     render() {
         return (
-            <div className="card-columns">
-                {this.makeManyCards()}
+            <div>
+                <div className="container">{this.makeFilters()}</div>
+                <div className="card-columns">
+                    {this.makeManyCards()}
+                </div>
             </div>
+
         )
     }
 
@@ -26,7 +30,7 @@ class DogList extends Component {
                     dogs.push(
                         <div>
                             <span className='oneDog'
-                                  key={i}>{this.makeACard(dogs2[i].name, dogs2[i].age, dogs2[i].breed)}</span>
+                                  key={i}>{this.makeACard(dogs2[i].name, dogs2[i].age, dogs2[i].breed, dogs2[i].photoPath)}</span>
                         </div>
                     )
                 }
@@ -34,15 +38,14 @@ class DogList extends Component {
         } catch (e) {
             console.log(e);
         }
-
         return dogs;
     }
 
 
-    makeACard(dogName, dogAge, dogBreed) {
+    makeACard(dogName, dogAge, dogBreed, dogPhoto) {
         return <div className="DogList">
             <div className="card w-100">
-                <img className="card-img-top" src='./img/dog1.jpeg' alt="Card image cap"/>
+                <img className="card-img-top" src={dogPhoto} alt="Card image cap"/>
                 <div className="card-body">
                     <h4 className="card-title">{dogName}</h4>
                     <p className="card-text">Age: {dogAge}</p>
@@ -61,6 +64,29 @@ class DogList extends Component {
                 console.log(json);
                 this.setState({data: json})
             });
+    }
+
+    makeFilters() {
+        return <div className="btn-group mb-10 mt-10 mr-10">
+            <button type="button" className="mr-10 btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                Age
+            </button>
+            <div className="dropdown-menu">
+                <a className="dropdown-item" href="#">Puppy</a>
+                <a className="dropdown-item" href="#">Young</a>
+                <a className="dropdown-item" href="#">Adult</a>
+            </div>
+            <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                Breed
+            </button>
+            <div className="dropdown-menu">
+                <a className="dropdown-item" href="#">Puppy</a>
+                <a className="dropdown-item" href="#">Young</a>
+                <a className="dropdown-item" href="#">Adult</a>
+            </div>
+        </div>;
     }
 }
 
