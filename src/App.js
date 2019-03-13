@@ -1,16 +1,31 @@
-import React, {Component} from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
 import DogList from "./DogList";
+import React from 'react';
+import Navigation from "./components/Navigation/Navigation";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import Footer from './components/Footer'
+import DogDetails from "./components/DogDetailsPage/DogDetails";
+import LandingPage from "./components/LandingPage";
 
 
-class App extends Component {
-    render() {
-        return (
-            <BrowserRouter>
-                <Route exact path={"/dogs"} component={DogList}/>
-            </BrowserRouter>
-        )
-    }
-}
+const App = () => {
+    return (
+        <Router>
+            <>
+                <div style={{height: 1000}}>
+                    <div className="App">
+                        <Navigation/>
+                    </div>
+
+                    <Switch>
+                        <Route exact path={'/'} component={LandingPage}/>
+                        <Route exact path={'/dog'} component={DogDetails}/>
+                        <Route exact path={"/dogs"} component={DogList}/>
+                    </Switch>
+                </div>
+                <Footer/>
+            </>
+        </Router>
+    );
+};
 
 export default App;
