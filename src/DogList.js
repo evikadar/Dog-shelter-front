@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Link from "react-router-dom/es/Link";
+import { NavLink } from "react-router-dom";
+import DogDetails from "./components/DogDetailsPage/DogDetails";
 
 class DogList extends Component {
     state = {data: []};
@@ -26,7 +27,7 @@ class DogList extends Component {
 
         try {
             if (dogs[0].name) {
-                console.log(dogs[0]);
+
                 for (var i = 0; i < dogs.length; i++) {
                     allTheDogs.push(
                         <div>
@@ -51,7 +52,7 @@ class DogList extends Component {
                     <h4 className="card-title">{dogName}</h4>
                     <p className="card-text">Age: {dogAge}</p>
                     <p className="card-text">Breed: {dogBreed}</p>
-                    <Link to={`/dog/${dogId}`} className="btn btn-primary">See more</Link>
+                    <NavLink to={`/dog/${dogId}`} className="btn btn-primary">See more</NavLink>
                 </div>
             </div>
         </div>;
@@ -62,7 +63,7 @@ class DogList extends Component {
         fetch('http://localhost:8080/dogs')
             .then(response => response.json())
             .then(json => {
-                console.log(json);
+
                 this.setState({data: json})
             });
     }
