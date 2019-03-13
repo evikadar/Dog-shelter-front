@@ -3,7 +3,7 @@ import InfoBox from './InfoBox'
 import Description from './Description'
 import { mainContainer, infoBox, description, leftSide, rightSide, btn} from './styles'
 
-export default () => {
+export default props => {
     const [details, setDetails] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
     const RIGHT_SIDE_WIDTH = 450
@@ -11,12 +11,14 @@ export default () => {
     const ERROR_MSG = '500 server error'
 
     useEffect(() => {
-        fetch(`http://localhost:8080/dogs`)
+
+        fetch(`http://localhost:8080/dog/${props.match.params.id}`)
             .then(response => response.json())
             .then(json => {
                 setDetails(json);
                 setIsLoaded(true)
             })
+
     }, [])
 
     return (
@@ -26,12 +28,12 @@ export default () => {
                 :
                 <div style={mainContainer}>
                     <div style={leftSide(LEFT_SIDE_WIDTH)}>
-                        <div>{details[0].name}</div>
-                        <InfoBox style={infoBox} details={details[0]}/>
-                        <Description style={description} details={details[0]}/>
+                        <div>{details.name}</div>
+                        <InfoBox style={infoBox} details={details}/>
+                        <Description style={description} details={details}/>
                     </div>
                     <div style={rightSide}>
-                        <img src={`http://localhost:8080/imgs/${details[0].photoPath}`} height="400" width={RIGHT_SIDE_WIDTH} alt={"dog"}/>
+                        <img src={`http://localhost:8080/img/${details.photoPath}`} height="400" width={RIGHT_SIDE_WIDTH} alt={"dog"}/>
                         <button style={btn(RIGHT_SIDE_WIDTH)}>Action</button>
                     </div>
                 </div>
