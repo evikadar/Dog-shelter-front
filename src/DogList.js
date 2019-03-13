@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
 class DogList extends Component {
+    state = { data: []};
+
     componentDidMount() {
         this.getDogs();
     }
@@ -14,10 +16,27 @@ class DogList extends Component {
     }
 
     makeManyCards(nrOfDogs) {
+        var dogs2 = this.state.data;
         var dogs = [];
-        for (var i = 0; i < nrOfDogs; i++) {
-            dogs.push(<span className='oneDog' key={i}>{this.makeACard("Süti", 7, "Mixed")}</span>)
+
+        try {
+            if(dogs2[0].name) {
+                console.log(dogs2[0]);
+                for (var i = 0; i < dogs2.length; i++) {
+                    dogs.push(
+                        <div>
+                            <span className='oneDog' key={i}>{this.makeACard(dogs2[i].name, dogs2[i].age, "Spániel")}</span>
+                        </div>
+                    )
+                }
+            }
+        }catch(e){
+            console.log(e);
         }
+
+
+
+
         return dogs;
     }
 
@@ -40,8 +59,10 @@ class DogList extends Component {
     getDogs() {
         fetch('http://localhost:8080/dogs')
             .then(response => response.json())
-            .then(json => console.log(json))
+            .then(json => {
+                console.log(json);
+                this.setState({data: json})
+            });
     }
 }
-
 export default DogList;
