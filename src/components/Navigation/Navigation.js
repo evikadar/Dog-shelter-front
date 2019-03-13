@@ -19,6 +19,9 @@ const Navigation = () => {
                 <li>
                     <NavLink exact activeClassName='active' to='/dogs' >Dogs</NavLink>
                 </li>
+                <li>
+                    <NavLink exact activeClassName='active' to='/shelter-index'>Log in as Shelter</NavLink>
+                </li>
             </ul>
         </Wrapper>
     );
