@@ -45,7 +45,7 @@ class DogList extends Component {
     makeACard(dogName, dogAge, dogBreed, dogPhoto) {
         return <div className="DogList">
             <div className="card w-100">
-                <img className="card-img-top" src={dogPhoto} alt="Card image cap"/>
+                <img className="card-img-top" src={'http://localhost:8080/img/'+dogPhoto} alt="Card image cap"/>
                 <div className="card-body">
                     <h4 className="card-title">{dogName}</h4>
                     <p className="card-text">Age: {dogAge}</p>
