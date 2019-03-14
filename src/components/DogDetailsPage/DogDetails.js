@@ -29,7 +29,7 @@ export default props => {
                 :
                 <div style={mainContainer}>
                     <div style={leftSide(LEFT_SIDE_WIDTH)}>
-                        <div>{details.name}</div>
+                        <div style={{paddingLeft: 10}}>{details.name}</div>
                         <InfoBox style={infoBox} details={details}/>
                         <Description style={description} details={details}/>
                     </div>
