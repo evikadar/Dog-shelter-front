@@ -17,7 +17,6 @@ class DogList extends Component {
                     {this.makeManyCards()}
                 </div>
             </div>
-
         )
     }
 
