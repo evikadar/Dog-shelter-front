@@ -52,7 +52,7 @@ class LandingPage extends React.Component {
                         <p className="card-text">Age: {this.state.data[dogNumber].age}</p>
                         {/*<p className="card-text">Breed: {this.state.data[0].breed}</p>*/}
 
-                        <a href="#" className="btn btn-primary">See more</a>
+                        <NavLink exact to={`/dog/${this.state.data[dogNumber].id}`} className="btn btn-primary">See more</NavLink>
                     </div>
                 </div>) : (<div>Loading dog ...</div>)
             }
