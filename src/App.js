@@ -19,7 +19,7 @@ const App = () => {
 
                     <Switch>
                         <Route exact path={'/'} component={LandingPage}/>
-                        <Route exact path={'/shelter-index'} render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
+                        <Route exact path={'/shelter-index/:id'} render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
                         <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
                         <Route exact path={"/dogs"} component={DogList}/>
                     </Switch>
