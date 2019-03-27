@@ -11,12 +11,13 @@ class ShelterIndex extends React.Component {
         super(props);
         this.state = {
             isLoaded: false,
-            dogData: []
+            dogData: [],
+            shelterId: props.match.params.id
         };
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/shelter/index", {
+        fetch(`http://localhost:8080/shelter/${this.state.shelterId}/dogs`, {
             method: "get",
         })
             .then(response => response.json())
@@ -33,16 +34,16 @@ class ShelterIndex extends React.Component {
         return (
             <div>
                 <Title value={this.props.value}/>
-                {this.renderDogBoxes()}
+                {this.renderDogCards()}
             </div>
         )
     }
 
-    renderDogBoxes() {
+    renderDogCards() {
         return (
-            <div className="card-columns">
+            <div className="container-fluid">
                 {this.state.dogData.length > 0 ? (
-                    this.renderAllBoxes()
+                    this.renderAllDogCards()
                     ) : (
                         <div>Your dogs are loading...</div>
                 )
@@ -51,26 +52,26 @@ class ShelterIndex extends React.Component {
         );
     }
 
-    renderAllBoxes() {
-        let dogBoxes = [];
+    renderAllDogCards() {
+        let dogCards = [];
         for (let i = 0; i < this.state.dogData.length; i++) {
             let dog = this.state.dogData[i];
-            dogBoxes.push(<div>
-                <DogBox dogName={dog.name} dogStatus={dog.status} dogImage={dog.photoPath}/>
+            dogCards.push(<div>
+                <DogCard dogName={dog.name} dogStatus={dog.status} dogImage={dog.photoPath}/>
             </div>)
         }
-        return dogBoxes;
+        return dogCards;
     }
 }
 
-class DogBox extends React.Component {
+class DogCard extends React.Component {
 
     render() {
         return (
-            <div className="card w-100">
-                <img className="shelterDogImage card-img-right" src={"http://localhost:8080/img/" + this.props.dogImage} alt="dog"/>
+            <div className="card">
+                <img className="shelterDogImage card-img-left" src={"http://localhost:8080/" + this.props.dogImage} alt="dog"/>
                 <div className="card-body">
-                    <h3 class="dogBox dogName">
+                    <h3 className="dogName">
                         {this.props.dogName}
                     </h3>
                     <div>
