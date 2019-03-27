@@ -17,28 +17,22 @@ class DogList extends Component {
                     {this.makeManyCards()}
                 </div>
             </div>
-
         )
     }
 
     makeManyCards() {
-        var dogs = this.state.data;
-        var allTheDogs = [];
+        const dogs = this.state.data;
+        const allTheDogs = [];
+        if (dogs.length > 0) {
 
-        try {
-            if (dogs[0].name) {
-
-                for (var i = 0; i < dogs.length; i++) {
-                    allTheDogs.push(
-                        <div>
-                            <span className='oneDog'
-                                  key={i}>{this.makeACard(dogs[i].name, dogs[i].age, dogs[i].breed, dogs[i].photoPath, dogs[i].id)}</span>
-                        </div>
-                    )
-                }
+            for (var i = 0; i < dogs.length; i++) {
+                allTheDogs.push(
+                    <div>
+                        <span className='oneDog'
+                              key={i}>{this.makeACard(dogs[i].name, dogs[i].age, dogs[i].breed, dogs[i].photoPath, dogs[i].id)}</span>
+                    </div>
+                )
             }
-        } catch (e) {
-            console.log(e);
         }
         return allTheDogs;
     }
