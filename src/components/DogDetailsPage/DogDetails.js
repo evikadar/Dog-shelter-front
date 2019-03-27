@@ -1,7 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import InfoBox from './InfoBox'
 import Description from './Description'
-import { mainContainer, infoBox, description, leftSide, rightSide, btn} from './styles'
+import {
+  mainContainer,
+  infoBox,
+  description,
+  leftSide,
+  rightSide,
+  btn
+} from './styles'
 
 export default props => {
     const [details, setDetails] = useState([]);
@@ -22,23 +29,28 @@ export default props => {
 
     }, []);
 
-    return (
-        <div>
-            {!isLoaded
-                ? ERROR_MSG
-                :
-                <div style={mainContainer}>
-                    <div style={leftSide(LEFT_SIDE_WIDTH)}>
-                        <div>{details.name}</div>
-                        <InfoBox style={infoBox} details={details}/>
-                        <Description style={description} details={details}/>
-                    </div>
-                    <div style={rightSide}>
-                        <img src={`http://localhost:8080/img/${details.photoPath}`} height="400" width={RIGHT_SIDE_WIDTH} alt={"dog"}/>
-                        <button style={btn(RIGHT_SIDE_WIDTH)}>{ACTION_TITLE}</button>
-                    </div>
-                </div>
-            }
+  return (
+    <div>
+      {!isLoaded ? (
+        ERROR_MSG
+      ) : (
+        <div style={mainContainer}>
+          <div style={leftSide(LEFT_SIDE_WIDTH)}>
+            <div style={{ paddingLeft: 10 }}>{details.name}</div>
+            <InfoBox style={infoBox} details={details} />
+            <Description style={description} details={details} />
+          </div>
+          <div style={rightSide}>
+            <img
+              src={`http://localhost:8080/${details.photoPath}`}
+              height="400"
+              width={RIGHT_SIDE_WIDTH}
+              alt={'dog'}
+            />
+            <button style={btn(RIGHT_SIDE_WIDTH)}>{ACTION_TITLE}</button>
+          </div>
         </div>
-    )
+      )}
+    </div>
+  )
 }

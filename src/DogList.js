@@ -17,28 +17,22 @@ class DogList extends Component {
                     {this.makeManyCards()}
                 </div>
             </div>
-
         )
     }
 
     makeManyCards() {
-        var dogs = this.state.data;
-        var allTheDogs = [];
+        const dogs = this.state.data;
+        const allTheDogs = [];
+        if (dogs.length > 0) {
 
-        try {
-            if (dogs[0].name) {
-
-                for (var i = 0; i < dogs.length; i++) {
-                    allTheDogs.push(
-                        <div>
-                            <span className='oneDog'
-                                  key={i}>{this.makeACard(dogs[i].name, dogs[i].age, dogs[i].breed, dogs[i].photoPath, dogs[i].id)}</span>
-                        </div>
-                    )
-                }
+            for (var i = 0; i < dogs.length; i++) {
+                allTheDogs.push(
+                    <div>
+                        <span className='oneDog'
+                              key={i}>{this.makeACard(dogs[i].name, dogs[i].age, dogs[i].breed, dogs[i].photoPath, dogs[i].id)}</span>
+                    </div>
+                )
             }
-        } catch (e) {
-            console.log(e);
         }
         return allTheDogs;
     }
@@ -47,7 +41,7 @@ class DogList extends Component {
     makeACard(dogName, dogAge, dogBreed, dogPhoto, dogId) {
         return <div className="DogList">
             <div className="card w-100">
-                <img className="card-img-top" src={'http://localhost:8080/img/'+dogPhoto} alt="Card image cap"/>
+                <img className="card-img-top" src={'http://localhost:8080/'+dogPhoto} alt="Card image cap"/>
                 <div className="card-body">
                     <h4 className="card-title">{dogName}</h4>
                     <p className="card-text">Age: {dogAge}</p>

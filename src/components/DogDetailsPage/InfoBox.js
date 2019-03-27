@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {NavLink} from "react-router-dom";
 
 export default props => {
@@ -14,7 +14,7 @@ export default props => {
             <p>Neutered: {neutered != undefined ? setNeutered(neutered) : ERROR_MSG}</p>
             <p>Shelter: {shelter ? <NavLink to={`/shelter/${shelter.id}`}>{shelter.name}</NavLink> : ERROR_MSG}</p>
         </div>
-    )
+    );
 }
 
 const setSex = gender => {
