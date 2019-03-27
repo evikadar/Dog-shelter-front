@@ -6,6 +6,8 @@ import Footer from './components/Footer'
 import DogDetails from "./components/DogDetailsPage/DogDetails";
 import ShelterIndex from './components/ShelterIndex/ShelterIndex';
 import LandingPage from "./components/LandingPage/LandingPage";
+import Login from "./components/LoginRegisterPage/Login";
+import Register from "./components/LoginRegisterPage/Register";
 
 
 const App = () => {
@@ -22,6 +24,8 @@ const App = () => {
                         <Route exact path={'/shelter-index'} render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
                         <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
                         <Route exact path={"/dogs"} component={DogList}/>
+                        <Route exact path={"/login"} component={Login}/>
+                        <Route exact path={"/register"} component={Register}/>
                     </Switch>
                 </div>
                 <Footer/>
