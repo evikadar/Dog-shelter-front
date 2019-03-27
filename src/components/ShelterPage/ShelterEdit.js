@@ -71,8 +71,19 @@ class ShelterEdit extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <div className="card m-3">
+                        <h3 className="text-center m-3">Description:</h3>
+                        <div className="row mt-0 ml-3 mr-3 mb-3">
+                            <div className="col m-3">
+                                <label htmlFor="shelter-description">Shelter description (motto, about the adoption-process, etc. ... ): </label>
+                                <textarea className="form-control" id="shelter-description"
+                                          rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
-                <div className="row">
+                <div className="row m-3">
                     <div className="col text-right">
                         <button type="cancel" className="btn btn-light" value="Cancel">Cancel</button>
                     </div>
