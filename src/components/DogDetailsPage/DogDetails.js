@@ -4,12 +4,12 @@ import Description from './Description'
 import { mainContainer, infoBox, description, leftSide, rightSide, btn} from './styles'
 
 export default props => {
-    const [details, setDetails] = useState([])
-    const [isLoaded, setIsLoaded] = useState(false)
-    const RIGHT_SIDE_WIDTH = 450
-    const LEFT_SIDE_WIDTH = 400
-    const ERROR_MSG = '500 server error'
-    const ACTION_TITLE = 'Take me home!'
+    const [details, setDetails] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const RIGHT_SIDE_WIDTH = 450;
+    const LEFT_SIDE_WIDTH = 400;
+    const ERROR_MSG = '500 server error';
+    const ACTION_TITLE = 'Take me home!';
 
     useEffect(() => {
 
@@ -20,10 +20,10 @@ export default props => {
                 setIsLoaded(true)
             })
 
-    }, [])
+    }, []);
 
     return (
-        <>
+        <div>
             {!isLoaded
                 ? ERROR_MSG
                 :
@@ -39,6 +39,6 @@ export default props => {
                     </div>
                 </div>
             }
-        </>
+        </div>
     )
 }
