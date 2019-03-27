@@ -9,6 +9,7 @@ import Login from "./components/LoginRegisterPage/Login";
 import Register from "./components/LoginRegisterPage/Register";
 import DogDetails from './components/DogDetailsPage/DogDetails'
 import LandingPage from './components/LandingPage/LandingPage'
+import ShelterEdit from "./components/ShelterPage/ShelterEdit";
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
                         <Route exact path={"/shelter/:id"} component={ShelterDetails}/>
                         <Route exact path={"/login"} component={Login}/>
                         <Route exact path={"/register"} component={Register}/>
+                        <Route exact path={"/shelter-edit"} component={ShelterEdit}/>
                     </Switch>
                 </div>
                 <Footer/>
