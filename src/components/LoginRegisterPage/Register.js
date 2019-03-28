@@ -41,8 +41,6 @@ class Register extends React.Component {
                 .then(data => this.setState({username: this.state.username}))
                 .catch(error => this.setState({error}));
         }
-
-
     }
 
     render() {
