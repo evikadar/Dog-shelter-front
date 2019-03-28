@@ -4,7 +4,7 @@ import FilterPanel from "./components/FilterPanel/FilterPanel";
 
 class DogList extends Component {
     constructor(props){
-        super(props)
+        super(props);
         this.state = {data: []};
         this.refreshDogCards = this.refreshDogCards.bind(this);
     }

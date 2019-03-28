@@ -3,12 +3,14 @@ import styled from 'styled-components'
 import Select from "react-select";
 
 const Wrapper = styled.div`
-	padding: 10px;
+	padding: 30px 10px 50px 10px;
+	text-align: center;
 `;
 
 const SelectWrapper = styled.div`
 	display: inline-block;
 	width: 200px;
+	margin: 0px 30px;
 `;
 
 const FilterPanel = ({invokeDataRefresh: passToParent}) => {
@@ -41,7 +43,7 @@ const FilterPanel = ({invokeDataRefresh: passToParent}) => {
         <Wrapper>
 
             <SelectWrapper>
-                Neutered
+                <label>Neutered</label>
                 <Select isSearchable={false} isClearable={true} options={[
                     {value: 'Yes', label: 'Yes'},
                     {value: 'No', label: 'No'}
@@ -51,7 +53,7 @@ const FilterPanel = ({invokeDataRefresh: passToParent}) => {
             </SelectWrapper>
 
             <SelectWrapper>
-                Age
+                <label>Age</label>
                 <Select isSearchable={false} isClearable={true} options={[
                     {value: 'Puppy', label: 'Puppy'},
                     {value: 'Young', label: 'Young'},
@@ -63,7 +65,7 @@ const FilterPanel = ({invokeDataRefresh: passToParent}) => {
             </SelectWrapper>
 
             <SelectWrapper>
-                Size
+                <label>Size</label>
                 <Select isSearchable={false} isClearable={true} options={[
                     {value: 'Extra small', label: 'Extra small'},
                     {value: 'Small', label: 'Small'},
@@ -76,7 +78,7 @@ const FilterPanel = ({invokeDataRefresh: passToParent}) => {
             </SelectWrapper>
 
             <SelectWrapper>
-                Gender
+                <label>Gender</label>
                 <Select isSearchable={false} isClearable={true} options={[
                     {value: 'Male', label: 'Male'},
                     {value: 'Female', label: 'Female'}
@@ -86,7 +88,7 @@ const FilterPanel = ({invokeDataRefresh: passToParent}) => {
             </SelectWrapper>
 
             <SelectWrapper>
-                Breed
+                <label>Breed</label>
                 <Select isSearchable={false} isClearable={true} options={[
                     {value: 'Collie', label: 'Collie'},
                     {value: 'Husky', label: 'Husky'},
