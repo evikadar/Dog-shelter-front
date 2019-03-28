@@ -64,7 +64,7 @@ class ShelterEdit extends React.Component {
                                 <div className="col m-2">
                                     <label htmlFor="shelter-phone">Phone number:</label>
                                     <input type="text" className="form-control" id="shelter-phone"
-                                           defaultValue={shelter.phoneNumber}/>
+                                           defaultValue={shelter.phoneNumber ? shelter.phoneNumber : ""}/>
                                 </div>
                             </div>
                         </div>
@@ -74,24 +74,24 @@ class ShelterEdit extends React.Component {
                                 <div className="col m-3">
                                     <label htmlFor="shelter-address-country">Country:</label>
                                     <input type="text" className="form-control" id="shelter-address-country"
-                                           defaultValue={shelter.address.country}/>
+                                           defaultValue={shelter.address && shelter.address.country ? shelter.address.country : ""}/>
                                 </div>
                                 <div className="col m-3">
                                     <label htmlFor="shelter-address-city">City:</label>
                                     <input type="text" className="form-control" id="shelter-address-city"
-                                           defaultValue={shelter.address.city}/>
+                                           defaultValue={shelter.address && shelter.address.city ? shelter.address.city : ""}/>
                                 </div>
                             </div>
                             <div className="row mt-0 ml-3 mr-3 mb-3">
                                 <div className="col m-3">
                                     <label htmlFor="shelter-address-address">Address (street, house number):</label>
                                     <input type="text" className="form-control" id="shelter-address-address"
-                                           defaultValue={shelter.address.address}/>
+                                           defaultValue={shelter.address && shelter.address.address ? shelter.address.address : ""}/>
                                 </div>
                                 <div className="col m-3">
                                     <label htmlFor="shelter-address-zip">Zip-code:</label>
                                     <input type="text" className="form-control" id="shelter-address-zip"
-                                           defaultValue={shelter.address.zipCode}/>
+                                           defaultValue={shelter.address && shelter.address.zipCode ? shelter.address.zipCode : ""}/>
                                 </div>
                             </div>
                         </div>
@@ -102,11 +102,10 @@ class ShelterEdit extends React.Component {
                                     <label htmlFor="shelter-description">Shelter description (motto, about the
                                         adoption-process, etc. ... ): </label>
                                     <textarea className="form-control" id="shelter-description"
-                                              rows="5" defaultValue={shelter.shelterDescription}/>
+                                              rows="5" defaultValue={shelter.shelterDescription ? shelter.shelterDescription : ""}/>
                                 </div>
                             </div>
                         </div>
-
                     </form>
                     <div className="row m-3">
                         <div className="col text-right">
