@@ -29,7 +29,7 @@ const App = () => {
                         <Route exact path={"/shelter/:id"} component={ShelterDetails}/>
                         <Route exact path={"/login"} component={Login}/>
                         <Route exact path={"/register"} component={Register}/>
-                        <Route exact path={"/shelter-edit"} component={ShelterEdit}/>
+                        <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
                     </Switch>
                 </div>
                 <Footer/>
