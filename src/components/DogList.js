@@ -1,21 +1,30 @@
-import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
-import DogDetails from './DogDetailsPage/DogDetails';
+import {NavLink} from "react-router-dom";
+import FilterPanel from "./FilterPanel/FilterPanel";
+import React from "react";
 
-class DogList extends Component {
-    state = {data: []};
 
-    componentDidMount() {
-        this.getDogs();
+class DogList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {data: []};
+        this.refreshDogCards = this.refreshDogCards.bind(this);
+    }
+
+    refreshDogCards(dogs) {
+        this.setState({data: dogs});
+        this.makeManyCards();
     }
 
     render() {
         return (
             <div>
-                <div className="container">{this.makeFilters()}</div>
-                <div className="card-columns">{this.makeManyCards()}</div>
+                <FilterPanel invokeDataRefresh={this.refreshDogCards}/>
+                <div className="card-columns">
+                    {this.makeManyCards()}
+                </div>
             </div>
-        );
+
+        )
     }
 
     makeManyCards() {
@@ -24,20 +33,14 @@ class DogList extends Component {
 
         try {
             if (dogs[0].name) {
+
                 for (var i = 0; i < dogs.length; i++) {
                     allTheDogs.push(
                         <div>
-              <span className="oneDog" key={i}>
-                {this.makeACard(
-                    dogs[i].name,
-                    dogs[i].age,
-                    dogs[i].breed,
-                    dogs[i].photoPath,
-                    dogs[i].id
-                )}
-              </span>
+                            <span className='oneDog'
+                                  key={i}>{this.makeACard(dogs[i].name, dogs[i].age, dogs[i].breed, dogs[i].photoPath, dogs[i].id)}</span>
                         </div>
-                    );
+                    )
                 }
             }
         } catch (e) {
@@ -47,7 +50,6 @@ class DogList extends Component {
     }
 
     makeACard(dogName, dogAge, dogBreed, dogPhoto, dogId) {
-        console.log(dogPhoto)
         return (
             <div className="DogList">
                 <div className="card w-100">
@@ -122,6 +124,8 @@ class DogList extends Component {
                 </div>
             </div>
         );
+
+
     }
 }
 

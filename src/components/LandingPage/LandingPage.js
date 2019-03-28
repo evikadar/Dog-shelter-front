@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import './landingstyle.css'
 
 class LandingPage extends React.Component {
@@ -74,7 +74,6 @@ class LandingPage extends React.Component {
     fetch('http://localhost:8080/dogs')
       .then(response => response.json())
       .then(json => {
-        console.log(json)
         this.setState({ data: json })
       })
   }

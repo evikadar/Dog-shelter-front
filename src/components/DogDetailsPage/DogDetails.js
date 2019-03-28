@@ -11,24 +11,26 @@ import {
 } from './styles'
 
 export default props => {
-  const [details, setDetails] = useState([])
-  const [isLoaded, setIsLoaded] = useState(false)
-  const RIGHT_SIDE_WIDTH = 450
-  const LEFT_SIDE_WIDTH = 400
-  const ERROR_MSG = '500 server error'
-  const ACTION_TITLE = 'Take me home!'
+    const [details, setDetails] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const RIGHT_SIDE_WIDTH = 450;
+    const LEFT_SIDE_WIDTH = 400;
+    const ERROR_MSG = '500 server error';
+    const ACTION_TITLE = 'Take me home!';
 
-  useEffect(() => {
-    fetch(`http://localhost:8080/dog/${props.match.params.id}`)
-      .then(response => response.json())
-      .then(json => {
-        setDetails(json)
-        setIsLoaded(true)
-      })
-  }, [])
+    useEffect(() => {
+
+        fetch(`http://localhost:8080/dog/${props.match.params.id}`)
+            .then(response => response.json())
+            .then(json => {
+                setDetails(json);
+                setIsLoaded(true)
+            })
+
+    }, []);
 
   return (
-    <>
+    <div>
       {!isLoaded ? (
         ERROR_MSG
       ) : (
@@ -40,7 +42,7 @@ export default props => {
           </div>
           <div style={rightSide}>
             <img
-              src={`http://localhost:8080/img/${details.photoPath}`}
+              src={`http://localhost:8080/${details.photoPath}`}
               height="400"
               width={RIGHT_SIDE_WIDTH}
               alt={'dog'}
@@ -49,6 +51,6 @@ export default props => {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
