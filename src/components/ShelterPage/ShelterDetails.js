@@ -75,36 +75,43 @@ class ShelterDetails extends React.Component {
                                         <i className="cui-envelope-closed"> </i>
                                         {shelter.email}
                                     </li>
-                                    <li className="list-group-item">
+                                    {shelter.phoneNumber ?
+                                        (<li className="list-group-item">
                                         <i className="cui-phone"> </i>
                                         {shelter.phoneNumber}
-                                    </li>
+                                    </li>) : ""}
                                 </div>
                             </div>
                             <div className="col-6">
+                                {shelter.address ? (
                                 <div className="card border-dark mb-3 text-center">
-                                    <h3 className="card-title">Address:</h3>
+                                    <h3 className="card-title mb-3">Address:</h3>
                                     <div className="card-text">
-                                        <div>{shelter.address.address}</div>
-                                        <div>{shelter.address.city}, {shelter.address.country}</div>
-                                        <div>{shelter.address.zipCode}</div>
+                                            <div>{shelter.address.address ? shelter.address.address : ""}</div>
+                                                <div> {shelter.address.city ? shelter.address.city : ""}
+                                                    {shelter.address.country ? shelter.address.country : ""}</div>
+                                                <div>{shelter.address.zipCode ? shelter.address.zipCode : ""}</div>
+
                                     </div>
-                                </div>
+                                </div>) : ""}
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-8">
-                                <div className="card border-dark mb-3">
-                                    <h3 className="card-title text-center">About us:</h3>
-                                    <div className="card-body">
-                                        <p className="card-text">
-                                            {shelter.shelterDescription}
-                                        </p>
-                                    </div>
-                                </div>
+                                {shelter.shelterDescription ?
+                                    (<div className="card border-dark mb-3">
+                                        <h3 className="card-title text-center">About us:</h3>
+                                        <div className="card-body">
+                                            <p className="card-text">
+                                                {shelter.shelterDescription}
+                                            </p>
+                                        </div>
+                                    </div>) : ""}
+
                             </div>
                             <div className="col-4">
-                                <ShelterLogo shelterLogo={shelter.photoPath}/>
+                                {shelter.photoPath ? (<ShelterLogo shelterLogo={shelter.photoPath}/>) : ""}
+
                             </div>
                         </div>
                     </div>
