@@ -1,18 +1,23 @@
 import React, {Component} from 'react';
-import { NavLink } from "react-router-dom";
-import DogDetails from "./components/DogDetailsPage/DogDetails";
+import {NavLink} from "react-router-dom";
+import FilterPanel from "./components/FilterPanel/FilterPanel";
 
 class DogList extends Component {
-    state = {data: []};
+    constructor(props){
+        super(props)
+        this.state = {data: []};
+        this.refreshDogCards = this.refreshDogCards.bind(this);
+    }
 
-    componentDidMount() {
-        this.getDogs();
+    refreshDogCards(dogs) {
+        this.setState({data: dogs});
+        this.makeManyCards();
     }
 
     render() {
         return (
             <div>
-                <div className="container">{this.makeFilters()}</div>
+                <FilterPanel invokeDataRefresh={this.refreshDogCards}/>
                 <div className="card-columns">
                     {this.makeManyCards()}
                 </div>
@@ -57,38 +62,6 @@ class DogList extends Component {
             </div>
         </div>;
 
-    }
-
-    getDogs() {
-        fetch('http://localhost:8080/dogs')
-            .then(response => response.json())
-            .then(json => {
-
-                this.setState({data: json})
-            });
-    }
-
-    makeFilters() {
-        return <div className="btn-group mb-10 mt-10 mr-10">
-            <button type="button" className="mr-10 btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                Age
-            </button>
-            <div className="dropdown-menu">
-                <a className="dropdown-item" href="#">Puppy</a>
-                <a className="dropdown-item" href="#">Young</a>
-                <a className="dropdown-item" href="#">Adult</a>
-            </div>
-            <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                Breed
-            </button>
-            <div className="dropdown-menu">
-                <a className="dropdown-item" href="#">Puppy</a>
-                <a className="dropdown-item" href="#">Young</a>
-                <a className="dropdown-item" href="#">Adult</a>
-            </div>
-        </div>;
     }
 }
 

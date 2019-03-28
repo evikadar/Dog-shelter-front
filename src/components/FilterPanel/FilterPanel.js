@@ -11,7 +11,7 @@ const SelectWrapper = styled.div`
 	width: 200px;
 `;
 
-const FilterPanel = props => {
+const FilterPanel = ({invokeDataRefresh: passToParent}) => {
     const [state, setState] = useState(
         {
             isNeutered: null,
@@ -32,7 +32,7 @@ const FilterPanel = props => {
             body: JSON.stringify(state)
         })
             .then(res => res.json())
-            .then(res => console.log('result', res));
+            .then(res => passToParent(res));
 
     }, [state]);
 
