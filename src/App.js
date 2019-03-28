@@ -1,7 +1,7 @@
-import DogList from './components/DogList'
+import DogList from './DogList'
 import React from 'react'
 import Navigation from './components/Navigation/Navigation'
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Footer from './components/Footer'
 import ShelterIndex from './components/ShelterIndex/ShelterIndex';
 import ShelterDetails from "./components/ShelterPage/ShelterDetails";

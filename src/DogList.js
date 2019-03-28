@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { NavLink } from "react-router-dom";
-import DogDetails from "./components/DogDetailsPage/DogDetails";
+import {NavLink} from "react-router-dom";
 
 class DogList extends Component {
     state = {data: []};
