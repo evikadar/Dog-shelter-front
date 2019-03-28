@@ -1,9 +1,6 @@
 import React from 'react'
 import './ShelterIndex.css'
-
-function Title(props) {
-    return <h1 className='title'>{props.value}</h1>
-}
+import NavLink from "react-router-dom/es/NavLink";
 
 class ShelterIndex extends React.Component {
 
@@ -33,10 +30,10 @@ class ShelterIndex extends React.Component {
     render() {
         return (
             <div>
-                <Title value={this.props.value}/>
+                <NavLink className="btn btn-dark" to={`/shelter/${this.state.shelterId}/add-dog`}>Add new dog</NavLink>
                 {this.renderDogCards()}
             </div>
-        )
+        );
     }
 
     renderDogCards() {
