@@ -1,12 +1,13 @@
 import React from "react";
 import 'whatwg-fetch';
+import {Redirect} from 'react-router-dom'
 
 
 class Register extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {username: '', password1: '', password2: '', email: ''};
+        this.state = {username: '', password1: '', password2: '', email: '', redirect: false};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,16 +37,10 @@ class Register extends React.Component {
             fetch('http://localhost:8080/register', options)
                 .then(response => {
                     console.log(response);
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Something went wrong ...');
-                    }
                 })
-                .then(data => this.setState({ username: this.state.username }))
-                .catch(error => this.setState({ error }));
+                .then(data => this.setState({username: this.state.username}))
+                .catch(error => this.setState({error}));
         }
-
 
 
     }
@@ -109,9 +104,13 @@ class Register extends React.Component {
                                placeholder="Repeat password"></input>
                     </div>
                     {this.registerAs()}
-                    <button className="btn btn-block btn-success" type="submit">Create Account</button>
+                    <div>
+                        <button className="btn btn-block btn-success" type="submit">Create Account</button>
+                    </div>
                 </form>
+                <div></div>
             </div>
+
         )
 
     }
