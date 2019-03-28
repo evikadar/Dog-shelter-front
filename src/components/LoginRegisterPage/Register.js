@@ -17,7 +17,6 @@ class Register extends React.Component {
 
     handleSubmit(event) {
         alert("Username was " + this.state.username || '');
-        console.log("Consi here Username was " + this.state.username || '');
         event.preventDefault();
     }
 
