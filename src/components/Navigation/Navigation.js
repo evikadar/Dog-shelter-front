@@ -22,6 +22,9 @@ const Navigation = () => {
                 <li>
                     <NavLink exact activeClassName='active' to='/shelter-index'>Log in as Shelter</NavLink>
                 </li>
+                <li>
+                    <NavLink exact activeClassName='active' to='/login'>Login / Register</NavLink>
+                </li>
             </ul>
         </Wrapper>
     );
