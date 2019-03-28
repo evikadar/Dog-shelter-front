@@ -60,28 +60,27 @@ class ShelterDetails extends React.Component {
                         <div className="card-header">
                             <h1 className="text-center">{shelter.name} </h1>
                             <div className="text-left">
-                                <NavLink exact activeClassName='active' to='/dogs' className="btn btn-secondary"><h2> ...
-                                    Our dogs ... </h2></NavLink>
+                                <NavLink exact activeClassName='active' to='/dogs' className="btn btn-secondary">
+                                    <h2> ...
+                                        Our dogs ... </h2></NavLink>
                             </div>
                         </div>
                     </div>
                     <div className="card-body">
                         <div className="row">
-
                             <div className="col-6">
                                 <div className="card border-dark mb-3 text-center">
                                     <h3 className="card-title">Contact us:</h3>
                                     <li className="list-group-item">
-                                        <i className="cui-envelope-closed">  </i>
-                                          {shelter.email}
+                                        <i className="cui-envelope-closed"> </i>
+                                        {shelter.email}
                                     </li>
                                     <li className="list-group-item">
-                                        <i className="cui-phone">  </i>
+                                        <i className="cui-phone"> </i>
                                         {shelter.phoneNumber}
                                     </li>
                                 </div>
                             </div>
-
                             <div className="col-6">
                                 <div className="card border-dark mb-3 text-center">
                                     <h3 className="card-title">Address:</h3>
@@ -104,11 +103,15 @@ class ShelterDetails extends React.Component {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="col-4">
                                 <ShelterLogo shelterLogo={shelter.photoPath}/>
                             </div>
                         </div>
+                    </div>
+                    <div className="m-2 text-center">
+                        <NavLink exact activeClassName='active'
+                                 to={`/shelter/${this.props.match.params.id}/edit`} className="btn btn-dark">
+                            <h4>Edit profile</h4></NavLink>
                     </div>
                 </div>
             )
