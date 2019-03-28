@@ -21,7 +21,6 @@ class ShelterDetails extends React.Component {
         fetch(`http://localhost:8080/shelter/${this.props.match.params.id}`) //
             .then(response => response.json())
             .then((result) => {
-                console.log(result);
                 this.setState({
                     isLoaded: true,
                     shelterData: result

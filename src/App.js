@@ -1,7 +1,6 @@
-import DogList from './components/DogList'
-import React from 'react'
-import Navigation from './components/Navigation/Navigation'
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import React from 'react';
+import Navigation from "./components/Navigation/Navigation";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Footer from './components/Footer'
 import ShelterIndex from './components/ShelterIndex/ShelterIndex';
 import ShelterDetails from "./components/ShelterPage/ShelterDetails";
@@ -10,6 +9,7 @@ import Register from "./components/LoginRegisterPage/Register";
 import DogDetails from './components/DogDetailsPage/DogDetails'
 import LandingPage from './components/LandingPage/LandingPage'
 import ShelterEdit from "./components/ShelterPage/ShelterEdit";
+import DogList from "./components/DogList";
 
 
 const App = () => {
