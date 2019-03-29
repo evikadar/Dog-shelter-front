@@ -1,51 +1,88 @@
 import React from "react";
-import DogList from "../../DogList";
 
 class Login extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {username: '', password1: ''};
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        const {name, value} = event.target;
+        this.setState({[name]: value});
+
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const options = {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
+        };
+
+        console.log(this.state);
+
+        fetch('http://localhost:8080/login', options)
+            .then(response => {
+                console.log(response);
+            })
+            .then(data => this.setState({username: this.state.username}))
+            .catch(error => this.setState({error}));
+    }
+
     render() {
         return (
-                <div className="container mt-5">
-                    <div className="row justify-content-center">
-                        <div className="col-md-8">
-                            <div className="card-group">
-                                {this.createLoginCard()}
-                                {this.createSignupCard()}
-                            </div>
+            <div className="container mt-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-8">
+                        <div className="card-group">
+                            {this.createLoginCard()}
+                            {this.createSignupCard()}
                         </div>
                     </div>
                 </div>
+            </div>
         )
     }
 
 
     createLoginCard() {
-        return(
+        return (
             <div className="card p-4">
                 <div className="card-body">
                     <h1>Login</h1>
                     <p className="text-muted">Sign In to your account</p>
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
+                    <form method="post" onSubmit={this.handleSubmit}>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
                                                 <span className="input-group-text">
                                                 <i className="icon-user"></i>
                                                 </span>
+                            </div>
+                            <input name="username" onChange={this.handleChange} className="form-control" type="text" placeholder="Username"></input>
                         </div>
-                        <input className="form-control" type="text" placeholder="Username"></input>
-                    </div>
-                    <div className="input-group mb-4">
-                        <div className="input-group-prepend">
+                        <div className="input-group mb-4">
+                            <div className="input-group-prepend">
                                                 <span className="input-group-text">
                                                 <i className="icon-lock"></i>
                                                 </span>
+                            </div>
+                            <input name="password1" onChange={this.handleChange} className="form-control" type="password"
+                                   placeholder="Password"></input>
                         </div>
-                        <input className="form-control" type="password"
-                               placeholder="Password"></input>
-                    </div>
-                    <div className="row">
-                        <div className="col6">
-                            <button className="btn btn-primary px-4" type="button">Login</button>
+                        <div className="row">
+                            <div className="col6">
+                                <button className="btn btn-primary px-4" type="submit">Login</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -53,7 +90,7 @@ class Login extends React.Component {
     }
 
     createSignupCard() {
-        return(
+        return (
             <div className="card text-white bg-primary py-5 d-md-down-none">
                 <div className="card-body text-center">
                     <div>
