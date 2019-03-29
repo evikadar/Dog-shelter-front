@@ -56,17 +56,20 @@ class AddDog extends React.Component {
 
     renderDogForm() {
         return (
-            <div className="container">
-                <form onSubmit={this.handleSubmit}>
-                    <div className="card m-3">
-                        {this.renderFormGroup1()}
-                        {this.renderFormGroup2()}
-                        {this.renderFormGroup3()}
-                        {this.renderFormGroup4()}
-                        {this.renderFormGroup5()}
-                        {this.renderSubmitButton()}
-                    </div>
-                </form>
+            <div>
+                <h1 className='title'>Add New Dog</h1>
+                <div className="container">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="card m-3">
+                            {this.renderFormGroup1()}
+                            {this.renderFormGroup2()}
+                            {this.renderFormGroup3()}
+                            {this.renderFormGroup4()}
+                            {this.renderFormGroup5()}
+                            {this.renderSubmitButton()}
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }
