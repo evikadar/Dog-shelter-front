@@ -99,11 +99,11 @@ const FilterPanel = ({invokeDataRefresh: passToParent}) => {
                     {value: 'Pug', label: 'Pug'},
                     {value: 'Chihuahua', label: 'Chihuahua'},
                     {value: 'Beagle', label: 'Beagle'},
-                    {value: 'Ack russel terrier', label: 'Ack russel terrier'},
+                    {value: 'Jack russel terrier', label: 'Jack russel terrier'},
                     {value: 'German shepherd', label: 'German shepherd'},
                     {value: 'Border collie', label: 'Border collie'},
                     {value: 'Redbone coonhound', label: 'Redbone coonhound'},
-                    {value: 'Rterrier', label: 'Rterrier'}
+                    {value: 'Terrier', label: 'Terrier'}
                 ]} onChange={value => {
                     setState({...state, breed: value ? value.label.toUpperCase().replace(' ', '_') : null});
                 }}/>
