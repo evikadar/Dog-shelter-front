@@ -8,6 +8,7 @@ import Login from "./components/LoginRegisterPage/Login";
 import Register from "./components/LoginRegisterPage/Register";
 import DogDetails from './components/DogDetailsPage/DogDetails'
 import LandingPage from './components/LandingPage/LandingPage'
+import AddDog from "./components/AddDogPage/AddDog";
 import ShelterEdit from "./components/ShelterPage/ShelterEdit";
 import DogList from "./components/DogList";
 
@@ -23,7 +24,8 @@ const App = () => {
 
                     <Switch>
                         <Route exact path={'/'} component={LandingPage}/>
-                        <Route exact path={'/shelter-index/:id'} render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
+                        <Route exact path={'/shelter/:id/index'} render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
+                        <Route exact path={'/shelter/:id/add-dog'} render={(props) => <AddDog {...props}/>}/>
                         <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
                         <Route exact path={"/dogs"} component={DogList}/>
                         <Route exact path={"/shelter/:id"} component={ShelterDetails}/>

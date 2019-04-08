@@ -36,12 +36,12 @@ class Login extends React.Component {
             .then(data => this.setState({username: this.state.username}))
             .catch(error => this.setState({error}));
 
-        console.log(this.state);
 
         this.props.history.push({
             pathname: '/dogs',
             state: this.state.username
         });
+
     }
 
     render() {

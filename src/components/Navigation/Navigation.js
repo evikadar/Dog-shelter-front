@@ -20,7 +20,7 @@ const Navigation = () => {
                     <NavLink exact activeClassName='active' to='/dogs' >Dogs</NavLink>
                 </li>
                 <li>
-                    <NavLink exact activeClassName='active' to='/shelter-index'>Log in as Shelter</NavLink>
+                    <NavLink exact activeClassName='active' to='/shelter/1/index'>Log in as Shelter</NavLink>
                 </li>
                 <li>
                     <NavLink exact activeClassName='active' to='/login'>Login / Register</NavLink>
