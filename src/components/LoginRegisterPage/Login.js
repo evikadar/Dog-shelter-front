@@ -27,7 +27,7 @@ class Login extends React.Component {
             body: JSON.stringify(this.state)
         };
 
-        console.log(this.state);
+
 
         fetch('http://localhost:8080/login', options)
             .then(response => {
@@ -35,6 +35,13 @@ class Login extends React.Component {
             })
             .then(data => this.setState({username: this.state.username}))
             .catch(error => this.setState({error}));
+
+        console.log(this.state);
+
+        this.props.history.push({
+            pathname: '/dogs',
+            state: this.state.username
+        });
     }
 
     render() {
@@ -102,6 +109,7 @@ class Login extends React.Component {
             </div>
         )
     }
+
 }
 
 export default Login;
