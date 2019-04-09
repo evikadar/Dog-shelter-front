@@ -1,4 +1,10 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const StyleWrapper = styled.div`
+    padding: 10px;
+    margin-top: 50px;
+`
 
 export default props => {
     const DEFAULT = 'no data'
@@ -8,7 +14,7 @@ export default props => {
     return (
 
         props.details.description ? (
-        <div style={props.style}>DogDetails
+        <StyleWrapper>DogDetails
             <label>Dream Home:</label>
             <p>{dreamHome}</p>
 
@@ -17,7 +23,7 @@ export default props => {
 
             <label>Special Features: </label>
             <p>{specialFeatures}</p>
-        </div>
+        </StyleWrapper>
         )
             : 'details'
     )
