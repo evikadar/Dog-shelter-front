@@ -70,63 +70,6 @@ class DogList extends React.Component {
             </div>
         );
     }
-
-    getDogs() {
-        fetch('http://localhost:8080/dogs')
-            .then(response => response.json())
-            .then(json => {
-                this.setState({data: json});
-            });
-    }
-
-    makeFilters() {
-        return (
-            <div className="btn-group mb-10 mt-10 mr-10">
-                <button
-                    type="button"
-                    className="mr-10 btn btn-primary dropdown-toggle"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    Age
-                </button>
-                <div className="dropdown-menu">
-                    <a className="dropdown-item" href="#">
-                        Puppy
-                    </a>
-                    <a className="dropdown-item" href="#">
-                        Young
-                    </a>
-                    <a className="dropdown-item" href="#">
-                        Adult
-                    </a>
-                </div>
-                <button
-                    type="button"
-                    className="btn btn-primary dropdown-toggle"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    Breed
-                </button>
-                <div className="dropdown-menu">
-                    <a className="dropdown-item" href="#">
-                        Puppy
-                    </a>
-                    <a className="dropdown-item" href="#">
-                        Young
-                    </a>
-                    <a className="dropdown-item" href="#">
-                        Adult
-                    </a>
-                </div>
-            </div>
-        );
-
-
-    }
 }
 
 export default DogList;
