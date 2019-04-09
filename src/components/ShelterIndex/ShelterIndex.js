@@ -1,9 +1,6 @@
 import React from 'react'
 import './ShelterIndex.css'
-
-function Title(props) {
-    return <h1 className='title'>{props.value}</h1>
-}
+import NavLink from "react-router-dom/es/NavLink";
 
 class ShelterIndex extends React.Component {
 
@@ -26,17 +23,20 @@ class ShelterIndex extends React.Component {
                 dogData: result
             }))
             .catch(function (error) {
-            alert(`Error: ${error}\nIf you see this, our testers did a sloppy job, and our developers an even sloppier`)
-        })
+                alert(`Error: ${error}\nIf you see this, our testers did a sloppy job, and our developers an even sloppier`)
+            })
     }
 
     render() {
         return (
             <div>
-                <Title value={this.props.value}/>
+                <div className="container-fluid">
+                    <NavLink className="btn btn-dark m-3" to={`/shelter/${this.state.shelterId}/add-dog`}>Add new
+                        dog</NavLink>
+                </div>
                 {this.renderDogCards()}
             </div>
-        )
+        );
     }
 
     renderDogCards() {
@@ -44,8 +44,8 @@ class ShelterIndex extends React.Component {
             <div className="container-fluid">
                 {this.state.dogData.length > 0 ? (
                     this.renderAllDogCards()
-                    ) : (
-                        <div>Your dogs are loading...</div>
+                ) : (
+                    <div>Your dogs are loading...</div>
                 )
                 }
             </div>
@@ -57,7 +57,8 @@ class ShelterIndex extends React.Component {
         for (let i = 0; i < this.state.dogData.length; i++) {
             let dog = this.state.dogData[i];
             dogCards.push(<div>
-                <DogCard dogName={dog.name} dogStatus={dog.status} dogImage={dog.photoPath}/>
+                <DogCard dogName={dog.name} dogStatus={dog.status} dogImage={dog.photoPath} dogGender={dog.gender}
+                         dogBreed={dog.breed} dogSize={dog.size} dogAge={dog.age} isNeutered={dog.isNeutered}/>
             </div>)
         }
         return dogCards;
@@ -68,14 +69,40 @@ class DogCard extends React.Component {
 
     render() {
         return (
-            <div className="card">
-                <img className="shelterDogImage card-img-left" src={"http://localhost:8080/" + this.props.dogImage} alt="dog"/>
+            <div className="card border-light mb-3">
+                <div className="card-header">{this.props.dogName}</div>
                 <div className="card-body">
-                    <h3 className="dogName">
-                        {this.props.dogName}
-                    </h3>
-                    <div>
-                        Status: {this.props.dogStatus}
+                    <img className="shelterDogImage card-img-left" src={"http://localhost:8080/" + this.props.dogImage}
+                         alt="dog"/>
+                    <div className="row">
+                        <div className="col">
+                            <h4 className="mt-1">Status</h4>
+                            <div>
+                                {this.props.dogStatus}
+                            </div>
+                            <h4 className="mt-1">Gender</h4>
+                            <div>
+                                {this.props.dogGender}
+                            </div>
+                            <h4 className="mt-1">Neutered</h4>
+                            <div>
+                                {this.props.isNeutered ? "Yes" : "No"}
+                            </div>
+                        </div>
+                        <div className="col">
+                            <h4 className="mt-1">Breed</h4>
+                            <div>
+                                {this.props.dogBreed}
+                            </div>
+                            <h4 className="mt-1">Size</h4>
+                            <div>
+                                {this.props.dogSize}
+                            </div>
+                            <h4 className="mt-1">Age</h4>
+                            <div>
+                                {this.props.dogAge}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

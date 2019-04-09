@@ -28,13 +28,13 @@ class DogList extends React.Component {
     }
 
     makeManyCards() {
-        var dogs = this.state.data;
-        var allTheDogs = [];
+        let dogs = this.state.data;
+        let allTheDogs = [];
 
         try {
             if (dogs[0].name) {
 
-                for (var i = 0; i < dogs.length; i++) {
+                for (let i = 0; i < dogs.length; i++) {
                     allTheDogs.push(
                         <div>
                             <span className='oneDog'

@@ -45,67 +45,67 @@ const FilterPanel = ({invokeDataRefresh: passToParent}) => {
             <SelectWrapper>
                 <label>Neutered</label>
                 <Select isSearchable={false} isClearable={true} options={[
-                    {value: 'Yes', label: 'Yes'},
-                    {value: 'No', label: 'No'}
-                ]} onChange={value => {
-                    setState({...state, isNeutered: value ? value.label === 'Yes' ? 'true' : 'false' : null});
+                    {value: true, label: 'Yes'},
+                    {value: false, label: 'No'}
+                ]} onChange={x => {
+                    setState({...state, isNeutered: x ? x.value : null});
                 }}/>
             </SelectWrapper>
 
             <SelectWrapper>
                 <label>Age</label>
                 <Select isSearchable={false} isClearable={true} options={[
-                    {value: 'Puppy', label: 'Puppy'},
-                    {value: 'Young', label: 'Young'},
-                    {value: 'Adult', label: 'Adult'},
-                    {value: 'Senior', label: 'Senior'}
-                ]} onChange={value => {
-                    setState({...state, age: value ? value.label.toUpperCase() : null});
+                    {value: 'PUPPY', label: 'Puppy'},
+                    {value: 'YOUNG', label: 'Young'},
+                    {value: 'ADULT', label: 'Adult'},
+                    {value: 'SENIOR', label: 'Senior'}
+                ]} onChange={x => {
+                    setState({...state, age: x ? x.value : null});
                 }}/>
             </SelectWrapper>
 
             <SelectWrapper>
                 <label>Size</label>
                 <Select isSearchable={false} isClearable={true} options={[
-                    {value: 'Extra small', label: 'Extra small'},
-                    {value: 'Small', label: 'Small'},
-                    {value: 'Medium', label: 'Medium'},
-                    {value: 'Large', label: 'Large'},
-                    {value: 'Extra large', label: 'Extra large'}
-                ]} onChange={value => {
-                    setState({...state, dogSize: value ? value.label.toUpperCase().replace(' ', '_') : null});
+                    {value: 'EXTRA_SMALL', label: 'Extra small'},
+                    {value: 'SMALL', label: 'Small'},
+                    {value: 'MEDIUM', label: 'Medium'},
+                    {value: 'LARGE', label: 'Large'},
+                    {value: 'EXTRA_LARGE', label: 'Extra large'}
+                ]} onChange={x => {
+                    setState({...state, dogSize: x ? x.value : null});
                 }}/>
             </SelectWrapper>
 
             <SelectWrapper>
                 <label>Gender</label>
                 <Select isSearchable={false} isClearable={true} options={[
-                    {value: 'Male', label: 'Male'},
-                    {value: 'Female', label: 'Female'}
-                ]} onChange={value => {
-                    setState({...state, gender: value ? value.label.toUpperCase() : null});
+                    {value: 'MALE', label: 'Male'},
+                    {value: 'FEMALE', label: 'Female'}
+                ]} onChange={x => {
+                    setState({...state, gender: x ? x.value : null});
                 }}/>
             </SelectWrapper>
 
             <SelectWrapper>
                 <label>Breed</label>
                 <Select isSearchable={false} isClearable={true} options={[
-                    {value: 'Collie', label: 'Collie'},
-                    {value: 'Husky', label: 'Husky'},
-                    {value: 'Labrador', label: 'Labrador'},
-                    {value: 'Retriever', label: 'Retriever'},
-                    {value: 'Mixed', label: 'Mixed'},
-                    {value: 'Hound', label: 'Hound'},
-                    {value: 'Pug', label: 'Pug'},
-                    {value: 'Chihuahua', label: 'Chihuahua'},
-                    {value: 'Beagle', label: 'Beagle'},
-                    {value: 'Ack russel terrier', label: 'Ack russel terrier'},
-                    {value: 'German shepherd', label: 'German shepherd'},
-                    {value: 'Border collie', label: 'Border collie'},
-                    {value: 'Redbone coonhound', label: 'Redbone coonhound'},
-                    {value: 'Rterrier', label: 'Rterrier'}
-                ]} onChange={value => {
-                    setState({...state, breed: value ? value.label.toUpperCase().replace(' ', '_') : null});
+                    {value: 'COLLIE', label: 'Collie'},
+                    {value: 'HUSKY', label: 'Husky'},
+                    {value: 'LABRADOR', label: 'Labrador'},
+                    {value: 'RETRIEVER', label: 'Retriever'},
+                    {value: 'MIXED', label: 'Mixed'},
+                    {value: 'HOUND', label: 'Hound'},
+                    {value: 'PUG', label: 'Pug'},
+                    {value: 'CHIHUAHUA', label: 'Chihuahua'},
+                    {value: 'BEAGLE', label: 'Beagle'},
+                    {value: 'JACK_RUSSEL_TERRIER', label: 'Jack russel terrier'},
+                    {value: 'GERMAN_SHEPHERD', label: 'German shepherd'},
+                    {value: 'BORDER_COLLIE', label: 'Border collie'},
+                    {value: 'REDBONE_COONHOUND', label: 'Redbone coonhound'},
+                    {value: 'TERRIER', label: 'Terrier'}
+                ]} onChange={x => {
+                    setState({...state, breed: x ? x.value : null});
                 }}/>
             </SelectWrapper>
 
