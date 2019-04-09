@@ -10,6 +10,7 @@ import DogDetails from './components/DogDetailsPage/DogDetails'
 import LandingPage from './components/LandingPage/LandingPage'
 import ShelterEdit from "./components/ShelterPage/ShelterEdit";
 import DogList from "./components/DogList";
+import DogListByShelter from "./components/DogListByShelter";
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
                         <Route exact path={"/login"} component={Login}/>
                         <Route exact path={"/register"} component={Register}/>
                         <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
+                        <Route exact path={"/dogs/shelter/:id"} component={DogListByShelter}/>
                     </Switch>
                 </div>
                 <Footer/>

@@ -60,7 +60,7 @@ class ShelterDetails extends React.Component {
                         <div className="card-header">
                             <h1 className="text-center">{shelter.name} </h1>
                             <div className="text-left">
-                                <NavLink exact activeClassName='active' to='/dogs' className="btn btn-secondary">
+                                <NavLink exact activeClassName='active' to={`/dogs/shelter/${this.props.match.params.id}`} className="btn btn-secondary">
                                     <h2> ...
                                         Our dogs ... </h2></NavLink>
                             </div>
