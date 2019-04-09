@@ -8,38 +8,46 @@ class AddDog extends React.Component {
         super(props);
         this.state = {
             isLoaded: false,
-            formData: {shelterId: props.match.params.id}
+            shelterId: props.match.params.id,
+            name: null,
+            dateOfBirth: null,
+            breed: null
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.fileInput = React.createRef();
     }
 
+
+    componentDidMount() {
+        //todo get enums for necessary data and either set state for default values or make a placeholder for them
+    }
+
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;
-        const name = target.name;
+        const key = target.name;
 
         this.setState({
-            formData: {[name]: value}
+            [key]: value
         });
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        let form = new FormData();
-        form.append("file", this.fileInput.current.files[0]);
-        form.append("dogData", JSON.stringify(this.state.formData));
-        console.log(form);
-        fetch("http://localhost:8080/shelter/dog", {
+        const data = new FormData();
+        data.append("shelterId", this.state.shelterId);
+        data.append("name", this.state.name);
+        data.append("breed", this.state.breed);
+        data.append("dateOfBirth", this.state.dateOfBirth);
+        data.append("file", this.fileInput.current.files[0]);
+        const options = {
             method: "post",
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-            body: form
-        }).then(response => {
+            body: data
+        };
+        fetch("http://localhost:8080/shelter/dog", options).then(response => {
             if (response.ok) {
-                window.location.href = `/shelter/${this.state.formData.shelterId}/index`;
+                window.location.href = `/shelter/${this.state.shelterId}/index`;
             } else {
                 response.error();
             }
@@ -104,7 +112,7 @@ class AddDog extends React.Component {
                 </div>
                 <div className="col">
                     <label htmlFor="breed">Breed</label>
-                    <select className="form-control" id="breed" name="breed" onChange={this.handleInputChange}>
+                    <select placeholder="Select a breed" required className="form-control" id="breed" name="breed" onChange={this.handleInputChange}>
                         <option value="MIXED">Mixed</option>
                         <option value="COLLIE">Collie</option>
                         <option value="HUSKY">Husky</option>
@@ -123,7 +131,7 @@ class AddDog extends React.Component {
                 <div className="col">
                     <div>Gender</div>
                     <div className="form-check form-check-inline">
-                        <input defaultChecked className="form-check-input" type="radio" name="gender" id="female"
+                        <input required className="form-check-input" type="radio" name="gender" id="female"
                                value="FEMALE" onChange={this.handleInputChange}/>
                         <label className="form-check-label" htmlFor="female">Female</label>
                     </div>
@@ -136,7 +144,7 @@ class AddDog extends React.Component {
                 <div className="col">
                     <div>Neutered</div>
                     <div className="form-check form-check-inline">
-                        <input defaultChecked className="form-check-input" type="radio" name="isNeutered" id="true"
+                        <input required className="form-check-input" type="radio" name="isNeutered" id="true"
                                value="true" onChange={this.handleInputChange}/>
                         <label className="form-check-label" htmlFor="true">Yes</label>
                     </div>
@@ -155,7 +163,7 @@ class AddDog extends React.Component {
             <div className="form-row m-3">
                 <div className="col">
                     <label htmlFor="size">Size</label>
-                    <select className="form-control" id="size" name="size" onChange={this.handleInputChange}>
+                    <select placeholder="Select a size" required className="form-control required" id="size" name="size" onChange={this.handleInputChange}>
                         <option value="EXTRA_SMALL">Extra small</option>
                         <option value="SMALL">Small</option>
                         <option value="MEDIUM">Medium</option>
@@ -165,7 +173,7 @@ class AddDog extends React.Component {
                 </div>
                 <div className="col">
                     <label htmlFor="status">Status</label>
-                    <select className="form-control" id="status" name="status" onChange={this.handleInputChange}>
+                    <select placeholder="Select status" className="form-control" id="status" name="status" onChange={this.handleInputChange}>
                         <option value="AVAILABLE">Looking for owner</option>
                         <option value="PENDING">Pending</option>
                         <option value="ADOPTED">Adopted</option>
