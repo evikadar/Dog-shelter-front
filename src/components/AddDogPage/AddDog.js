@@ -1,26 +1,46 @@
 import React from "react";
 import * as ReactDOM from "react-dom";
 import Redirect from "react-router-dom/es/Redirect";
+import FormSelect from "./FormSelect";
 
 class AddDog extends React.Component {
+
+    dogData = [
+        "shelterId", "name", "dateOfBirth",
+        "breed", "size", "gender", "isNeutered",
+        "status", "personalityTrait", "dreamHome",
+        "specialFeatures"
+    ];
 
     constructor(props) {
         super(props);
         this.state = {
             isLoaded: false,
             shelterId: props.match.params.id,
-            name: null,
-            dateOfBirth: null,
-            breed: null
+            name: "",
+            dateOfBirth: "",
+            breed: null,
+            size: null,
+            gender: null,
+            isNeutered: null,
+            status: null,
+            personalityTrait: null,
+            dreamHome: null,
+            specialFeatures: null,
+            breedOptions: [
+                {value: "HUSKY", label: "Husky"},
+                {value: "MIXED", label: "Mixed"}
+                ],
+            statuses: [],
+            sizes: []
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.fileInput = React.createRef();
     }
 
-
     componentDidMount() {
-        //todo get enums for necessary data and either set state for default values or make a placeholder for them
+        //todo get enums for necessary data
     }
 
     handleInputChange(event) {
@@ -35,12 +55,7 @@ class AddDog extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const data = new FormData();
-        data.append("shelterId", this.state.shelterId);
-        data.append("name", this.state.name);
-        data.append("breed", this.state.breed);
-        data.append("dateOfBirth", this.state.dateOfBirth);
-        data.append("file", this.fileInput.current.files[0]);
+        let data = this.getDogFormData();
         const options = {
             method: "post",
             body: data
@@ -48,10 +63,17 @@ class AddDog extends React.Component {
         fetch("http://localhost:8080/shelter/dog", options).then(response => {
             if (response.ok) {
                 window.location.href = `/shelter/${this.state.shelterId}/index`;
-            } else {
-                response.error();
             }
         }).catch(error => alert(error))
+    }
+
+    getDogFormData() {
+        let data = new FormData();
+        for (let key of this.dogData) {
+            data.append(key, this.state[key])
+        }
+        data.append("file", this.fileInput.current.files[0]);
+        return data;
     }
 
     render() {
@@ -87,7 +109,7 @@ class AddDog extends React.Component {
             <div className="form-row m-3">
                 <div className="col">
                     <label htmlFor="dogName">Name</label>
-                    <input type="text" className="form-control" id="dogName" name="name"
+                    <input type="text" className="form-control" id="dogName" name="name" value={this.state.name}
                            placeholder="Enter name" onChange={this.handleInputChange}/>
                 </div>
                 <div className="col">
@@ -108,22 +130,18 @@ class AddDog extends React.Component {
                 <div className="col">
                     <label htmlFor="dateOfBirth">Date of birth</label>
                     <input id="dateOfBirth" name="dateOfBirth" required type="date" className="form-control"
-                           placeholder="Enter date of birth" onChange={this.handleInputChange}/>
+                           value={this.state.dateOfBirth} placeholder="Enter date of birth"
+                           onChange={this.handleInputChange}/>
                 </div>
                 <div className="col">
-                    <label htmlFor="breed">Breed</label>
-                    <select placeholder="Select a breed" required className="form-control" id="breed" name="breed" onChange={this.handleInputChange}>
-                        <option value="MIXED">Mixed</option>
-                        <option value="COLLIE">Collie</option>
-                        <option value="HUSKY">Husky</option>
-                        <option value="LABRADOR">Labrador</option>
-                        <option value="PUG">Pug</option>
-                    </select>
+                    <FormSelect id="breed" labelName="Breed" className="form-control" name={"breed"}
+                                onChange={this.handleInputChange} placeholderText="Please select a breed"
+                                value={this.state.breed == null ? 0 : this.state.breed}
+                                defaultDisabled={this.state.breed == null ? null : true} options={this.state.breedOptions}/>
                 </div>
             </div>
         );
     }
-
 
     renderFormGroup3() {
         return (
@@ -163,7 +181,9 @@ class AddDog extends React.Component {
             <div className="form-row m-3">
                 <div className="col">
                     <label htmlFor="size">Size</label>
-                    <select placeholder="Select a size" required className="form-control required" id="size" name="size" onChange={this.handleInputChange}>
+                    <select required className="form-control required" id="size" name="size"
+                            onChange={this.handleInputChange}>
+                        <option disabled selected value="">Please select size</option>
                         <option value="EXTRA_SMALL">Extra small</option>
                         <option value="SMALL">Small</option>
                         <option value="MEDIUM">Medium</option>
@@ -173,7 +193,9 @@ class AddDog extends React.Component {
                 </div>
                 <div className="col">
                     <label htmlFor="status">Status</label>
-                    <select placeholder="Select status" className="form-control" id="status" name="status" onChange={this.handleInputChange}>
+                    <select placeholder="Select status" className="form-control" id="status" name="status"
+                            onChange={this.handleInputChange}>
+                        <option disabled selected value={null}>Please select status</option>
                         <option value="AVAILABLE">Looking for owner</option>
                         <option value="PENDING">Pending</option>
                         <option value="ADOPTED">Adopted</option>
