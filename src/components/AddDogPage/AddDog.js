@@ -24,15 +24,23 @@ class AddDog extends React.Component {
             gender: null,
             isNeutered: null,
             status: null,
-            personalityTrait: null,
-            dreamHome: null,
-            specialFeatures: null,
+            personalityTrait: "",
+            dreamHome: "",
+            specialFeatures: "",
             breedOptions: [
                 {value: "HUSKY", label: "Husky"},
                 {value: "MIXED", label: "Mixed"}
                 ],
-            statuses: [],
-            sizes: []
+            statusOptions: [
+                {value: "AVAILABLE", label: "Looking for owner"},
+                {value: "PENDING", label: "Pending"},
+                {value: "ADOPTED", label: "Adopted"},
+                {value: "DEAD", label: "Passed away"}
+            ],
+            sizeOptions: [
+                {value: "SMALL", label: "Small"},
+                {value: "LARGE", label: "Large"}
+            ]
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -109,7 +117,7 @@ class AddDog extends React.Component {
             <div className="form-row m-3">
                 <div className="col">
                     <label htmlFor="dogName">Name</label>
-                    <input type="text" className="form-control" id="dogName" name="name" value={this.state.name}
+                    <input required type="text" className="form-control" id="dogName" name="name" value={this.state.name}
                            placeholder="Enter name" onChange={this.handleInputChange}/>
                 </div>
                 <div className="col">
@@ -137,7 +145,9 @@ class AddDog extends React.Component {
                     <FormSelect id="breed" labelName="Breed" className="form-control" name={"breed"}
                                 onChange={this.handleInputChange} placeholderText="Please select a breed"
                                 value={this.state.breed == null ? 0 : this.state.breed}
-                                defaultDisabled={this.state.breed == null ? null : true} options={this.state.breedOptions}/>
+                                defaultDisabled={this.state.breed == null ? null : true}
+                                options={this.state.breedOptions}
+                                required={true}/>
                 </div>
             </div>
         );
@@ -180,27 +190,19 @@ class AddDog extends React.Component {
         return (
             <div className="form-row m-3">
                 <div className="col">
-                    <label htmlFor="size">Size</label>
-                    <select required className="form-control required" id="size" name="size"
-                            onChange={this.handleInputChange}>
-                        <option disabled selected value="">Please select size</option>
-                        <option value="EXTRA_SMALL">Extra small</option>
-                        <option value="SMALL">Small</option>
-                        <option value="MEDIUM">Medium</option>
-                        <option value="LARGE">Large</option>
-                        <option value="EXTRA_LARGE">Extra large</option>
-                    </select>
+                    <FormSelect id="size" labelName="Size" className="form-control" name="size"
+                                onChange={this.handleInputChange} placeholderText="Please select size"
+                                value={this.state.breed == null ? 0 : this.state.breed}
+                                defaultDisabled={this.state.size == null ? null : true}
+                                options={this.state.sizeOptions}
+                                required={true}/>
                 </div>
                 <div className="col">
-                    <label htmlFor="status">Status</label>
-                    <select placeholder="Select status" className="form-control" id="status" name="status"
-                            onChange={this.handleInputChange}>
-                        <option disabled selected value={null}>Please select status</option>
-                        <option value="AVAILABLE">Looking for owner</option>
-                        <option value="PENDING">Pending</option>
-                        <option value="ADOPTED">Adopted</option>
-                        <option value="DEAD">Passed away</option>
-                    </select>
+                    <FormSelect id="status" labelName="Status" className="form-control" name="status"
+                                onChange={this.handleInputChange} placeholderText="Please select status"
+                                value={this.state.status == null ? 0 : this.state.status}
+                                defaultDisabled={this.state.size == null ? null : true} options={this.state.statusOptions}
+                                required={null}/>
                 </div>
             </div>
         );
