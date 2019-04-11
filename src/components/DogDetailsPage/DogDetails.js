@@ -52,7 +52,7 @@ const LeftSide = styled.div`
   margin-bottom: 100px;
   background-color: white;
   border-radius: 5px;
-  padding 20px;
+  padding 5px 20px;
 `;
 
 const RightSide = styled.div`
