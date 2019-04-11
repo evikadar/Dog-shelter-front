@@ -13,31 +13,35 @@ import ShelterEdit from "./components/ShelterPage/ShelterEdit";
 import DogList from "./components/DogList";
 
 
-const App = () => {
-    return (
-        <Router>
-            <>
-                <div style={{height: 1000}}>
-                    <div className="App">
-                        <Navigation/>
+class App extends React.Component {
+    render() {
+        return (
+            <Router>
+                <>
+                    <div style={{height: 1000}}>
+                        <div className="App">
+                            <Navigation/>
+                        </div>
+                        <Switch>
+                            <Route exact path={'/'} component={LandingPage}/>
+                            <Route exact path={'/shelter/:id/index'} render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
+                            <Route exact path={'/shelter/:id/add-dog'} render={(props) => <AddDog {...props}/>}/>
+                            <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
+                            <Route exact path={"/dogs"} component={DogList}/>
+                            <Route exact path={"/shelter/:id"} component={ShelterDetails}/>
+                            <Route exact path={"/login"} component={Login}/>
+                            <Route exact path={"/register"} component={Register}/>
+                            <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
+                        </Switch>
                     </div>
+                    <Footer/>
+                </>
+            </Router>
+        );
 
-                    <Switch>
-                        <Route exact path={'/'} component={LandingPage}/>
-                        <Route exact path={'/shelter/:id/index'} render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
-                        <Route exact path={'/shelter/:id/add-dog'} render={(props) => <AddDog {...props}/>}/>
-                        <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
-                        <Route exact path={"/dogs"} component={DogList}/>
-                        <Route exact path={"/shelter/:id"} component={ShelterDetails}/>
-                        <Route exact path={"/login"} component={Login}/>
-                        <Route exact path={"/register"} component={Register}/>
-                        <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
-                    </Switch>
-                </div>
-                <Footer/>
-            </>
-        </Router>
-    );
-};
+
+    }
+
+}
 
 export default App;
