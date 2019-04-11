@@ -42,11 +42,11 @@ export default props => {
 };
 
 const Main = styled.div`
-  padding: 100px 100px 50px 100px;
+  padding: 100px 130px 50px 130px;
 `;
 
 const LeftSide = styled.div`
-  width: 625px;
+  width: 550px;
   float: left;
   font-size: 25px;
   margin-bottom: 100px;
