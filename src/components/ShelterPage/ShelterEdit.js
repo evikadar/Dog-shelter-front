@@ -19,6 +19,7 @@ class ShelterEdit extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.routeChange = this.routeChange.bind(this);
     }
 
     createJSONFromFormData(){
@@ -56,7 +57,9 @@ class ShelterEdit extends React.Component {
         };
 
         fetch(`http://localhost:8080/shelter/${this.props.match.params.id}/edit`, options)
-            .then(response => console.log(response))
+            .then(response => {if (response.ok){
+                this.routeChange();
+            }})
             .catch(error => this.setState({error}));
 
     }
@@ -105,6 +108,11 @@ class ShelterEdit extends React.Component {
     <input type="file" className="form-control-file" id="shelter-logo-file"/>
     </div>
     */
+
+    routeChange() {
+        let path = `/shelter/${this.props.match.params.id}`;
+        this.props.history.push(path);
+    }
 
     getForm() {
         let shelterInfo = [];
@@ -187,10 +195,13 @@ class ShelterEdit extends React.Component {
 
                         <div className="row m-3">
                             <div className="col text-right">
-                                <button type="cancel" className="btn btn-light" value="Cancel">Cancel</button>
+                                <button type="cancel" className="btn btn-light" value="Cancel" onClick={this.routeChange}>Go back to profile</button>
                             </div>
                             <div className="col text-left">
-                                <button type="submit" className="btn btn-success" value="Submit">Save changes</button>
+                                <button type="submit" className="btn btn-success" value="Submit"
+                                        >
+                                    Save changes
+                                </button>
                             </div>
                         </div>
                     </form>
