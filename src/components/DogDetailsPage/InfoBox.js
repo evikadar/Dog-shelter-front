@@ -72,6 +72,9 @@ const Separator = styled.span`
 `;
 
 const BreedGenderAge = styled.p`
+
+  margin: 10px 0px 20px 0px !important;
+
   span {
     font-size 20px;
   }
