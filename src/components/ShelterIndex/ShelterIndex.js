@@ -72,7 +72,7 @@ class DogCard extends React.Component {
             <div className="card border-light mb-3">
                 <div className="card-header">{this.props.dogName}</div>
                 <div className="card-body">
-                    <img className="shelterDogImage card-img-left" src={"http://localhost:8080/" + this.props.dogImage}
+                    <img className="shelterDogImage card-img-left" src={"http://localhost:8080/image/" + this.props.dogImage}
                          alt="dog"/>
                     <div className="row">
                         <div className="col">
