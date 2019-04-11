@@ -58,7 +58,7 @@ class ShelterIndex extends React.Component {
             let dog = this.state.dogData[i];
             dogCards.push(<div>
                 <DogCard dogName={dog.name} dogStatus={dog.status} dogImage={dog.photoPath} dogGender={dog.gender}
-                dogBreed={dog.breed} dogSize={dog.size} dogAge={dog.age} isNeutered={dog.isNeutered}/>
+                         dogBreed={dog.breed} dogSize={dog.size} dogAge={dog.age} isNeutered={dog.isNeutered}/>
             </div>)
         }
         return dogCards;
