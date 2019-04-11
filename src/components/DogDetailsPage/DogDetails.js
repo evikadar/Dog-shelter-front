@@ -30,7 +30,7 @@ export default props => {
           </LeftSide>
           <RightSide>
             <img
-              src={`http://localhost:8080/${details.photoPath}`}
+              src={`http://localhost:8080/image/${details.photoPath}`}
               alt={'dog'}
             />
             <button>{ACTION_TITLE}</button>

@@ -71,7 +71,7 @@ class DogListByShelter extends React.Component {
                 <div className="card w-100">
                     <img
                         className="card-img-top"
-                        src={'http://localhost:8080/' + dogPhoto}
+                        src={'http://localhost:8080/image/' + dogPhoto}
                         alt="Card image cap"
                     />
                     <div className="card-body">
