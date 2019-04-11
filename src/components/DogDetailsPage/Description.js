@@ -37,15 +37,17 @@ const StyleWrapper = styled.div`
       font-size: 16px;
       padding: 0px 5px 10px 0px;
       font-weight: 300;
-      margin-bottom: 10px
+      margin-bottom: 7px;
   }
 
   label {
       font-weight: 400;
+      margin-bottom: 5px;
   }
 `;
 
 const MainTitle = styled.p`
   font-size: 30px;
   font-weight: 600;
+  margin-bottom: 7px;
 `;
