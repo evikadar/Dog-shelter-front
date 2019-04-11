@@ -80,5 +80,6 @@ const BreedGenderAge = styled.p`
 const Title = styled.p`
   span {
     font-size 20px;
+    font-weight: 300;
   }
 `;
