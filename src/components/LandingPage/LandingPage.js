@@ -45,7 +45,7 @@ class LandingPage extends React.Component {
             <img
               className="example-dog-img"
               src={
-                'http://localhost:8080/' +
+                'http://localhost:8080/image/' +
                 this.state.data[dogNumber].photoPath
               }
               alt="Card image cap"
