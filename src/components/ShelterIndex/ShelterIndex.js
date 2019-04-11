@@ -23,7 +23,7 @@ class ShelterIndex extends React.Component {
                 dogData: result
             }))
             .catch(function (error) {
-                alert(`Error: ${error}\nIf you see this, our testers did a sloppy job, and our developers an even sloppier`)
+                console.log(error);
             })
     }
 

@@ -24,23 +24,12 @@ class AddDog extends React.Component {
             gender: null,
             isNeutered: null,
             status: null,
-            personalityTrait: "",
-            dreamHome: "",
-            specialFeatures: "",
-            breedOptions: [
-                {value: "HUSKY", label: "Husky"},
-                {value: "MIXED", label: "Mixed"}
-                ],
-            statusOptions: [
-                {value: "AVAILABLE", label: "Looking for owner"},
-                {value: "PENDING", label: "Pending"},
-                {value: "ADOPTED", label: "Adopted"},
-                {value: "DEAD", label: "Passed away"}
-            ],
-            sizeOptions: [
-                {value: "SMALL", label: "Small"},
-                {value: "LARGE", label: "Large"}
-            ]
+            personalityTrait: null,
+            dreamHome: null,
+            specialFeatures: null,
+            breedOptions: [],
+            statusOptions: [],
+            sizeOptions: []
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -48,7 +37,31 @@ class AddDog extends React.Component {
     }
 
     componentDidMount() {
-        //todo get enums for necessary data
+        fetch("http://localhost:8080/dogs/enums")
+            .then(response => response.json())
+            .then((result) => {
+                let breeds = this.getOptionsArray(result.breeds);
+                let sizes = this.getOptionsArray(result.sizes);
+                let statuses = this.getOptionsArray(result.statuses);
+                this.setState(
+                    {
+                        isLoaded: true,
+                        sizeOptions: sizes,
+                        breedOptions: breeds,
+                        statusOptions: statuses
+                    }
+                )
+            }).catch(function (err) {
+            console.log(err);
+        })
+    }
+
+    getOptionsArray(options) {
+        let optionsArray = [];
+        for (let optionKey in options) {
+            optionsArray.push({value: optionKey, label: options[optionKey]})
+        }
+        return optionsArray;
     }
 
     handleInputChange(event) {
@@ -72,7 +85,7 @@ class AddDog extends React.Component {
             if (response.ok) {
                 window.location.href = `/shelter/${this.state.shelterId}/index`;
             }
-        }).catch(error => alert(error))
+        }).catch(error => console.log(error))
     }
 
     getDogFormData() {
@@ -117,7 +130,8 @@ class AddDog extends React.Component {
             <div className="form-row m-3">
                 <div className="col">
                     <label htmlFor="dogName">Name</label>
-                    <input required type="text" className="form-control" id="dogName" name="name" value={this.state.name}
+                    <input required type="text" className="form-control" id="dogName" name="name"
+                           value={this.state.name}
                            placeholder="Enter name" onChange={this.handleInputChange}/>
                 </div>
                 <div className="col">
@@ -201,7 +215,8 @@ class AddDog extends React.Component {
                     <FormSelect id="status" labelName="Status" className="form-control" name="status"
                                 onChange={this.handleInputChange} placeholderText="Please select status"
                                 value={this.state.status == null ? 0 : this.state.status}
-                                defaultDisabled={this.state.size == null ? null : true} options={this.state.statusOptions}
+                                defaultDisabled={null}
+                                options={this.state.statusOptions}
                                 required={null}/>
                 </div>
             </div>
