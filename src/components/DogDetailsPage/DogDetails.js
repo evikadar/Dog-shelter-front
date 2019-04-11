@@ -1,56 +1,81 @@
-import React, { useState, useEffect } from 'react'
-import InfoBox from './InfoBox'
-import Description from './Description'
-import {
-  mainContainer,
-  infoBox,
-  description,
-  leftSide,
-  rightSide,
-  btn
-} from './styles'
+import React, { useState, useEffect } from 'react';
+import InfoBox from './InfoBox';
+import Description from './Description';
+import styled from 'styled-components';
 
 export default props => {
-    const [details, setDetails] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const RIGHT_SIDE_WIDTH = 450;
-    const LEFT_SIDE_WIDTH = 400;
-    const ERROR_MSG = '500 server error';
-    const ACTION_TITLE = 'Take me home!';
+  const [details, setDetails] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const ERROR_MSG = '500 server error';
+  const ACTION_TITLE = 'Take me home!';
 
-    useEffect(() => {
-
-        fetch(`http://localhost:8080/dog/${props.match.params.id}`)
-            .then(response => response.json())
-            .then(json => {
-                setDetails(json);
-                setIsLoaded(true)
-            })
-
-    }, []);
+  useEffect(() => {
+    fetch(`http://localhost:8080/dog/${props.match.params.id}`)
+      .then(response => response.json())
+      .then(json => {
+        setDetails(json);
+        setIsLoaded(true);
+      });
+  }, []);
 
   return (
     <div>
       {!isLoaded ? (
         ERROR_MSG
       ) : (
-        <div style={mainContainer}>
-          <div style={leftSide(LEFT_SIDE_WIDTH)}>
-            <div style={{ paddingLeft: 10 }}>{details.name}</div>
-            <InfoBox style={infoBox} details={details} />
-            <Description style={description} details={details} />
-          </div>
-          <div style={rightSide}>
+        <Main>
+          <LeftSide>
+            <InfoBox details={details} />
+            <Description details={details} />
+          </LeftSide>
+          <RightSide>
             <img
               src={`http://localhost:8080/${details.photoPath}`}
-              height="400"
-              width={RIGHT_SIDE_WIDTH}
               alt={'dog'}
             />
-            <button style={btn(RIGHT_SIDE_WIDTH)}>{ACTION_TITLE}</button>
-          </div>
-        </div>
+            <button>{ACTION_TITLE}</button>
+          </RightSide>
+        </Main>
       )}
     </div>
-  )
-}
+  );
+};
+
+const Main = styled.div`
+  padding: 100px 130px 50px 130px;
+`;
+
+const LeftSide = styled.div`
+  width: 550px;
+  float: left;
+  font-size: 25px;
+  margin-bottom: 100px;
+  background-color: white;
+  border-radius: 5px;
+  padding 5px 20px;
+`;
+
+const RightSide = styled.div`
+  float: right;
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  padding-bottom: 30px;
+
+  img {
+    height: 400px;
+    width: 450px;
+  }
+
+  button {
+    margin-top: 50px;
+    display: block;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 200;
+    border-radius: 10px;
+    color: white;
+    width: 450px;
+    background-color: #1fa8d8;
+  }
+`;
