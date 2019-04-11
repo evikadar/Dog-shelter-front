@@ -1,53 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import InfoBox from './InfoBox'
-import Description from './Description'
-import styled from 'styled-components'
-
-const Main = styled.div`
-  padding: 100px 150px 50px 150px;
-`
-
-const LeftSide = styled.div`
-    width: 400px;
-    float: left;
-    font-size: 25px;
-    margin-bottom: 100px;
-`
-
-const RightSide = styled.div`
-  float: right;
-
-  img {
-    height: 400px;
-    width: 450px;
-  }
-
-  button {
-    margin-top: 20px;
-    display: block;
-    padding: 20px;
-    font-size: 50px;
-    width: 450px;
-  }
-`
+import React, { useState, useEffect } from 'react';
+import InfoBox from './InfoBox';
+import Description from './Description';
+import styled from 'styled-components';
 
 export default props => {
-    const [details, setDetails] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const RIGHT_SIDE_WIDTH = 450;
-    const ERROR_MSG = '500 server error';
-    const ACTION_TITLE = 'Take me home!';
+  const [details, setDetails] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const ERROR_MSG = '500 server error';
+  const ACTION_TITLE = 'Take me home!';
 
-    useEffect(() => {
-
-        fetch(`http://localhost:8080/dog/${props.match.params.id}`)
-            .then(response => response.json())
-            .then(json => {
-                setDetails(json);
-                setIsLoaded(true)
-            })
-
-    }, []);
+  useEffect(() => {
+    fetch(`http://localhost:8080/dog/${props.match.params.id}`)
+      .then(response => response.json())
+      .then(json => {
+        setDetails(json);
+        setIsLoaded(true);
+      });
+  }, []);
 
   return (
     <div>
@@ -56,7 +25,6 @@ export default props => {
       ) : (
         <Main>
           <LeftSide>
-            <div style={{ paddingLeft: 10 }}>{details.name}</div>
             <InfoBox details={details} />
             <Description details={details} />
           </LeftSide>
@@ -70,5 +38,44 @@ export default props => {
         </Main>
       )}
     </div>
-  )
-}
+  );
+};
+
+const Main = styled.div`
+  padding: 100px 100px 50px 100px;
+`;
+
+const LeftSide = styled.div`
+  width: 625px;
+  float: left;
+  font-size: 25px;
+  margin-bottom: 100px;
+  background-color: white;
+  border-radius: 5px;
+  padding 20px;
+`;
+
+const RightSide = styled.div`
+  float: right;
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  padding-bottom: 30px;
+
+  img {
+    height: 400px;
+    width: 450px;
+  }
+
+  button {
+    margin-top: 50px;
+    display: block;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 200;
+    border-radius: 10px;
+    color: white;
+    width: 450px;
+    background-color: #1fa8d8;
+  }
+`;
