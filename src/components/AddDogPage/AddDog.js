@@ -19,11 +19,11 @@ class AddDog extends React.Component {
             shelterId: props.match.params.id,
             name: "",
             dateOfBirth: "",
-            breed: null,
-            size: null,
-            gender: null,
+            breed: "",
+            size: "",
+            gender: "",
             isNeutered: null,
-            status: null,
+            status: "",
             personalityTrait: null,
             dreamHome: null,
             specialFeatures: null,
@@ -91,7 +91,7 @@ class AddDog extends React.Component {
     getDogFormData() {
         let data = new FormData();
         for (let key of this.dogData) {
-            data.append(key, this.state[key])
+            data.append(key, this.state[key]);
         }
         data.append("file", this.fileInput.current.files[0]);
         return data;
@@ -206,7 +206,7 @@ class AddDog extends React.Component {
                 <div className="col">
                     <FormSelect id="size" labelName="Size" className="form-control" name="size"
                                 onChange={this.handleInputChange} placeholderText="Please select size"
-                                value={this.state.breed == null ? 0 : this.state.breed}
+                                value={this.state.size == null ? 0 : this.state.size}
                                 defaultDisabled={this.state.size == null ? null : true}
                                 options={this.state.sizeOptions}
                                 required={true}/>
