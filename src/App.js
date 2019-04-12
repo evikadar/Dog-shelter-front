@@ -14,13 +14,30 @@ import DogList from "./components/DogList";
 
 
 class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state= {
+            loggedIn: false,
+            userName: "Guest",
+        }
+    }
+
+    handleChange(e) {
+        this.setState({
+            userName: e.target.value,
+        });
+    }
+
     render() {
+        const currentUser = this.state.userName;
         return (
             <Router>
                 <>
                     <div style={{height: 1000}}>
                         <div className="App">
-                            <Navigation/>
+                            <Navigation userName = {currentUser} loggedIn = {this.state.loggedIn}/>
                         </div>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage}/>
@@ -29,7 +46,10 @@ class App extends React.Component {
                             <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
                             <Route exact path={"/dogs"} component={DogList}/>
                             <Route exact path={"/shelter/:id"} component={ShelterDetails}/>
-                            <Route exact path={"/login"} component={Login}/>
+                            <Route exact path={"/login"}
+                                   component={Login}
+                                   userName = {currentUser}
+                            />
                             <Route exact path={"/register"} component={Register}/>
                             <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
                         </Switch>

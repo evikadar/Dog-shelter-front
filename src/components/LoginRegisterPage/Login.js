@@ -13,6 +13,12 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    update = (e) => {
+        console.log(e.target.value);
+        this.props.onUpdate(e.target.value);
+        this.setState({userName: e.target.value});
+    };
+
     handleChange(event) {
         const {name, value} = event.target;
         this.setState({[name]: value});
@@ -36,8 +42,10 @@ class Login extends React.Component {
                     username: this.state.username,
                     isLoaded: true,
                 });
+
                 this.redirectAfterLogin(result);
             })
+            .then(this.update)
             .catch(error => this.setState({error}));
 
     }
@@ -47,6 +55,7 @@ class Login extends React.Component {
             this.props.history.push({
                 pathname: '/profile/' + this.state.username,
             });
+
         } else {
             this.props.history.push({
                 pathname: '/dogs',
@@ -55,6 +64,7 @@ class Login extends React.Component {
     }
 
     render() {
+
         return (
             <div className="container mt-5">
                 <div className="row justify-content-center">
