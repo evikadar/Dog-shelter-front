@@ -1,4 +1,7 @@
 import React from "react";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+
 
 class Login extends React.Component {
 
@@ -10,10 +13,15 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    update = (e) => {
+        console.log(e.target.value);
+        this.props.onUpdate(e.target.value);
+        this.setState({userName: e.target.value});
+    };
+
     handleChange(event) {
         const {name, value} = event.target;
         this.setState({[name]: value});
-
     }
 
     handleSubmit(event) {
@@ -27,24 +35,36 @@ class Login extends React.Component {
             body: JSON.stringify(this.state)
         };
 
-
-
         fetch('http://localhost:8080/login', options)
-            .then(response => {
-                console.log(response);
+            .then(response => response.json())
+            .then((result) => {
+                this.setState({
+                    username: this.state.username,
+                    isLoaded: true,
+                });
+
+                this.redirectAfterLogin(result);
             })
-            .then(data => this.setState({username: this.state.username}))
+            .then(this.update)
             .catch(error => this.setState({error}));
-
-
-        this.props.history.push({
-            pathname: '/dogs',
-            state: this.state.username
-        });
 
     }
 
+    redirectAfterLogin(authenticationIsSuccessful) {
+        if (authenticationIsSuccessful) {
+            this.props.history.push({
+                pathname: '/profile/' + this.state.username,
+            });
+
+        } else {
+            this.props.history.push({
+                pathname: '/dogs',
+            });
+        }
+    }
+
     render() {
+
         return (
             <div className="container mt-5">
                 <div className="row justify-content-center">
@@ -73,7 +93,8 @@ class Login extends React.Component {
                                                 <i className="icon-user"></i>
                                                 </span>
                             </div>
-                            <input name="username" onChange={this.handleChange} className="form-control" type="text" placeholder="Username"></input>
+                            <input name="username" onChange={this.handleChange} className="form-control" type="text"
+                                   placeholder="Username"></input>
                         </div>
                         <div className="input-group mb-4">
                             <div className="input-group-prepend">
@@ -81,13 +102,16 @@ class Login extends React.Component {
                                                 <i className="icon-lock"></i>
                                                 </span>
                             </div>
-                            <input name="password1" onChange={this.handleChange} className="form-control" type="password"
+                            <input name="password1" onChange={this.handleChange} className="form-control"
+                                   type="password"
                                    placeholder="Password"></input>
                         </div>
                         <div className="row">
                             <div className="col6">
                                 <button className="btn btn-primary px-4" type="submit">Login</button>
+
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -95,6 +119,7 @@ class Login extends React.Component {
 
         )
     }
+
 
     createSignupCard() {
         return (
@@ -109,6 +134,7 @@ class Login extends React.Component {
             </div>
         )
     }
+
 
 }
 
