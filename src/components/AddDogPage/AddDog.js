@@ -1,49 +1,100 @@
 import React from "react";
 import * as ReactDOM from "react-dom";
 import Redirect from "react-router-dom/es/Redirect";
+import FormSelect from "./FormSelect";
 
 class AddDog extends React.Component {
+
+    dogData = [
+        "shelterId", "name", "dateOfBirth",
+        "breed", "size", "gender", "isNeutered",
+        "status", "personalityTrait", "dreamHome",
+        "specialFeatures"
+    ];
 
     constructor(props) {
         super(props);
         this.state = {
             isLoaded: false,
-            formData: {shelterId: props.match.params.id}
+            shelterId: props.match.params.id,
+            name: "",
+            dateOfBirth: "",
+            breed: null,
+            size: null,
+            gender: null,
+            isNeutered: null,
+            status: null,
+            personalityTrait: null,
+            dreamHome: null,
+            specialFeatures: null,
+            breedOptions: [],
+            statusOptions: [],
+            sizeOptions: []
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.fileInput = React.createRef();
     }
 
+    componentDidMount() {
+        fetch("http://localhost:8080/dogs/enums")
+            .then(response => response.json())
+            .then((result) => {
+                let breeds = this.getOptionsArray(result.breeds);
+                let sizes = this.getOptionsArray(result.sizes);
+                let statuses = this.getOptionsArray(result.statuses);
+                this.setState(
+                    {
+                        isLoaded: true,
+                        sizeOptions: sizes,
+                        breedOptions: breeds,
+                        statusOptions: statuses
+                    }
+                )
+            }).catch(function (err) {
+            console.log(err);
+        })
+    }
+
+    getOptionsArray(options) {
+        let optionsArray = [];
+        for (let optionKey in options) {
+            optionsArray.push({value: optionKey, label: options[optionKey]})
+        }
+        return optionsArray;
+    }
+
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;
-        const name = target.name;
+        const key = target.name;
 
         this.setState({
-            formData: {[name]: value}
+            [key]: value
         });
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        let form = new FormData();
-        form.append("file", this.fileInput.current.files[0]);
-        form.append("dogData", JSON.stringify(this.state.formData));
-        console.log(form);
-        fetch("http://localhost:8080/shelter/dog", {
+        let data = this.getDogFormData();
+        const options = {
             method: "post",
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-            body: form
-        }).then(response => {
+            body: data
+        };
+        fetch("http://localhost:8080/shelter/dog", options).then(response => {
             if (response.ok) {
-                window.location.href = `/shelter/${this.state.formData.shelterId}/index`;
-            } else {
-                response.error();
+                window.location.href = `/shelter/${this.state.shelterId}/index`;
             }
-        }).catch(error => alert(error))
+        }).catch(error => console.log(error))
+    }
+
+    getDogFormData() {
+        let data = new FormData();
+        for (let key of this.dogData) {
+            data.append(key, this.state[key])
+        }
+        data.append("file", this.fileInput.current.files[0]);
+        return data;
     }
 
     render() {
@@ -79,7 +130,8 @@ class AddDog extends React.Component {
             <div className="form-row m-3">
                 <div className="col">
                     <label htmlFor="dogName">Name</label>
-                    <input type="text" className="form-control" id="dogName" name="name"
+                    <input required type="text" className="form-control" id="dogName" name="name"
+                           value={this.state.name}
                            placeholder="Enter name" onChange={this.handleInputChange}/>
                 </div>
                 <div className="col">
@@ -100,22 +152,20 @@ class AddDog extends React.Component {
                 <div className="col">
                     <label htmlFor="dateOfBirth">Date of birth</label>
                     <input id="dateOfBirth" name="dateOfBirth" required type="date" className="form-control"
-                           placeholder="Enter date of birth" onChange={this.handleInputChange}/>
+                           value={this.state.dateOfBirth} placeholder="Enter date of birth"
+                           onChange={this.handleInputChange}/>
                 </div>
                 <div className="col">
-                    <label htmlFor="breed">Breed</label>
-                    <select className="form-control" id="breed" name="breed" onChange={this.handleInputChange}>
-                        <option value="MIXED">Mixed</option>
-                        <option value="COLLIE">Collie</option>
-                        <option value="HUSKY">Husky</option>
-                        <option value="LABRADOR">Labrador</option>
-                        <option value="PUG">Pug</option>
-                    </select>
+                    <FormSelect id="breed" labelName="Breed" className="form-control" name={"breed"}
+                                onChange={this.handleInputChange} placeholderText="Please select a breed"
+                                value={this.state.breed == null ? 0 : this.state.breed}
+                                defaultDisabled={this.state.breed == null ? null : true}
+                                options={this.state.breedOptions}
+                                required={true}/>
                 </div>
             </div>
         );
     }
-
 
     renderFormGroup3() {
         return (
@@ -123,7 +173,7 @@ class AddDog extends React.Component {
                 <div className="col">
                     <div>Gender</div>
                     <div className="form-check form-check-inline">
-                        <input defaultChecked className="form-check-input" type="radio" name="gender" id="female"
+                        <input required className="form-check-input" type="radio" name="gender" id="female"
                                value="FEMALE" onChange={this.handleInputChange}/>
                         <label className="form-check-label" htmlFor="female">Female</label>
                     </div>
@@ -136,7 +186,7 @@ class AddDog extends React.Component {
                 <div className="col">
                     <div>Neutered</div>
                     <div className="form-check form-check-inline">
-                        <input defaultChecked className="form-check-input" type="radio" name="isNeutered" id="true"
+                        <input required className="form-check-input" type="radio" name="isNeutered" id="true"
                                value="true" onChange={this.handleInputChange}/>
                         <label className="form-check-label" htmlFor="true">Yes</label>
                     </div>
@@ -154,23 +204,20 @@ class AddDog extends React.Component {
         return (
             <div className="form-row m-3">
                 <div className="col">
-                    <label htmlFor="size">Size</label>
-                    <select className="form-control" id="size" name="size" onChange={this.handleInputChange}>
-                        <option value="EXTRA_SMALL">Extra small</option>
-                        <option value="SMALL">Small</option>
-                        <option value="MEDIUM">Medium</option>
-                        <option value="LARGE">Large</option>
-                        <option value="EXTRA_LARGE">Extra large</option>
-                    </select>
+                    <FormSelect id="size" labelName="Size" className="form-control" name="size"
+                                onChange={this.handleInputChange} placeholderText="Please select size"
+                                value={this.state.breed == null ? 0 : this.state.breed}
+                                defaultDisabled={this.state.size == null ? null : true}
+                                options={this.state.sizeOptions}
+                                required={true}/>
                 </div>
                 <div className="col">
-                    <label htmlFor="status">Status</label>
-                    <select className="form-control" id="status" name="status" onChange={this.handleInputChange}>
-                        <option value="AVAILABLE">Looking for owner</option>
-                        <option value="PENDING">Pending</option>
-                        <option value="ADOPTED">Adopted</option>
-                        <option value="DEAD">Passed away</option>
-                    </select>
+                    <FormSelect id="status" labelName="Status" className="form-control" name="status"
+                                onChange={this.handleInputChange} placeholderText="Please select status"
+                                value={this.state.status == null ? 0 : this.state.status}
+                                defaultDisabled={null}
+                                options={this.state.statusOptions}
+                                required={null}/>
                 </div>
             </div>
         );

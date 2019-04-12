@@ -1,24 +1,40 @@
 import {NavLink} from "react-router-dom";
-import FilterPanel from "./FilterPanel/FilterPanel";
 import React from "react";
 
 
-class DogList extends React.Component {
+class DogListByShelter extends React.Component {
+
     constructor(props) {
         super(props);
-        this.state = {data: []};
-        this.refreshDogCards = this.refreshDogCards.bind(this);
+        this.state = {
+            isLoaded: false,
+            data: [],
+        };
     }
 
-    refreshDogCards(dogs) {
-        this.setState({data: dogs});
+    componentDidMount() {
+        this.getDogs();
         this.makeManyCards();
     }
+
+    getDogs() {
+        fetch(`http://localhost:8080/dogs/shelter/${this.props.match.params.id}`)
+            .then(response => response.json())
+            .then(json => {
+                this.setState({data: json});
+            })
+    }
+
 
     render() {
         return (
             <div>
-                <FilterPanel invokeDataRefresh={this.refreshDogCards}/>
+                <div>
+                    <h1 className="text-center m-3 p-3">{this.state.data.length > 0 ? (this.state.data[0].shelter.name + " shelter's dogs:") : (
+                        <div>Please wait..</div>
+                    )}
+                        </h1>
+                </div>
                 <div className="card-columns">
                     {this.makeManyCards()}
                 </div>
@@ -28,13 +44,13 @@ class DogList extends React.Component {
     }
 
     makeManyCards() {
-        let dogs = this.state.data;
-        let allTheDogs = [];
+        var dogs = this.state.data;
+        var allTheDogs = [];
 
         try {
             if (dogs[0].name) {
 
-                for (let i = 0; i < dogs.length; i++) {
+                for (var i = 0; i < dogs.length; i++) {
                     allTheDogs.push(
                         <div>
                             <span className='oneDog'
@@ -72,4 +88,4 @@ class DogList extends React.Component {
     }
 }
 
-export default DogList;
+export default DogListByShelter;
