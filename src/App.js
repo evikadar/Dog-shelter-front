@@ -21,11 +21,12 @@ class App extends React.Component {
         loggedIn: false
     };
 
-    handleChange(e) {
+    handleLogin = (user) => {
         this.setState({
-            userName: e.target.value,
-        });
-    }
+            username: user,
+            loggedIn: true,
+        })
+    };
 
     render() {
         const currentUser = this.state.userName;
