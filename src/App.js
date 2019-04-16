@@ -16,14 +16,10 @@ import DogListByShelter from "./components/DogListByShelter";
 
 class App extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.state = {
-            loggedIn: false,
-            userName: "Guest",
-        }
-    }
+    state = {
+        username: 'Guest',
+        loggedIn: false
+    };
 
     handleChange(e) {
         this.setState({
@@ -33,6 +29,7 @@ class App extends React.Component {
 
     render() {
         const currentUser = this.state.userName;
+        console.log("Username is " + currentUser);
         return (
             <Router>
                 <>

@@ -16,7 +16,7 @@ class Login extends React.Component {
     update = (e) => {
         console.log(e.target.value);
         this.props.onUpdate(e.target.value);
-        this.setState({userName: e.target.value});
+        this.setState({userName: this.state.username});
     };
 
     handleChange(event) {
@@ -93,7 +93,7 @@ class Login extends React.Component {
                                                 <i className="icon-user"></i>
                                                 </span>
                             </div>
-                            <input name="username" onChange={this.handleChange} className="form-control" type="text"
+                            <input name="username" onChange={this.handleChange} onSubmit={this.update} className="form-control" type="text"
                                    placeholder="Username"></input>
                         </div>
                         <div className="input-group mb-4">
