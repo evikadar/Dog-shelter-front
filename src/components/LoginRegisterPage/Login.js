@@ -45,11 +45,11 @@ class Login extends React.Component {
         if (authenticationIsSuccessful) {
             this.props.handleLogin(this.state.username);
             this.props.history.push({
-                pathname: '/profile/' + this.state.username,
+                pathname: '/dogs',
             });
         } else {
             this.props.history.push({
-                pathname: '/dogs',
+                pathname: '/login',
             });
         }
     }
