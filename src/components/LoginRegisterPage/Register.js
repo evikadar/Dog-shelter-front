@@ -20,7 +20,6 @@ class Register extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(JSON.stringify(this.state));
         const options = {
             method: 'post',
             headers: {
@@ -33,10 +32,7 @@ class Register extends React.Component {
             alert("Passwords don't match");
         } else {
             fetch('http://localhost:8080/register', options)
-                .then(response => {
-                    console.log(response);
-                })
-                .then(data => this.setState({username: this.state.username}))
+                .then(() => this.setState({username: this.state.username}))
                 .catch(error => this.setState({error}));
             this.props.history.push('/login');
         }
@@ -65,12 +61,12 @@ class Register extends React.Component {
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
                         <span className="input-group-text">
-                        <i className="icon-user"></i>
+                        <i className="icon-user"/>
                         </span>
                         </div>
                         <input className="form-control" type="text" name="username"
                                onChange={this.handleChange}
-                               placeholder="Username"></input>
+                               placeholder="Username"/>
                     </div>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
@@ -78,27 +74,27 @@ class Register extends React.Component {
                         </div>
                         <input className="form-control" type="text" name="email"
                                onChange={this.handleChange}
-                               placeholder="Email"></input>
+                               placeholder="Email"/>
                     </div>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
                         <span className="input-group-text">
-                        <i className="icon-lock"></i>
+                        <i className="icon-lock"/>
                         </span>
                         </div>
                         <input className="form-control" type="password" name="password1"
                                onChange={this.handleChange}
-                               placeholder="Password"></input>
+                               placeholder="Password"/>
                     </div>
                     <div className="input-group mb-4">
                         <div className="input-group-prepend">
                         <span className="input-group-text">
-                        <i className="icon-lock"></i>
+                        <i className="icon-lock"/>
                         </span>
                         </div>
                         <input className="form-control" type="password" name="password2"
                                onChange={this.handleChange}
-                               placeholder="Repeat password"></input>
+                               placeholder="Repeat password"/>
                     </div>
                     {this.registerAs()}
                     <div>
@@ -116,13 +112,13 @@ class Register extends React.Component {
             <div className="input-group mb-4">
                 <div className="custom-control custom-radio custom-control-inline">
                     <input type="radio" defaultChecked={true} id="registerAs1" name="registerAs"
-                           className="custom-control-input"></input>
+                           className="custom-control-input"/>
                     <label className="custom-control-label text-muted" htmlFor="registerAs1">I Register As Pet
                         Shelter</label>
                 </div>
                 <div className="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="registerAs2" name="registerAs"
-                           className="custom-control-input"></input>
+                           className="custom-control-input"/>
                     <label className="custom-control-label text-muted" htmlFor="registerAs2">I Register As Pet
                         Owner</label>
                 </div>
