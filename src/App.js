@@ -29,14 +29,12 @@ class App extends React.Component {
     };
 
     render() {
-        const currentUser = this.state.userName;
-        console.log("Username is " + currentUser);
         return (
             <Router>
                 <>
                     <div style={{height: 1000}}>
                         <div className="App">
-                            <Navigation userName={currentUser} loggedIn={this.state.loggedIn}/>
+                            <Navigation userName={this.state.username} loggedIn={this.state.loggedIn}/>
                         </div>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage}/>
@@ -46,11 +44,23 @@ class App extends React.Component {
                             <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
                             <Route exact path={"/dogs"} component={DogList}/>
                             <Route exact path={"/shelter/:id"} component={ShelterDetails}/>
-                            <Route exact path={"/login"}
-                                   component={Login}
-                                   userName={currentUser}
+                            <Route
+                                path={'/login'}
+                                render={(routeProps) => (
+                                    <Login {...routeProps}
+                                           username={this.state.username}
+                                           loggedIn = {this.state.loggedIn}
+                                           handleLogin={this.handleLogin} />
+                                )}
                             />
-                            <Route exact path={"/register"} component={Register}/>
+                            <Route
+                                path={'/register'}
+                                render={(routeProps) => (
+                                    <Register {...routeProps}
+                                           username={this.state.username}
+                                           loggedIn = {this.state.loggedIn}/>
+                                )}
+                            />
                             <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
                         </Switch>
                     </div>
