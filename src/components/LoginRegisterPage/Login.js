@@ -1,5 +1,4 @@
 import React from "react";
-import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 
 
@@ -7,7 +6,10 @@ class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {username: '', password1: ''};
+        this.state = {
+            password1: '',
+            username: this.props.username,
+            loggedIn: this.props.loggedIn,};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,6 +39,7 @@ class Login extends React.Component {
 
         fetch('http://localhost:8080/login', options)
             .then(response => response.json())
+            .then(this.props.handleLogin(this.state.username))
             .then((result) => {
                 this.setState({
                     username: this.state.username,

@@ -1,17 +1,15 @@
 import React from "react";
 import 'whatwg-fetch';
-import {Redirect} from 'react-router-dom'
 
 
 class Register extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {username: '', password1: '', password2: '', email: '', redirect: false};
+        this.state = {username: '', password1: '', password2: '', email: ''};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        console.log(this.state);
     }
 
     handleChange(event) {
@@ -107,7 +105,6 @@ class Register extends React.Component {
                         <button className="btn btn-block btn-success" type="submit">Create Account</button>
                     </div>
                 </form>
-                <div></div>
             </div>
 
         )

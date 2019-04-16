@@ -11,11 +11,21 @@ const Wrapper = styled.main`
 
 class Navigation extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: this.props.username,
+            loggedIn: this.props.loggedIn,
+        }
+    }
+
     render() {
+
+        const logged_in = this.props.loggedIn? "" : "not";
 
         return (
             <Wrapper>
-                <img height={50} width={50}
+                <img alt="logo of a dog" height={50} width={50}
                      src={`https://banner2.kisspng.com/20180630/ias/kisspng-arctic-wolf-dog-logo-bucky-barnes-drawing-5b37c2d6245b67.1298494215303810141489.jpg`}/>
                 <ul>
                     <li>
@@ -29,7 +39,9 @@ class Navigation extends React.Component {
                     </li>
                     {this.buttonsByLogin()}
                     <li>
-                        <NavLink exact activeClassName='active' to='/login'>Hi {this.props.userName}!</NavLink>
+                        <NavLink exact activeClassName='active' to='/login'>
+                            Hi {this.props.username}! You are {logged_in} logged in.
+                        </NavLink>
                     </li>
 
                 </ul>
@@ -37,7 +49,9 @@ class Navigation extends React.Component {
         );
     }
 
-    buttonsByLogin(props) {
+    // Todo: add an onclick function to the logout button so that it actually logs out the user
+
+    buttonsByLogin() {
         const isLoggedIn = this.props.loggedIn;
         if (isLoggedIn) {
             return (

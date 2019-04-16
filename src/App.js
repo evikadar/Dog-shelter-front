@@ -34,7 +34,7 @@ class App extends React.Component {
                 <>
                     <div style={{height: 1000}}>
                         <div className="App">
-                            <Navigation userName={this.state.username} loggedIn={this.state.loggedIn}/>
+                            <Navigation username={this.state.username} loggedIn={this.state.loggedIn}/>
                         </div>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage}/>
