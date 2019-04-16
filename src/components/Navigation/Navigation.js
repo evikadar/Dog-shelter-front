@@ -8,7 +8,6 @@ const Wrapper = styled.main`
     ${Style.main}
 `;
 
-
 class Navigation extends React.Component {
 
     constructor(props) {
@@ -20,9 +19,6 @@ class Navigation extends React.Component {
     }
 
     render() {
-
-        const logged_in = this.props.loggedIn? "" : "not";
-
         return (
             <Wrapper>
                 <img alt="logo of a dog" height={50} width={50}
@@ -38,11 +34,7 @@ class Navigation extends React.Component {
                         <NavLink exact activeClassName='active' to='/shelter/1/index'>Log in as Shelter</NavLink>
                     </li>
                     {this.buttonsByLogin()}
-                    <li>
-                        <NavLink exact activeClassName='active' to='/login'>
-                            Hi {this.props.username}! You are {logged_in} logged in.
-                        </NavLink>
-                    </li>
+                    {this.welcomeMessage()}
 
                 </ul>
             </Wrapper>
@@ -66,6 +58,30 @@ class Navigation extends React.Component {
                 </li>
             )
         }
+
+    }
+
+    welcomeMessage() {
+        const logged_in = this.props.loggedIn? "" : "not";
+        const profilePage = "/profile/" + this.props.username;
+        if (this.props.loggedIn) {
+            return(
+                <li>
+                    <NavLink exact activeClassName='active' to={profilePage}>
+                        Hi {this.props.username}! You are {logged_in} logged in.
+                    </NavLink>
+                </li>
+            )
+        } else {
+            return(
+                <li>
+                    <NavLink to={"/dogs"}>
+                        Hi {this.props.username}! You are {logged_in} logged in.
+                    </NavLink>
+                </li>
+            )
+        }
+
 
     }
 }
