@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom'
 import './landingstyle.css'
 
 class LandingPage extends React.Component {
-  state = { data: [] }
+  state = { data: [] };
 
   componentDidMount() {
     this.getDogs()
