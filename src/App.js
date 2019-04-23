@@ -62,6 +62,7 @@ class App extends React.Component {
                                 )}
                             />
                             <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
+                            <Route exact path={"/dogs/shelter/:id"} component={DogListByShelter}/>
                         </Switch>
                     </div>
                     <Footer/>
