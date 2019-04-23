@@ -33,7 +33,7 @@ class ShelterEdit extends React.Component {
                 city: this.state.shelterAddressCity,
                 address: this.state.shelterAddressAddress,
                 zipCode: this.state.shelterAddressZip,
-                id: this.state.shelterData[0].address.id
+                id: this.state.shelterData[0].address ? this.state.shelterData[0].address.id : null
             },
             shelterDescription: this.state.description
         };

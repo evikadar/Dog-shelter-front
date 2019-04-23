@@ -14,32 +14,65 @@ import DogList from "./components/DogList";
 import DogListByShelter from "./components/DogListByShelter";
 
 
-const App = () => {
-    return (
-        <Router>
-            <>
-                <div style={{height: 1000}}>
-                    <div className="App">
-                        <Navigation/>
-                    </div>
+class App extends React.Component {
 
-                    <Switch>
-                        <Route exact path={'/'} component={LandingPage}/>
-                        <Route exact path={'/shelter/:id/index'} render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
-                        <Route exact path={'/shelter/:id/add-dog'} render={(props) => <AddDog {...props}/>}/>
-                        <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
-                        <Route exact path={"/dogs"} component={DogList}/>
-                        <Route exact path={"/shelter/:id"} component={ShelterDetails}/>
-                        <Route exact path={"/login"} component={Login}/>
-                        <Route exact path={"/register"} component={Register}/>
-                        <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
-                        <Route exact path={"/dogs/shelter/:id"} component={DogListByShelter}/>
-                    </Switch>
-                </div>
-                <Footer/>
-            </>
-        </Router>
-    );
-};
+    state = {
+        username: 'Guest',
+        loggedIn: false
+    };
+
+    handleLogin = (user) => {
+        this.setState({
+            username: user,
+            loggedIn: true,
+        })
+    };
+
+    render() {
+        return (
+            <Router>
+                <>
+                    <div style={{height: 1000}}>
+                        <div className="App">
+                            <Navigation username={this.state.username} loggedIn={this.state.loggedIn}/>
+                        </div>
+                        <Switch>
+                            <Route exact path={'/'} component={LandingPage}/>
+                            <Route exact path={'/shelter/:id/index'}
+                                   render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
+                            <Route exact path={'/shelter/:id/add-dog'} render={(props) => <AddDog {...props}/>}/>
+                            <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
+                            <Route exact path={"/dogs"} component={DogList}/>
+                            <Route exact path={"/shelter/:id"} component={ShelterDetails}/>
+                            <Route
+                                path={'/login'}
+                                render={(routeProps) => (
+                                    <Login {...routeProps}
+                                           username={this.state.username}
+                                           loggedIn = {this.state.loggedIn}
+                                           handleLogin={this.handleLogin} />
+                                )}
+                            />
+                            <Route
+                                path={'/register'}
+                                render={(routeProps) => (
+                                    <Register {...routeProps}
+                                           username={this.state.username}
+                                           loggedIn = {this.state.loggedIn}/>
+                                )}
+                            />
+                            <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
+                            <Route exact path={"/dogs/shelter/:id"} component={DogListByShelter}/>
+                        </Switch>
+                    </div>
+                    <Footer/>
+                </>
+            </Router>
+        );
+
+
+    }
+
+}
 
 export default App;

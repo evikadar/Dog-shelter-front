@@ -1,10 +1,16 @@
 import React from "react";
+import "react-notifications-component/dist/theme.css";
+
 
 class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {username: '', password1: ''};
+        this.state = {
+            password1: '',
+            username: this.props.username,
+            loggedIn: this.props.loggedIn,
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,7 +19,6 @@ class Login extends React.Component {
     handleChange(event) {
         const {name, value} = event.target;
         this.setState({[name]: value});
-
     }
 
     handleSubmit(event) {
@@ -27,21 +32,26 @@ class Login extends React.Component {
             body: JSON.stringify(this.state)
         };
 
-
-
         fetch('http://localhost:8080/login', options)
-            .then(response => {
-                console.log(response);
+            .then(response => response.json())
+            .then((result) => {
+                this.redirectAfterLogin(result);
             })
-            .then(data => this.setState({username: this.state.username}))
             .catch(error => this.setState({error}));
 
+    }
 
-        this.props.history.push({
-            pathname: '/dogs',
-            state: this.state.username
-        });
-
+    redirectAfterLogin(authenticationIsSuccessful) {
+        if (authenticationIsSuccessful) {
+            this.props.handleLogin(this.state.username);
+            this.props.history.push({
+                pathname: '/dogs',
+            });
+        } else {
+            this.props.history.push({
+                pathname: '/login',
+            });
+        }
     }
 
     render() {
@@ -51,7 +61,7 @@ class Login extends React.Component {
                     <div className="col-md-8">
                         <div className="card-group">
                             {this.createLoginCard()}
-                            {this.createSignupCard()}
+                            {Login.createSignupCard()}
                         </div>
                     </div>
                 </div>
@@ -70,24 +80,31 @@ class Login extends React.Component {
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                                 <span className="input-group-text">
-                                                <i className="icon-user"></i>
+                                                <i className="icon-user"/>
                                                 </span>
                             </div>
-                            <input name="username" onChange={this.handleChange} className="form-control" type="text" placeholder="Username"></input>
+                            <input name="username"
+                                   onChange={this.handleChange}
+                                   className="form-control"
+                                   type="text"
+                                   placeholder="Username"/>
                         </div>
                         <div className="input-group mb-4">
                             <div className="input-group-prepend">
                                                 <span className="input-group-text">
-                                                <i className="icon-lock"></i>
+                                                <i className="icon-lock"/>
                                                 </span>
                             </div>
-                            <input name="password1" onChange={this.handleChange} className="form-control" type="password"
-                                   placeholder="Password"></input>
+                            <input name="password1" onChange={this.handleChange} className="form-control"
+                                   type="password"
+                                   placeholder="Password"/>
                         </div>
                         <div className="row">
                             <div className="col6">
                                 <button className="btn btn-primary px-4" type="submit">Login</button>
+
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -96,7 +113,8 @@ class Login extends React.Component {
         )
     }
 
-    createSignupCard() {
+
+    static createSignupCard() {
         return (
             <div className="card text-white bg-primary py-5 d-md-down-none">
                 <div className="card-body text-center">
@@ -109,6 +127,7 @@ class Login extends React.Component {
             </div>
         )
     }
+
 
 }
 
