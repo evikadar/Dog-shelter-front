@@ -1,5 +1,4 @@
 import React from "react";
-import "react-notifications-component/dist/theme.css";
 
 
 class Login extends React.Component {

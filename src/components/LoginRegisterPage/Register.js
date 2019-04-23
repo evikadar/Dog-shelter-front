@@ -6,8 +6,13 @@ class Register extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {username: '', password1: '', password2: '', email: ''};
-
+        this.state = {
+            username: '',
+            password1: '',
+            password2: '',
+            email: '',
+            selectedO: 'asShelter',
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -96,34 +101,38 @@ class Register extends React.Component {
                                onChange={this.handleChange}
                                placeholder="Repeat password"/>
                     </div>
-                    {this.registerAs()}
+                    <div className="input-group mb-4">
+                        <div className="custom-control custom-radio custom-control-inline">
+                            <input
+                                type="radio"
+                                value="asOwner"
+                                checked={this.state.selectedO === "asOwner"}
+                                onChange={this.handleRadioChange}
+                            />
+                            <label className="text-muted"> Register As Owner</label>
+                        </div>
+                        <div className="custom-control custom-radio custom-control-inline">
+                            <input
+                                type="radio"
+                                value="asShelter"
+                                checked={this.state.selectedO === "asShelter"}
+                                onChange={this.handleRadioChange}
+                            />
+                            <label className="text-muted"> Register As Shelter</label>
+                        </div>
+                    </div>
                     <div>
                         <button className="btn btn-block btn-success" type="submit">Create Account</button>
                     </div>
                 </form>
             </div>
-
         )
-
     }
 
-    registerAs() {
-        return (
-            <div className="input-group mb-4">
-                <div className="custom-control custom-radio custom-control-inline">
-                    <input type="radio" defaultChecked={true} id="registerAs1" name="registerAs"
-                           className="custom-control-input"/>
-                    <label className="custom-control-label text-muted" htmlFor="registerAs1">I Register As Pet
-                        Shelter</label>
-                </div>
-                <div className="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="registerAs2" name="registerAs"
-                           className="custom-control-input"/>
-                    <label className="custom-control-label text-muted" htmlFor="registerAs2">I Register As Pet
-                        Owner</label>
-                </div>
-            </div>
-        )
+    handleRadioChange = changeEvent => {
+        this.setState({
+            selectedO: changeEvent.target.value,
+        })
     }
 }
 
