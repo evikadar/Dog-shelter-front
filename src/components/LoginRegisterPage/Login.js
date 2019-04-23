@@ -115,7 +115,7 @@ class Login extends React.Component {
 
     static createSignupCard() {
         return (
-            <div className="card text-white bg-primary py-5 d-md-down-none">
+            <div className="card text-white bg-primary py-5">
                 <div className="card-body text-center">
                     <div>
                         <h2>Sign up</h2>
