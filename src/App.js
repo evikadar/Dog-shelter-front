@@ -28,13 +28,21 @@ class App extends React.Component {
         })
     };
 
+    logOut = () => {
+        console.log("logOut");
+        this.setState({
+            username: 'Guest',
+            loggedIn: false,
+        })
+    };
+
     render() {
         return (
             <Router>
                 <>
                     <div style={{height: 1000}}>
                         <div className="App">
-                            <Navigation username={this.state.username} loggedIn={this.state.loggedIn}/>
+                            <Navigation username={this.state.username} loggedIn={this.state.loggedIn} logOut={this.logOut}/>
                         </div>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage}/>

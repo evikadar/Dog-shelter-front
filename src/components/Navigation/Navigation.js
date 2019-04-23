@@ -25,7 +25,7 @@ class Navigation extends React.Component {
                      src={`https://banner2.kisspng.com/20180630/ias/kisspng-arctic-wolf-dog-logo-bucky-barnes-drawing-5b37c2d6245b67.1298494215303810141489.jpg`}/>
                 <ul>
                     <li>
-                        <NavLink exact activeClassName='active' to='/'>Home</NavLink>
+                        <NavLink  exact activeClassName='active' to='/'>Home</NavLink>
                     </li>
                     <li>
                         <NavLink exact activeClassName='active' to='/dogs'>Dogs</NavLink>
@@ -41,13 +41,13 @@ class Navigation extends React.Component {
         );
     }
 
-    // Todo: add an onclick function to the logout button so that it actually logs out the user
+    // Todo: add an onclick function to the logOut button so that it actually logs out the user
     
     buttonsByLogin() {
         const isLoggedIn = this.props.loggedIn;
         if (isLoggedIn) {
             return (
-                <li>
+                <li onClick={this.props.logOut}>
                     <NavLink exact activeClassName='active' to='/'>LogOut</NavLink>
                 </li>
             )
