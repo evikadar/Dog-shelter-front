@@ -12,6 +12,7 @@ import AddDog from "./components/AddDogPage/AddDog";
 import ShelterEdit from "./components/ShelterPage/ShelterEdit";
 import DogList from "./components/DogList";
 import DogListByShelter from "./components/DogListByShelter";
+import ShelterDogDetailsPage from "./components/ShelterDogDetailsPage/ShelterDogDetailsPage";
 
 
 class App extends React.Component {
@@ -40,6 +41,8 @@ class App extends React.Component {
                             <Route exact path={'/'} component={LandingPage}/>
                             <Route exact path={'/shelter/:id/index'}
                                    render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
+                            <Route exact path={'/shelter/:id/dog/:dogId'}
+                                   render={(props) => <ShelterDogDetailsPage {...props}/>}/>
                             <Route exact path={'/shelter/:id/add-dog'} render={(props) => <AddDog {...props}/>}/>
                             <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
                             <Route exact path={"/dogs"} component={DogList}/>
