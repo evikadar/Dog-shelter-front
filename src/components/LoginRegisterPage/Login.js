@@ -49,7 +49,7 @@ class Login extends React.Component {
                 });
             } else if (loginData.userRole === 'SHELTER') {
                 this.props.history.push({
-                    pathname: '/shelter/1/index',
+                    pathname: '/shelter/:id/index', 
                 });
             }
 
