@@ -124,6 +124,10 @@ class ShelterEdit extends React.Component {
                                            onChange={this.handleChange}
                                            defaultValue={shelter.name} required/>
                                 </div>
+                                <div className="col m-2">
+                                    <label htmlFor="shelter-logo-file">Upload shelter logo:</label>
+                                    <input type="file" className="form-control-file" id="shelter-logo-file"/>
+                                </div>
                             </div>
                             <div className="row mt-0 ml-3 mr-3 mb-3">
                                 <div className="col m-2">
