@@ -42,7 +42,7 @@ class Navigation extends React.Component {
     }
 
     // Todo: add an onclick function to the logout button so that it actually logs out the user
-
+    
     buttonsByLogin() {
         const isLoggedIn = this.props.loggedIn;
         if (isLoggedIn) {
