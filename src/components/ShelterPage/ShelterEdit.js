@@ -102,13 +102,6 @@ class ShelterEdit extends React.Component {
         )
     }
 
-    /*
-    <div className="col m-2">
-    <label htmlFor="shelter-logo-file">Upload shelter logo:</label>
-    <input type="file" className="form-control-file" id="shelter-logo-file"/>
-    </div>
-    */
-
     routeChange() {
         let path = `/shelter/${this.props.match.params.id}`;
         this.props.history.push(path);
@@ -126,7 +119,7 @@ class ShelterEdit extends React.Component {
                             <h3 className="text-center m-3">General and contact data:</h3>
                             <div className="row mt-0 ml-3 mr-3 mb-3">
                                 <div className="col m-2">
-                                    <label htmlFor="shelter-name">Shelter name:</label>
+                                    <label htmlFor="shelter-name">Shelter name: <span style={{ color: 'red' }}>* required</span></label>
                                     <input type="text" className="form-control" id="shelter-name" name="shelterName"
                                            onChange={this.handleChange}
                                            defaultValue={shelter.name} required/>
@@ -134,7 +127,7 @@ class ShelterEdit extends React.Component {
                             </div>
                             <div className="row mt-0 ml-3 mr-3 mb-3">
                                 <div className="col m-2">
-                                    <label htmlFor="shelter-email">E-mail:</label>
+                                    <label htmlFor="shelter-email">E-mail: <span style={{ color: 'red' }}>* required</span></label>
                                     <input type="text" className="form-control" id="shelter-email" name="shelterEmail"
                                            onChange={this.handleChange}
                                            placeholder="Example input" defaultValue={shelter.email} required/>
