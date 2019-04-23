@@ -1,5 +1,4 @@
 import React from "react";
-import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 
 
@@ -7,17 +6,15 @@ class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {username: '', password1: ''};
+        this.state = {
+            password1: '',
+            username: this.props.username,
+            loggedIn: this.props.loggedIn,
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    update = (e) => {
-        console.log(e.target.value);
-        this.props.onUpdate(e.target.value);
-        this.setState({userName: e.target.value});
-    };
 
     handleChange(event) {
         const {name, value} = event.target;
@@ -38,40 +35,33 @@ class Login extends React.Component {
         fetch('http://localhost:8080/login', options)
             .then(response => response.json())
             .then((result) => {
-                this.setState({
-                    username: this.state.username,
-                    isLoaded: true,
-                });
-
                 this.redirectAfterLogin(result);
             })
-            .then(this.update)
             .catch(error => this.setState({error}));
 
     }
 
     redirectAfterLogin(authenticationIsSuccessful) {
         if (authenticationIsSuccessful) {
-            this.props.history.push({
-                pathname: '/profile/' + this.state.username,
-            });
-
-        } else {
+            this.props.handleLogin(this.state.username);
             this.props.history.push({
                 pathname: '/dogs',
+            });
+        } else {
+            this.props.history.push({
+                pathname: '/login',
             });
         }
     }
 
     render() {
-
         return (
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card-group">
                             {this.createLoginCard()}
-                            {this.createSignupCard()}
+                            {Login.createSignupCard()}
                         </div>
                     </div>
                 </div>
@@ -90,21 +80,24 @@ class Login extends React.Component {
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                                 <span className="input-group-text">
-                                                <i className="icon-user"></i>
+                                                <i className="icon-user"/>
                                                 </span>
                             </div>
-                            <input name="username" onChange={this.handleChange} className="form-control" type="text"
-                                   placeholder="Username"></input>
+                            <input name="username"
+                                   onChange={this.handleChange}
+                                   className="form-control"
+                                   type="text"
+                                   placeholder="Username"/>
                         </div>
                         <div className="input-group mb-4">
                             <div className="input-group-prepend">
                                                 <span className="input-group-text">
-                                                <i className="icon-lock"></i>
+                                                <i className="icon-lock"/>
                                                 </span>
                             </div>
                             <input name="password1" onChange={this.handleChange} className="form-control"
                                    type="password"
-                                   placeholder="Password"></input>
+                                   placeholder="Password"/>
                         </div>
                         <div className="row">
                             <div className="col6">
@@ -121,7 +114,7 @@ class Login extends React.Component {
     }
 
 
-    createSignupCard() {
+    static createSignupCard() {
         return (
             <div className="card text-white bg-primary py-5 d-md-down-none">
                 <div className="card-body text-center">
