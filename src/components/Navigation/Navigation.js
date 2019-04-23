@@ -35,14 +35,14 @@ class Navigation extends React.Component {
                     </li>
                     {this.buttonsByLogin()}
                     {this.welcomeMessage()}
-
+                    {this.shelterButtons()}
                 </ul>
             </Wrapper>
         );
     }
 
     // Todo: add an onclick function to the logout button so that it actually logs out the user
-    
+
     buttonsByLogin() {
         const isLoggedIn = this.props.loggedIn;
         if (isLoggedIn) {
@@ -62,10 +62,10 @@ class Navigation extends React.Component {
     }
 
     welcomeMessage() {
-        const logged_in = this.props.loggedIn? "" : "not";
+        const logged_in = this.props.loggedIn ? "" : "not";
         const profilePage = "/profile/" + this.props.username;
         if (this.props.loggedIn) {
-            return(
+            return (
                 <li>
                     <NavLink exact activeClassName='active' to={profilePage}>
                         Hi {this.props.username}! You are {logged_in} logged in.
@@ -73,7 +73,7 @@ class Navigation extends React.Component {
                 </li>
             )
         } else {
-            return(
+            return (
                 <li>
                     <NavLink to={"/dogs"}>
                         Hi {this.props.username}! You are {logged_in} logged in.
@@ -81,8 +81,25 @@ class Navigation extends React.Component {
                 </li>
             )
         }
+    }
 
-
+    shelterButtons() {
+        const isLoggedIn = this.props.loggedIn;
+        if (isLoggedIn) {
+            return (
+                <ul className="float-right">
+                    <li>
+                        <NavLink exact activeClassName='active' to='/shelter/1' className='btn btn-outline-light'>My
+                            profile</NavLink>
+                    </li>
+                    <li>
+                        <NavLink exact activeClassName='active' to='/shelter/1/edit'
+                                 className='btn btn-outline-warning'>Edit my
+                            profile</NavLink>
+                    </li>
+                </ul>
+            )
+        }
     }
 }
 
