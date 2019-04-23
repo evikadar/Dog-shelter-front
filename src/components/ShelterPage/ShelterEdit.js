@@ -129,7 +129,7 @@ class ShelterEdit extends React.Component {
                                     <label htmlFor="shelter-name">Shelter name:</label>
                                     <input type="text" className="form-control" id="shelter-name" name="shelterName"
                                            onChange={this.handleChange}
-                                           defaultValue={shelter.name}/>
+                                           defaultValue={shelter.name} required/>
                                 </div>
                             </div>
                             <div className="row mt-0 ml-3 mr-3 mb-3">
@@ -137,7 +137,7 @@ class ShelterEdit extends React.Component {
                                     <label htmlFor="shelter-email">E-mail:</label>
                                     <input type="text" className="form-control" id="shelter-email" name="shelterEmail"
                                            onChange={this.handleChange}
-                                           placeholder="Example input" defaultValue={shelter.email}/>
+                                           placeholder="Example input" defaultValue={shelter.email} required/>
                                 </div>
                                 <div className="col m-2">
                                     <label htmlFor="shelter-phone">Phone number:</label>
