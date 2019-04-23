@@ -33,7 +33,7 @@ class App extends React.Component {
             <Router>
                 <>
                     <div style={{height: 1000}}>
-                        <div className="App">
+                        <div className="App sticky-top">
                             <Navigation username={this.state.username} loggedIn={this.state.loggedIn}/>
                         </div>
                         <Switch>
@@ -49,16 +49,16 @@ class App extends React.Component {
                                 render={(routeProps) => (
                                     <Login {...routeProps}
                                            username={this.state.username}
-                                           loggedIn = {this.state.loggedIn}
-                                           handleLogin={this.handleLogin} />
+                                           loggedIn={this.state.loggedIn}
+                                           handleLogin={this.handleLogin}/>
                                 )}
                             />
                             <Route
                                 path={'/register'}
                                 render={(routeProps) => (
                                     <Register {...routeProps}
-                                           username={this.state.username}
-                                           loggedIn = {this.state.loggedIn}/>
+                                              username={this.state.username}
+                                              loggedIn={this.state.loggedIn}/>
                                 )}
                             />
                             <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
