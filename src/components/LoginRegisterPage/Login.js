@@ -40,12 +40,19 @@ class Login extends React.Component {
 
     }
 
-    redirectAfterLogin(authenticationIsSuccessful) {
-        if (authenticationIsSuccessful) {
+    redirectAfterLogin(loginData) {
+        if (loginData.loggedIn) {
             this.props.handleLogin(this.state.username);
-            this.props.history.push({
-                pathname: '/dogs',
-            });
+            if (loginData.userRole === 'POTENTIAL_PET_OWNER') {
+                this.props.history.push({
+                    pathname: '/dogs',
+                });
+            } else if (loginData.userRole === 'SHELTER') {
+                this.props.history.push({
+                    pathname: '/shelter/1/index',
+                });
+            }
+
         } else {
             this.props.history.push({
                 pathname: '/login',
