@@ -13,12 +13,12 @@ class Navigation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: this.props.username,
-            loggedIn: this.props.loggedIn,
+            userData: this.props.userData
         }
     }
 
     render() {
+        console.log(this.state.userData);
         return (
             <Wrapper>
                 <img alt="logo of a dog" height={50} width={50}
@@ -44,7 +44,7 @@ class Navigation extends React.Component {
     // Todo: add an onclick function to the logout button so that it actually logs out the user
     
     buttonsByLogin() {
-        const isLoggedIn = this.props.loggedIn;
+        const isLoggedIn = this.props.userData[0].loggedIn;
         if (isLoggedIn) {
             return (
                 <li>
@@ -62,13 +62,13 @@ class Navigation extends React.Component {
     }
 
     welcomeMessage() {
-        const logged_in = this.props.loggedIn? "" : "not";
-        const profilePage = "/profile/" + this.props.username;
-        if (this.props.loggedIn) {
+        const logged_in = this.props.userData[0].loggedIn? "" : "not";
+        const profilePage = "/profile/" + this.props.userData[0].username;
+        if (this.props.userData[0].loggedIn) {
             return(
                 <li>
                     <NavLink exact activeClassName='active' to={profilePage}>
-                        Hi {this.props.username}! You are {logged_in} logged in.
+                        Hi {this.props.userData[0].username}! You are {logged_in} logged in.
                     </NavLink>
                 </li>
             )
@@ -76,7 +76,7 @@ class Navigation extends React.Component {
             return(
                 <li>
                     <NavLink to={"/dogs"}>
-                        Hi {this.props.username}! You are {logged_in} logged in.
+                        Hi {this.props.userData[0].username}! You are {logged_in} logged in.
                     </NavLink>
                 </li>
             )

@@ -7,8 +7,9 @@ class Login extends React.Component {
         super(props);
         this.state = {
             password1: '',
-            username: this.props.username,
-            loggedIn: this.props.loggedIn,
+            username: this.props.userData[0].username,
+            loggedIn: this.props.userData[0].loggedIn,
+            userRole: this.props.userData[0].userRole,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -42,7 +43,7 @@ class Login extends React.Component {
 
     redirectAfterLogin(loginData) {
         if (loginData.loggedIn) {
-            this.props.handleLogin(this.state.username);
+            this.props.handleLogin(this.state.userData);
             if (loginData.userRole === 'POTENTIAL_PET_OWNER') {
                 this.props.history.push({
                     pathname: '/dogs',
