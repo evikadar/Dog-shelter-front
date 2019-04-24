@@ -1,31 +1,57 @@
 import {NavLink} from "react-router-dom";
 import FilterPanel from "./FilterPanel/FilterPanel";
 import React from "react";
-
+import Pagination from 'react-js-pagination';
 
 class DogList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {data: []};
+        this.state = {
+            data: [],
+            activePage: 1
+        };
         this.refreshDogCards = this.refreshDogCards.bind(this);
     }
 
     refreshDogCards(dogs) {
         this.setState({data: dogs});
         this.makeManyCards();
-    }
+    };
 
     render() {
+        let dogs = this.state.data;
         return (
             <div>
                 <FilterPanel invokeDataRefresh={this.refreshDogCards}/>
                 <div className="card-columns">
                     {this.makeManyCards()}
                 </div>
+                <div aria-label="Page navigation" className={"d-flex justify-content-center"}>
+                    <Pagination
+                        className={'pagination'}
+                        itemClass='page-item page-link'
+                        prevPageText='prev'
+                        nextPageText='next'
+                        firstPageText='first'
+                        lastPageText='last'
+                        activePage={this.state.activePage}
+                        itemsCountPerPage={3}
+                        totalItemsCount={dogs.length}
+                        pageRangeDisplayed={5}
+                        onChange={this.handlePageChange}
+                    />
+                </div>
+
             </div>
 
         )
     }
+
+    handlePageChange = (pageNumber) => {
+        console.log(`active page is ${pageNumber}`);
+        this.setState({activePage: pageNumber})
+    };
+
 
     makeManyCards() {
         let dogs = this.state.data;
