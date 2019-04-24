@@ -13,9 +13,7 @@ class Navigation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: this.props.username,
-            loggedIn: this.props.loggedIn,
-            userRole: this.props.userRole
+            userData: this.props.userData
         }
     }
 
@@ -26,7 +24,7 @@ class Navigation extends React.Component {
                      src={`https://banner2.kisspng.com/20180630/ias/kisspng-arctic-wolf-dog-logo-bucky-barnes-drawing-5b37c2d6245b67.1298494215303810141489.jpg`}/>
                 <ul>
                     <li>
-                        <NavLink exact activeClassName='active' to='/'>Home</NavLink>
+                        <NavLink  exact activeClassName='active' to='/'>Home</NavLink>
                     </li>
                     <li>
                         <NavLink exact activeClassName='active' to='/dogs'>Dogs</NavLink>
@@ -42,13 +40,13 @@ class Navigation extends React.Component {
         );
     }
 
-    // Todo: add an onclick function to the logout button so that it actually logs out the user
-
+    // Todo: add an onclick function to the logOut button so that it actually logs out the user
+    
     buttonsByLogin() {
-        const isLoggedIn = this.props.loggedIn;
+        const isLoggedIn = this.props.userData[0].loggedIn;
         if (isLoggedIn) {
             return (
-                <li>
+                <li onClick={this.props.logOut}>
                     <NavLink exact activeClassName='active' to='/'>LogOut</NavLink>
                 </li>
             )
@@ -63,13 +61,13 @@ class Navigation extends React.Component {
     }
 
     welcomeMessage() {
-        const logged_in = this.props.loggedIn ? "" : "not";
-        const profilePage = "/profile/" + this.props.username;
-        if (this.props.loggedIn) {
-            return (
+        const logged_in = this.props.userData[0].loggedIn? "" : "not";
+        const profilePage = "/profile/" + this.props.userData[0].username;
+        if (this.props.userData[0].loggedIn) {
+            return(
                 <li>
                     <NavLink exact activeClassName='active' to={profilePage}>
-                        Hi {this.props.username}! You are {logged_in} logged in.
+                        Hi {this.props.userData[0].username}! You are {logged_in} logged in as a {this.props.userData[0].userRole}
                     </NavLink>
                 </li>
             )
@@ -77,7 +75,7 @@ class Navigation extends React.Component {
             return (
                 <li>
                     <NavLink to={"/dogs"}>
-                        Hi {this.props.username}! You are {logged_in} logged in.
+                        Hi {this.props.userData[0].username}! You are {logged_in} logged in.
                     </NavLink>
                 </li>
             )

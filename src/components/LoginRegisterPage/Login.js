@@ -8,9 +8,10 @@ class Login extends React.Component {
         super(props);
         this.state = {
             password1: '',
-            username: this.props.username,
-            loggedIn: this.props.loggedIn,
-            userRole: this.props.userRole
+            username: this.props.userData[0].username,
+            loggedIn: this.props.userData[0].loggedIn,
+            userRole: this.props.userData[0].userRole,
+            shelterId: this.props.userData[0].shelterId,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -42,12 +43,18 @@ class Login extends React.Component {
 
     }
 
-    redirectAfterLogin(authenticationIsSuccessful) {
-        if (authenticationIsSuccessful) {
-            this.props.handleLogin(this.state.username);
-            this.props.history.push({
-                pathname: '/dogs',
-            });
+    redirectAfterLogin(loginData) {
+        if (loginData.loggedIn) {
+            this.props.handleLogin(loginData);
+            if (loginData.userRole === 'POTENTIAL_PET_OWNER') {
+                this.props.history.push({
+                    pathname: '/dogs',
+                });
+            } else if (loginData.userRole === 'SHELTER') {
+                this.props.history.push({
+                    pathname: `/shelter/${loginData.shelterId}/index`,
+                });
+            }
         } else {
             this.props.history.push({
                 pathname: '/login',
@@ -117,7 +124,7 @@ class Login extends React.Component {
 
     static createSignupCard() {
         return (
-            <div className="card text-white bg-primary py-5 d-md-down-none">
+            <div className="card text-white bg-primary py-5">
                 <div className="card-body text-center">
                     <div>
                         <h2>Sign up</h2>

@@ -17,16 +17,36 @@ import DogListByShelter from "./components/DogListByShelter";
 class App extends React.Component {
 
     state = {
-        username: 'Guest',
-        loggedIn: false,
-        userRole: 'SHELTER'
+        userData: [{
+            username: 'Guest',
+            loggedIn: false,
+            userRole: 'SHELTER',
+            shelterId: 0
+
+        }]
     };
 
-    handleLogin = (user) => {
+    handleLogin = (userData) => {
         this.setState({
-            username: user,
-            loggedIn: true,
-            userRole: 'SHELTER'
+            userData: [{
+                username: userData.username,
+                loggedIn: true,
+                userRole: userData.userRole,
+                shelterId: userData.shelterId,
+
+            }]
+        })
+    };
+
+    logOut = () => {
+        console.log("logOut");
+        this.setState({
+            userData: [{
+                username: 'Guest',
+                loggedIn: false,
+                userRole: 'SHELTER',
+                shelterId: 0,
+            }]
         })
     };
 
@@ -36,12 +56,13 @@ class App extends React.Component {
                 <>
                     <div style={{height: 1000}}>
                         <div className="App">
-                            <Navigation username={this.state.username} loggedIn={this.state.loggedIn} userRole={this.state.userRole}/>
+                            <Navigation userData={this.state.userData} logOut={this.logOut}/>
                         </div>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage}/>
                             <Route exact path={'/shelter/:id/index'}
-                                   render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
+                                   render={(props) => <ShelterIndex {...props}
+                                                                    value="All Dogs"/>}/>
                             <Route exact path={'/shelter/:id/add-dog'} render={(props) => <AddDog {...props}/>}/>
                             <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
                             <Route exact path={"/dogs"} component={DogList}/>
@@ -50,9 +71,7 @@ class App extends React.Component {
                                 path={'/login'}
                                 render={(routeProps) => (
                                     <Login {...routeProps}
-                                           username={this.state.username}
-                                           loggedIn = {this.state.loggedIn}
-                                           userRole={this.state.userRole}
+                                           userData = {this.state.userData}
                                            handleLogin={this.handleLogin} />
                                 )}
                             />
@@ -60,8 +79,8 @@ class App extends React.Component {
                                 path={'/register'}
                                 render={(routeProps) => (
                                     <Register {...routeProps}
-                                           username={this.state.username}
-                                           loggedIn = {this.state.loggedIn}/>
+                                              userData = {this.state.userData}
+                                    />
                                 )}
                             />
                             <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
