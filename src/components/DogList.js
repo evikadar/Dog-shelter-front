@@ -52,10 +52,9 @@ class DogList extends React.Component {
         this.setState({activePage: pageNumber})
     };
 
-
     makeManyCards() {
-        let activeNumber = this.state.activePage;
-        let dogs = this.state.data.slice((activeNumber - 1) * this.DOGS_PER_PAGE, activeNumber * this.DOGS_PER_PAGE);
+        let activePage = this.state.activePage;
+        let dogs = this.state.data.slice((activePage - 1) * this.DOGS_PER_PAGE, activePage * this.DOGS_PER_PAGE);
         let actualDogs = [];
 
         try {
