@@ -38,8 +38,11 @@ class App extends React.Component {
     logOut = () => {
         console.log("logOut");
         this.setState({
-            username: 'Guest',
-            loggedIn: false,
+            userData: [{
+                username: 'Guest',
+                loggedIn: false,
+                userRole: 'SHELTER',
+            }]
         })
     };
 
@@ -49,7 +52,7 @@ class App extends React.Component {
                 <>
                     <div style={{height: 1000}}>
                         <div className="App">
-                            <Navigation userData={this.state.userData}/>
+                            <Navigation userData={this.state.userData} logOut={this.logOut}/>
                         </div>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage}/>
