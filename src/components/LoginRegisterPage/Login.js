@@ -7,8 +7,9 @@ class Login extends React.Component {
         super(props);
         this.state = {
             password1: '',
-            username: this.props.username,
-            loggedIn: this.props.loggedIn,
+            username: this.props.userData[0].username,
+            loggedIn: this.props.userData[0].loggedIn,
+            userRole: this.props.userData[0].userRole,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -40,12 +41,18 @@ class Login extends React.Component {
 
     }
 
-    redirectAfterLogin(authenticationIsSuccessful) {
-        if (authenticationIsSuccessful) {
-            this.props.handleLogin(this.state.username);
-            this.props.history.push({
-                pathname: '/dogs',
-            });
+    redirectAfterLogin(loginData) {
+        if (loginData.loggedIn) {
+            this.props.handleLogin(loginData);
+            if (loginData.userRole === 'POTENTIAL_PET_OWNER') {
+                this.props.history.push({
+                    pathname: '/dogs',
+                });
+            } else if (loginData.userRole === 'SHELTER') {
+                this.props.history.push({
+                    pathname: '/shelter/:id/index', 
+                });
+            }
         } else {
             this.props.history.push({
                 pathname: '/login',

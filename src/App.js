@@ -17,22 +17,32 @@ import DogListByShelter from "./components/DogListByShelter";
 class App extends React.Component {
 
     state = {
-        username: 'Guest',
-        loggedIn: false
+        userData: [{
+            username: 'Guest',
+            loggedIn: false,
+            userRole: 'SHELTER',
+        }]
     };
 
-    handleLogin = (user) => {
+    handleLogin = (userData) => {
         this.setState({
-            username: user,
-            loggedIn: true,
+            userData: [{
+                username: userData.username,
+                loggedIn: true,
+                userRole: userData.userRole,
+
+            }]
         })
     };
 
     logOut = () => {
         console.log("logOut");
         this.setState({
-            username: 'Guest',
-            loggedIn: false,
+            userData: [{
+                username: 'Guest',
+                loggedIn: false,
+                userRole: 'SHELTER',
+            }]
         })
     };
 
@@ -42,7 +52,7 @@ class App extends React.Component {
                 <>
                     <div style={{height: 1000}}>
                         <div className="App">
-                            <Navigation username={this.state.username} loggedIn={this.state.loggedIn} logOut={this.logOut}/>
+                            <Navigation userData={this.state.userData} logOut={this.logOut}/>
                         </div>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage}/>
@@ -56,8 +66,7 @@ class App extends React.Component {
                                 path={'/login'}
                                 render={(routeProps) => (
                                     <Login {...routeProps}
-                                           username={this.state.username}
-                                           loggedIn = {this.state.loggedIn}
+                                           userData = {this.state.userData}
                                            handleLogin={this.handleLogin} />
                                 )}
                             />
@@ -65,8 +74,8 @@ class App extends React.Component {
                                 path={'/register'}
                                 render={(routeProps) => (
                                     <Register {...routeProps}
-                                           username={this.state.username}
-                                           loggedIn = {this.state.loggedIn}/>
+                                              userData = {this.state.userData}
+                                    />
                                 )}
                             />
                             <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
