@@ -10,6 +10,7 @@ class Login extends React.Component {
             username: this.props.userData[0].username,
             loggedIn: this.props.userData[0].loggedIn,
             userRole: this.props.userData[0].userRole,
+            shelterId: this.props.userData[0].shelterId,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -50,7 +51,7 @@ class Login extends React.Component {
                 });
             } else if (loginData.userRole === 'SHELTER') {
                 this.props.history.push({
-                    pathname: '/shelter/:id/index', 
+                    pathname: `/shelter/${loginData.shelterId}/index`,
                 });
             }
         } else {
