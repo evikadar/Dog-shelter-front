@@ -4,6 +4,8 @@ import React from "react";
 import Pagination from 'react-js-pagination';
 
 class DogList extends React.Component {
+    DOGS_PER_PAGE = 3;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -35,15 +37,13 @@ class DogList extends React.Component {
                         firstPageText='first'
                         lastPageText='last'
                         activePage={this.state.activePage}
-                        itemsCountPerPage={3}
+                        itemsCountPerPage={this.DOGS_PER_PAGE}
                         totalItemsCount={dogs.length}
                         pageRangeDisplayed={5}
                         onChange={this.handlePageChange}
                     />
                 </div>
-
             </div>
-
         )
     }
 
@@ -54,14 +54,15 @@ class DogList extends React.Component {
 
 
     makeManyCards() {
-        let dogs = this.state.data;
-        let allTheDogs = [];
+        let activeNumber = this.state.activePage;
+        let dogs = this.state.data.slice((activeNumber - 1) * this.DOGS_PER_PAGE, activeNumber * this.DOGS_PER_PAGE);
+        let actualDogs = [];
 
         try {
             if (dogs[0].name) {
 
                 for (let i = 0; i < dogs.length; i++) {
-                    allTheDogs.push(
+                    actualDogs.push(
                         <div>
                             <span className='oneDog'
                                   key={i}>{this.makeACard(dogs[i].name, dogs[i].age, dogs[i].breed, dogs[i].photoPath, dogs[i].id)}</span>
@@ -72,7 +73,7 @@ class DogList extends React.Component {
         } catch (e) {
             console.log(e);
         }
-        return allTheDogs;
+        return actualDogs;
     }
 
     makeACard(dogName, dogAge, dogBreed, dogPhoto, dogId) {
