@@ -35,6 +35,14 @@ class App extends React.Component {
         })
     };
 
+    logOut = () => {
+        console.log("logOut");
+        this.setState({
+            username: 'Guest',
+            loggedIn: false,
+        })
+    };
+
     render() {
         return (
             <Router>
