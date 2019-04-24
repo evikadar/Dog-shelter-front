@@ -10,6 +10,7 @@ class Login extends React.Component {
             password1: '',
             username: this.props.username,
             loggedIn: this.props.loggedIn,
+            userRole: this.props.userRole
         };
 
         this.handleChange = this.handleChange.bind(this);

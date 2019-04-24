@@ -18,13 +18,15 @@ class App extends React.Component {
 
     state = {
         username: 'Guest',
-        loggedIn: false
+        loggedIn: false,
+        userRole: 'SHELTER'
     };
 
     handleLogin = (user) => {
         this.setState({
             username: user,
             loggedIn: true,
+            userRole: 'SHELTER'
         })
     };
 
@@ -34,7 +36,7 @@ class App extends React.Component {
                 <>
                     <div style={{height: 1000}}>
                         <div className="App">
-                            <Navigation username={this.state.username} loggedIn={this.state.loggedIn}/>
+                            <Navigation username={this.state.username} loggedIn={this.state.loggedIn} userRole={this.state.userRole}/>
                         </div>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage}/>
@@ -50,6 +52,7 @@ class App extends React.Component {
                                     <Login {...routeProps}
                                            username={this.state.username}
                                            loggedIn = {this.state.loggedIn}
+                                           userRole={this.state.userRole}
                                            handleLogin={this.handleLogin} />
                                 )}
                             />

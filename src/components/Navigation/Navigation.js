@@ -15,6 +15,7 @@ class Navigation extends React.Component {
         this.state = {
             username: this.props.username,
             loggedIn: this.props.loggedIn,
+            userRole: this.props.userRole
         }
     }
 
@@ -85,7 +86,8 @@ class Navigation extends React.Component {
 
     shelterButtons() {
         const isLoggedIn = this.props.loggedIn;
-        if (isLoggedIn) {
+        const userRole = this.state.userRole;
+        if (isLoggedIn && userRole === 'SHELTER') {
             return (
                 <ul className="float-right">
                     <li>
