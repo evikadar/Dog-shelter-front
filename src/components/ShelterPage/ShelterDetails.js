@@ -132,7 +132,7 @@ class ShelterLogo extends React.Component {
         return (
             <div>
                 <img className="shelterLogo"
-                     src={"http://localhost:8080/" + this.props.shelterLogo} alt="logo"/>
+                     src={"http://localhost:8080/image/" + this.props.shelterLogo} alt="logo"/>
             </div>
         )
     }
