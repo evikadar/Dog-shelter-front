@@ -115,11 +115,6 @@ class ShelterDetails extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="m-2 text-center">
-                        <NavLink exact activeClassName='active'
-                                 to={`/shelter/${this.props.match.params.id}/edit`} className="btn btn-dark">
-                            <h4>Edit profile</h4></NavLink>
-                    </div>
                 </div>
             )
         }
