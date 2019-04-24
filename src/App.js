@@ -24,12 +24,12 @@ class App extends React.Component {
         }]
     };
 
-    handleLogin = (user) => {
+    handleLogin = (userData) => {
         this.setState({
             userData: [{
-                username: user.username,
+                username: userData.username,
                 loggedIn: true,
-                userRole: user.userRole,
+                userRole: userData.userRole,
 
             }]
         })

@@ -42,9 +42,8 @@ class Login extends React.Component {
     }
 
     redirectAfterLogin(loginData) {
-        console.log(loginData);
         if (loginData.loggedIn) {
-            this.props.handleLogin(this.state.userData);
+            this.props.handleLogin(loginData);
             if (loginData.userRole === 'POTENTIAL_PET_OWNER') {
                 this.props.history.push({
                     pathname: '/dogs',

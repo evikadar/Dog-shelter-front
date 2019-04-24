@@ -68,7 +68,7 @@ class Navigation extends React.Component {
             return(
                 <li>
                     <NavLink exact activeClassName='active' to={profilePage}>
-                        Hi {this.props.userData[0].username}! You are {logged_in} logged in.
+                        Hi {this.props.userData[0].username}! You are {logged_in} logged in as a {this.props.userData[0].userRole}
                     </NavLink>
                 </li>
             )
