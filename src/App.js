@@ -21,6 +21,8 @@ class App extends React.Component {
             username: 'Guest',
             loggedIn: false,
             userRole: 'SHELTER',
+            shelterId: 0
+
         }]
     };
 
@@ -30,6 +32,7 @@ class App extends React.Component {
                 username: userData.username,
                 loggedIn: true,
                 userRole: userData.userRole,
+                shelterId: userData.shelterId,
 
             }]
         })
@@ -42,6 +45,7 @@ class App extends React.Component {
                 username: 'Guest',
                 loggedIn: false,
                 userRole: 'SHELTER',
+                shelterId: 0,
             }]
         })
     };
@@ -57,7 +61,8 @@ class App extends React.Component {
                         <Switch>
                             <Route exact path={'/'} component={LandingPage}/>
                             <Route exact path={'/shelter/:id/index'}
-                                   render={(props) => <ShelterIndex {...props} value="All Dogs"/>}/>
+                                   render={(props) => <ShelterIndex {...props}
+                                                                    value="All Dogs"/>}/>
                             <Route exact path={'/shelter/:id/add-dog'} render={(props) => <AddDog {...props}/>}/>
                             <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
                             <Route exact path={"/dogs"} component={DogList}/>
