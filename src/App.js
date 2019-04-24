@@ -29,6 +29,7 @@ class App extends React.Component {
             userData: [{
                 username: user.username,
                 loggedIn: true,
+                userRole: user.userRole,
 
             }]
         })

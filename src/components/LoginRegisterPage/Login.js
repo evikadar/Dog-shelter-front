@@ -42,6 +42,7 @@ class Login extends React.Component {
     }
 
     redirectAfterLogin(loginData) {
+        console.log(loginData);
         if (loginData.loggedIn) {
             this.props.handleLogin(this.state.userData);
             if (loginData.userRole === 'POTENTIAL_PET_OWNER') {
@@ -53,7 +54,6 @@ class Login extends React.Component {
                     pathname: '/shelter/:id/index', 
                 });
             }
-
         } else {
             this.props.history.push({
                 pathname: '/login',
