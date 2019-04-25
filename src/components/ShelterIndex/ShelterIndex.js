@@ -101,7 +101,17 @@ class DogCard extends React.Component {
     render() {
         return (
             <div className="card border-light mb-3">
-                <div className="card-header">{this.props.dogName}</div>
+                <div className="card-header bg-secondary">
+                    <div className={"row justify-content-between"}>
+                        <div className={"col-2 align-self-center"}>
+                            <h4 className={"text-uppercase align-middle"}>{this.props.dogName}</h4>
+                        </div>
+                        <div className={"col-2 align-self-center"}>
+                            <NavLink className="cui-info text-right nav-link h1 text-primary"
+                                     to={`/shelter/${this.props.shelterId}/dog/${this.props.dogId}`}/>
+                        </div>
+                    </div>
+                </div>
                 <div className="card-body">
                     <img className="shelterDogImage card-img-left"
                          src={this.props.dogImage ? `http://localhost:8080/image/${this.props.dogImage}` : "/dummyDogImage.jpg"}
@@ -136,10 +146,6 @@ class DogCard extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <NavLink className="btn btn-dark m-3"
-                             to={`/shelter/${this.props.shelterId}/dog/${this.props.dogId}`}>
-                        Details
-                    </NavLink>
                 </div>
             </div>
         )
