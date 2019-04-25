@@ -20,7 +20,7 @@ class App extends React.Component {
         userData: [{
             username: 'Guest',
             loggedIn: false,
-            userRole: 'SHELTER',
+            userRole: 'POTENTIAL_PET_OWNER',
             shelterId: 0
 
         }]
@@ -44,7 +44,7 @@ class App extends React.Component {
             userData: [{
                 username: 'Guest',
                 loggedIn: false,
-                userRole: 'SHELTER',
+                userRole: 'POTENTIAL_PET_OWNER',
                 shelterId: 0,
             }]
         })
