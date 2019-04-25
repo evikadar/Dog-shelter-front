@@ -9,8 +9,9 @@ class FormSelect extends React.Component {
         });
         return (
             <div>
-                <label htmlFor={this.props.id}>{this.props.labelName}</label>
-                <select value={this.props.value} required={this.props.required} className={this.props.className} id={this.props.id} name={this.props.name} onChange={this.props.onChange}>
+                <label htmlFor={this.props.id}>{this.props.labelName} {this.props.required ? (<span style={{color: 'red'}}>* required</span>) : null}</label>
+                <select value={this.props.value} required={this.props.required} className={this.props.className}
+                        id={this.props.id} name={this.props.name} onChange={this.props.onChange}>
                     <option disabled={this.props.defaultDisabled} value="">{this.props.placeholderText}</option>
                     {options}
                 </select>
