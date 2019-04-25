@@ -13,7 +13,8 @@ class ShelterDetails extends React.Component {
         super(props);
         this.state = {
             isLoaded: false,
-            shelterData: []
+            shelterData: [],
+            userData: this.props.userData
         };
     }
 
@@ -50,6 +51,20 @@ class ShelterDetails extends React.Component {
         );
     }
 
+    buttonToOwnDogsInGeneralPage(){
+        const userRole = this.props.userData[0].userRole;
+        if (userRole !== 'SHELTER'){
+            return (
+                <div className="text-left">
+                    <NavLink exact activeClassName='active' to={`/dogs/shelter/${this.props.match.params.id}`} className="btn btn-secondary">
+                        <h2> ...
+                            Our dogs ... </h2></NavLink>
+                </div>
+            )
+        }
+        return null;
+    }
+
     getShelterData() {
         let shelterInfo = [];
         for (let i = 0; i < this.state.shelterData.length; i++) {
@@ -59,11 +74,7 @@ class ShelterDetails extends React.Component {
                     <div className="card">
                         <div className="card-header">
                             <h1 className="text-center">{shelter.name} </h1>
-                            <div className="text-left">
-                                <NavLink exact activeClassName='active' to={`/dogs/shelter/${this.props.match.params.id}`} className="btn btn-secondary">
-                                    <h2> ...
-                                        Our dogs ... </h2></NavLink>
-                            </div>
+                            {this.buttonToOwnDogsInGeneralPage()}
                         </div>
                     </div>
                     <div className="card-body">

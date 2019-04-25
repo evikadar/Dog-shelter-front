@@ -66,20 +66,25 @@ class App extends React.Component {
                             <Route exact path={'/shelter/:id/add-dog'} render={(props) => <AddDog {...props}/>}/>
                             <Route exact path={'/dog/:id'} name='DogDetails' component={DogDetails}/>
                             <Route exact path={"/dogs"} component={DogList}/>
-                            <Route exact path={"/shelter/:id"} component={ShelterDetails}/>
+                            <Route exact path={"/shelter/:id"}
+                                   render={(routeProps) => (
+                                       <ShelterDetails {...routeProps}
+                                                       userData={this.state.userData}/>
+                                   )}
+                            />
                             <Route
                                 path={'/login'}
                                 render={(routeProps) => (
                                     <Login {...routeProps}
-                                           userData = {this.state.userData}
-                                           handleLogin={this.handleLogin} />
+                                           userData={this.state.userData}
+                                           handleLogin={this.handleLogin}/>
                                 )}
                             />
                             <Route
                                 path={'/register'}
                                 render={(routeProps) => (
                                     <Register {...routeProps}
-                                              userData = {this.state.userData}
+                                              userData={this.state.userData}
                                     />
                                 )}
                             />
