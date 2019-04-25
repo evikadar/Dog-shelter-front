@@ -9,7 +9,7 @@ class AddDog extends React.Component {
         "shelterId", "name", "dateOfBirth",
         "breed", "size", "gender", "isNeutered",
         "status", "personalityTrait", "dreamHome",
-        "specialFeatures"
+        "specialFeatures", "ownerName", "ownerPhoneNumber", "ownerEmail"
     ];
 
     constructor(props) {
@@ -27,6 +27,9 @@ class AddDog extends React.Component {
             personalityTrait: null,
             dreamHome: null,
             specialFeatures: null,
+            ownerName: "",
+            ownerPhoneNumber: "",
+            ownerEmail: "",
             breedOptions: [],
             statusOptions: [],
             sizeOptions: []
@@ -117,6 +120,7 @@ class AddDog extends React.Component {
                             {this.renderFormGroup3()}
                             {this.renderFormGroup4()}
                             {this.renderFormGroup5()}
+                            {this.renderFormGroup6()}
                             {this.renderSubmitButton()}
                         </div>
                     </form>
@@ -128,18 +132,17 @@ class AddDog extends React.Component {
     renderFormGroup1() {
         return (
             <div className="form-row m-3">
-                <div className="col">
-                    <label htmlFor="dogName">Name:  <span
+                <div className="form-group col">
+                    <label htmlFor="dogName">Name: <span
                         style={{color: 'red'}}>* required</span></label>
                     <input required type="text" className="form-control" id="dogName" name="name"
                            value={this.state.name}
                            placeholder="Enter name" onChange={this.handleInputChange}/>
                 </div>
-                <div className="col">
+                <div className="form-group col">
                     <label>Photo</label>
                     <div className="custom-file">
-                        <label className="custom-file-label" htmlFor="image">Choose image</label>
-                        <input type="file" className="custom-file-input" id="image" accept="image/*"
+                        <input type="file" id="image" accept="image/*"
                                ref={this.fileInput}/>
                     </div>
                 </div>
@@ -150,14 +153,14 @@ class AddDog extends React.Component {
     renderFormGroup2() {
         return (
             <div className="form-row m-3">
-                <div className="col">
-                    <label htmlFor="dateOfBirth">Date of birth:  <span
+                <div className="form-group col">
+                    <label htmlFor="dateOfBirth">Date of birth: <span
                         style={{color: 'red'}}>* required</span></label>
                     <input id="dateOfBirth" name="dateOfBirth" required type="date" className="form-control"
                            value={this.state.dateOfBirth} placeholder="Enter date of birth"
                            onChange={this.handleInputChange}/>
                 </div>
-                <div className="col">
+                <div className="form-group col">
                     <FormSelect id="breed" labelName="Breed" className="form-control" name={"breed"}
                                 onChange={this.handleInputChange} placeholderText="Please select a breed"
                                 value={this.state.breed == null ? 0 : this.state.breed}
@@ -172,8 +175,8 @@ class AddDog extends React.Component {
     renderFormGroup3() {
         return (
             <div className="form-row m-3">
-                <div className="col">
-                    <div>Gender:  <span
+                <div className="form-group col">
+                    <div>Gender: <span
                         style={{color: 'red'}}>* required</span></div>
                     <div className="form-check form-check-inline">
                         <input required className="form-check-input" type="radio" name="gender" id="female"
@@ -186,8 +189,8 @@ class AddDog extends React.Component {
                         <label className="form-check-label" htmlFor="male">Male</label>
                     </div>
                 </div>
-                <div className="col">
-                    <div>Neutered?  <span
+                <div className="form-group col">
+                    <div>Neutered? <span
                         style={{color: 'red'}}>* required</span></div>
                     <div className="form-check form-check-inline">
                         <input required className="form-check-input" type="radio" name="isNeutered" id="true"
@@ -207,7 +210,7 @@ class AddDog extends React.Component {
     renderFormGroup4() {
         return (
             <div className="form-row m-3">
-                <div className="col">
+                <div className="form-group col">
                     <FormSelect id="size" labelName="Size" className="form-control" name="size"
                                 onChange={this.handleInputChange} placeholderText="Please select size"
                                 value={this.state.size == null ? 0 : this.state.size}
@@ -215,7 +218,7 @@ class AddDog extends React.Component {
                                 options={this.state.sizeOptions}
                                 required={true}/>
                 </div>
-                <div className="col">
+                <div className="form-group col">
                     <FormSelect id="status" labelName="Status" className="form-control" name="status"
                                 onChange={this.handleInputChange} placeholderText="Please select status"
                                 value={this.state.status == null ? 0 : this.state.status}
@@ -233,17 +236,52 @@ class AddDog extends React.Component {
                 <div className="form-group m-3">
                     <label htmlFor="personalityTrait">Personality trait</label>
                     <textarea className="form-control" id="personalityTrait" placeholder="Describe personality"
-                              name="personalityTrait" rows="5" onChange={this.handleInputChange}/>
+                              name="personalityTrait" rows="5" onChange={this.handleInputChange}
+                              value={this.state.personalityTrait}/>
                 </div>
                 <div className="form-group m-3">
                     <label htmlFor="dreamHome">Dream home</label>
                     <textarea className="form-control" id="dreamHome" placeholder="Describe dream home"
-                              name="dreamHome" rows="5" onChange={this.handleInputChange}/>
+                              name="dreamHome" rows="5" onChange={this.handleInputChange}
+                              value={this.state.dreamHome}/>
                 </div>
                 <div className="form-group m-3">
                     <label htmlFor="specialFeatures">Special features</label>
                     <textarea className="form-control" id="specialFeatures" placeholder="Describe special features"
-                              name="specialFeatures" rows="5" onChange={this.handleInputChange}/>
+                              name="specialFeatures" rows="5" onChange={this.handleInputChange}
+                              value={this.state.specialFeatures}/>
+                </div>
+            </div>
+        );
+    }
+
+    renderFormGroup6() {
+        return (
+            <div>
+                <div className="form-group m-3 text-center">
+                    <label className={"text-uppercase h6"}>Owner (candidate) details</label>
+                </div>
+                <div className="form-row m-3">
+                    <div className="form-group col">
+                        <label htmlFor="ownerName">Name</label>
+                        <input className="form-control" id="ownerName" placeholder="Enter name"
+                               name="ownerName" onChange={this.handleInputChange} type="text"
+                               value={this.state.ownerName}/>
+                    </div>
+                    <div className="form-group col">
+                        <label htmlFor="ownerPhoneNumber">Phone number</label>
+                        <input className="form-control" id="ownerPhoneNumber" placeholder="Enter phone number"
+                               name="ownerPhoneNumber" onChange={this.handleInputChange} type="text"
+                               value={this.state.ownerPhoneNumber}/>
+                    </div>
+                </div>
+                <div className="form-row m-3">
+                    <div className="form-group col">
+                        <label htmlFor="ownerEmail">E-mail</label>
+                        <input className="form-control" id="ownerEmail" placeholder="Enter e-mail address"
+                               name="ownerEmail" onChange={this.handleInputChange} type="text"
+                               value={this.state.ownerEmail}/>
+                    </div>
                 </div>
             </div>
         );
