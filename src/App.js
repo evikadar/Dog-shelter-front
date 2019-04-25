@@ -13,6 +13,7 @@ import ShelterEdit from "./components/ShelterPage/ShelterEdit";
 import DogList from "./components/DogList";
 import DogListByShelter from "./components/DogListByShelter";
 import ShelterDogDetailsPage from "./components/ShelterDogDetailsPage/ShelterDogDetailsPage";
+import EditDog from "./components/AddDogPage/EditDog";
 
 
 class App extends React.Component {

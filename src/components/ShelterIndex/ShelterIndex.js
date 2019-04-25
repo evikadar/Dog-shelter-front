@@ -89,7 +89,7 @@ class ShelterIndex extends React.Component {
                 <DogCard dogName={dog.name} dogStatus={dog.status}
                          dogImage={dog.photoPath} dogGender={dog.gender}
                          dogBreed={dog.breed} dogSize={dog.size} dogAge={dog.age}
-                         isNeutered={dog.isNeutered} dogId={dog.id} shelterId={this.state.shelterId}/>
+                         isNeutered={dog.neutered} dogId={dog.id} shelterId={this.state.shelterId}/>
             </div>)
         }
         return dogCards;
@@ -106,9 +106,11 @@ class DogCard extends React.Component {
                         <div className={"col-2 align-self-center"}>
                             <h4 className={"text-uppercase align-middle"}>{this.props.dogName}</h4>
                         </div>
-                        <div className={"col-2 align-self-center"}>
-                            <NavLink className="cui-info text-right nav-link h1 text-primary"
+                        <div className={"col-2 align-self-center nav justify-content-end"}>
+                            <NavLink className="cui-info nav-link h1 text-primary"
                                      to={`/shelter/${this.props.shelterId}/dog/${this.props.dogId}`}/>
+                            <NavLink className="cui-pencil nav-link h1 text-dark"
+                                     to={`/shelter/${this.props.shelterId}/edit-dog/${this.props.dogId}`}/>
                         </div>
                     </div>
                 </div>
