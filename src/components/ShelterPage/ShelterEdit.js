@@ -28,29 +28,6 @@ class ShelterEdit extends React.Component {
         this.fileInput = React.createRef();
     }
 
-    /*createJSONFromFormData() {
-        let formData = {
-            id: this.state.shelterData[0].id,
-            name: this.state.shelterName,
-            email: this.state.shelterEmail,
-            phoneNumber: this.state.shelterPhoneNumber,
-            address: {
-                country: this.state.shelterAddressCountry,
-                city: this.state.shelterAddressCity,
-                address: this.state.shelterAddressAddress,
-                zipCode: this.state.shelterAddressZip,
-                id: this.state.shelterData[0].address ? this.state.shelterData[0].address.id : null
-            },
-            shelterDescription: this.state.description
-        };
-        return JSON.stringify(formData);
-    }
-
-    handleChange(event) {
-        const {name, value} = event.target;
-        this.setState({[name]: value});
-    }*/
-
     handleChange(event) {
         const target = event.target;
         const value = target.value;
