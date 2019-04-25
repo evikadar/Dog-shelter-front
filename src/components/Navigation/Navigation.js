@@ -83,8 +83,8 @@ class Navigation extends React.Component {
     }
 
     shelterButtons() {
-        const isLoggedIn = this.props.loggedIn;
-        const userRole = this.state.userRole;
+        const isLoggedIn = this.props.userData[0].loggedIn;
+        const userRole = this.props.userData[0].userRole;
         if (isLoggedIn && userRole === 'SHELTER') {
             return (
                 <ul className="float-right">
