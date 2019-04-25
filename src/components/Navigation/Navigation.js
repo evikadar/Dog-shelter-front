@@ -61,18 +61,31 @@ class Navigation extends React.Component {
     welcomeMessage() {
         const logged_in = this.props.userData[0].loggedIn? "" : "not";
         const profilePage = "/profile/" + this.props.userData[0].username;
+        const userRole = this.props.userData[0].userRole;
         if (this.props.userData[0].loggedIn) {
-            return(
-                <li>
-                    <NavLink exact activeClassName='active' to={profilePage}>
-                        Hi {this.props.userData[0].username}! You are {logged_in} logged in as a {this.props.userData[0].userRole}
-                    </NavLink>
-                </li>
-            )
+            if (userRole === "POTENTIAL_PET_OWNER") {
+                return(
+                    <li>
+                        <NavLink exact activeClassName='active' to={profilePage}>
+                            Hi {this.props.userData[0].username}! You are {logged_in} logged in as a {userRole}
+                        </NavLink>
+                    </li>
+                )
+            } else {
+                return(
+                    <li>
+                        <NavLink className='nav-link disabled' to={profilePage}>
+                            Hi {this.props.userData[0].username}! You are {logged_in} logged in as a {userRole}
+                        </NavLink>
+                    </li>
+                )
+
+            }
+
         } else {
             return(
                 <li>
-                    <NavLink to={"/dogs"}>
+                    <NavLink className='nav-link disabled' to={"/dogs"}>
                         Hi {this.props.userData[0].username}! You are {logged_in} logged in.
                     </NavLink>
                 </li>
