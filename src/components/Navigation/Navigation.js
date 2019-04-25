@@ -33,8 +33,6 @@ class Navigation extends React.Component {
         );
     }
 
-    // Todo: add an onclick function to the logOut button so that it actually logs out the user
-
     homeButton(){
         const userRole = this.props.userData[0].userRole;
         if (userRole !== 'SHELTER'){
