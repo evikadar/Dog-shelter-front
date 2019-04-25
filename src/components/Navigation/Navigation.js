@@ -21,7 +21,7 @@ class Navigation extends React.Component {
         return (
             <Wrapper>
                 <img alt="logo of a dog" height={50} width={50}
-                     src={'../../doglogo.png'}/>
+                     src={'/doglogo.png'}/>
                 <ul>
                     {this.homeButton()}
                     {this.dogsButton()}
