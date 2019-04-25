@@ -18,14 +18,36 @@ import ShelterDogDetailsPage from "./components/ShelterDogDetailsPage/ShelterDog
 class App extends React.Component {
 
     state = {
-        username: 'Guest',
-        loggedIn: false
+        userData: [{
+            username: 'Guest',
+            loggedIn: false,
+            userRole: 'SHELTER',
+            shelterId: 0
+
+        }]
     };
 
-    handleLogin = (user) => {
+    handleLogin = (userData) => {
         this.setState({
-            username: user,
-            loggedIn: true,
+            userData: [{
+                username: userData.username,
+                loggedIn: true,
+                userRole: userData.userRole,
+                shelterId: userData.shelterId,
+
+            }]
+        })
+    };
+
+    logOut = () => {
+        console.log("logOut");
+        this.setState({
+            userData: [{
+                username: 'Guest',
+                loggedIn: false,
+                userRole: 'SHELTER',
+                shelterId: 0,
+            }]
         })
     };
 
@@ -35,7 +57,7 @@ class App extends React.Component {
                 <>
                     <div style={{height: 1000}}>
                         <div className="App sticky-top">
-                            <Navigation username={this.state.username} loggedIn={this.state.loggedIn}/>
+                            <Navigation userData={this.state.userData} logOut={this.logOut}/>
                         </div>
                         <Switch>
                             <Route exact path={'/'} component={LandingPage}/>
@@ -51,20 +73,20 @@ class App extends React.Component {
                                 path={'/login'}
                                 render={(routeProps) => (
                                     <Login {...routeProps}
-                                           username={this.state.username}
-                                           loggedIn={this.state.loggedIn}
-                                           handleLogin={this.handleLogin}/>
+                                           userData = {this.state.userData}
+                                           handleLogin={this.handleLogin} />
                                 )}
                             />
                             <Route
                                 path={'/register'}
                                 render={(routeProps) => (
                                     <Register {...routeProps}
-                                              username={this.state.username}
-                                              loggedIn={this.state.loggedIn}/>
+                                              userData = {this.state.userData}
+                                    />
                                 )}
                             />
                             <Route exact path={"/shelter/:id/edit"} component={ShelterEdit}/>
+                            <Route exact path={"/dogs/shelter/:id"} component={DogListByShelter}/>
                         </Switch>
                     </div>
                     <Footer/>

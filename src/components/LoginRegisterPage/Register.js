@@ -6,8 +6,13 @@ class Register extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {username: '', password1: '', password2: '', email: ''};
-
+        this.state = {
+            username: '',
+            password1: '',
+            password2: '',
+            email: '',
+            selectedO: 'asShelter',
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -58,16 +63,29 @@ class Register extends React.Component {
                 <form action={this.props.action} method="post" onSubmit={this.handleSubmit}>
                     <h1>Register</h1>
                     <p className="text-muted">Create your account</p>
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                        <span className="input-group-text">
-                        <i className="icon-user"/>
-                        </span>
+                    <div className="input-group mb-4">
+                        <div className="custom-control custom-radio custom-control-inline">
+                            <input
+                                type="radio"
+                                value="asOwner"
+                                checked={this.state.selectedO === "asOwner"}
+                                onChange={this.handleRadioChange}
+                            />
+                            <label className="text-muted"> Register As Owner</label>
                         </div>
-                        <input className="form-control" type="text" name="username"
-                               onChange={this.handleChange}
-                               placeholder="Username"/>
+                        <div className="custom-control custom-radio custom-control-inline">
+                            <input
+                                type="radio"
+                                value="asShelter"
+                                checked={this.state.selectedO === "asShelter"}
+                                onChange={this.handleRadioChange}
+                            />
+                            <label className="text-muted"> Register As Shelter</label>
+                        </div>
                     </div>
+
+                    {this.renderUserNameByRole()}
+
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
                             <span className="input-group-text">@</span>
@@ -96,34 +114,52 @@ class Register extends React.Component {
                                onChange={this.handleChange}
                                placeholder="Repeat password"/>
                     </div>
-                    {this.registerAs()}
+
                     <div>
                         <button className="btn btn-block btn-success" type="submit">Create Account</button>
                     </div>
                 </form>
             </div>
-
         )
-
     }
 
-    registerAs() {
-        return (
-            <div className="input-group mb-4">
-                <div className="custom-control custom-radio custom-control-inline">
-                    <input type="radio" defaultChecked={true} id="registerAs1" name="registerAs"
-                           className="custom-control-input"/>
-                    <label className="custom-control-label text-muted" htmlFor="registerAs1">I Register As Pet
-                        Shelter</label>
+    handleRadioChange = changeEvent => {
+        this.setState({
+            selectedO: changeEvent.target.value,
+        })
+    };
+    
+    renderUserNameByRole() {
+        if (this.state.selectedO === 'asShelter') {
+            return(
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text">
+                        <i className="icon-user"/>
+                        </span>
+                    </div>
+                    <input className="form-control" type="text" name="username"
+                           onChange={this.handleChange}
+                           placeholder="Shelter Name"/>
                 </div>
-                <div className="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="registerAs2" name="registerAs"
-                           className="custom-control-input"/>
-                    <label className="custom-control-label text-muted" htmlFor="registerAs2">I Register As Pet
-                        Owner</label>
+
+            )
+        } else if (this.state.selectedO === 'asOwner') {
+            return(
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text">
+                        <i className="icon-user"/>
+                        </span>
+                    </div>
+                    <input className="form-control" type="text" name="username"
+                           onChange={this.handleChange}
+                           placeholder="UserName"/>
                 </div>
-            </div>
-        )
+
+            )
+        }
+        
     }
 }
 

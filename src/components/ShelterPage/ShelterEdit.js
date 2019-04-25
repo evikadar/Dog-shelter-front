@@ -2,6 +2,11 @@ import React from "react";
 
 class ShelterEdit extends React.Component {
 
+    shelterFormData = [
+        "shelterName", "shelterEmail", "shelterPhoneNumber", "shelterAddressCountry",
+        "shelterAddressCity", "shelterAddressAddress", "shelterAddressZip", "description"
+    ];
+
     constructor(props) {
         super(props);
         this.state = {
@@ -20,48 +25,47 @@ class ShelterEdit extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.routeChange = this.routeChange.bind(this);
-    }
-
-    createJSONFromFormData(){
-        let formData = {
-            id: this.state.shelterData[0].id,
-            name: this.state.shelterName,
-            email: this.state.shelterEmail,
-            phoneNumber: this.state.shelterPhoneNumber,
-            address: {
-                country: this.state.shelterAddressCountry,
-                city: this.state.shelterAddressCity,
-                address: this.state.shelterAddressAddress,
-                zipCode: this.state.shelterAddressZip,
-                id: this.state.shelterData[0].address ? this.state.shelterData[0].address.id : null
-            },
-            shelterDescription: this.state.description
-        };
-        return JSON.stringify(formData);
+        this.fileInput = React.createRef();
     }
 
     handleChange(event) {
-        const {name, value} = event.target;
-        this.setState({[name]: value});
+        const target = event.target;
+        const value = target.value;
+        const key = target.name;
+
+        this.setState({
+            [key]: value
+        });
     }
 
     handleSubmit(event) {
         event.preventDefault();
+        let data = this.getShelterFormData();
         const options = {
             method: 'post',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
             },
-            body: this.createJSONFromFormData()
+            body: data
         };
 
         fetch(`http://localhost:8080/shelter/${this.props.match.params.id}/edit`, options)
-            .then(response => {if (response.ok){
-                this.routeChange();
-            }})
+            .then(response => {
+                if (response.ok) {
+                    this.routeChange();
+                }
+            })
             .catch(error => this.setState({error}));
 
+    }
+
+    getShelterFormData() {
+        let data = new FormData();
+        for (let key of this.shelterFormData) {
+            data.append(key, this.state[key]);
+        }
+        data.append("file", this.fileInput.current.files[0]);
+        return data;
     }
 
     componentDidMount() {
@@ -76,9 +80,9 @@ class ShelterEdit extends React.Component {
                     shelterEmail: details.email,
                     shelterPhoneNumber: details.phoneNumber,
                     shelterAddressCountry: details.address ? details.address.country : "",
-                    shelterAddressCity: details.address ? details.address.city: "",
-                    shelterAddressAddress: details.address ? details.address.address: "",
-                    shelterAddressZip: details.address ? details.address.zipCode: "",
+                    shelterAddressCity: details.address ? details.address.city : "",
+                    shelterAddressAddress: details.address ? details.address.address : "",
+                    shelterAddressZip: details.address ? details.address.zipCode : "",
                     description: details.shelterDescription,
                     isLoaded: true,
                     shelterData: result,
@@ -86,8 +90,6 @@ class ShelterEdit extends React.Component {
                 })
 
             });
-
-
     }
 
     render() {
@@ -101,13 +103,6 @@ class ShelterEdit extends React.Component {
             </div>
         )
     }
-
-    /*
-    <div className="col m-2">
-    <label htmlFor="shelter-logo-file">Upload shelter logo:</label>
-    <input type="file" className="form-control-file" id="shelter-logo-file"/>
-    </div>
-    */
 
     routeChange() {
         let path = `/shelter/${this.props.match.params.id}`;
@@ -126,18 +121,26 @@ class ShelterEdit extends React.Component {
                             <h3 className="text-center m-3">General and contact data:</h3>
                             <div className="row mt-0 ml-3 mr-3 mb-3">
                                 <div className="col m-2">
-                                    <label htmlFor="shelter-name">Shelter name:</label>
+                                    <label htmlFor="shelter-name">Shelter name: <span
+                                        style={{color: 'red'}}>* required</span></label>
                                     <input type="text" className="form-control" id="shelter-name" name="shelterName"
                                            onChange={this.handleChange}
-                                           defaultValue={shelter.name}/>
+                                           defaultValue={shelter.name} required/>
+                                </div>
+                                <div className="col m-2">
+                                    <label htmlFor="shelter-logo-file">Upload shelter logo:</label>
+                                    <input type="file" className="form-control-file" id="shelter-logo-file"
+                                           accept="image/*" ref={this.fileInput}/>
+
                                 </div>
                             </div>
                             <div className="row mt-0 ml-3 mr-3 mb-3">
                                 <div className="col m-2">
-                                    <label htmlFor="shelter-email">E-mail:</label>
+                                    <label htmlFor="shelter-email">E-mail: <span
+                                        style={{color: 'red'}}>* required</span></label>
                                     <input type="text" className="form-control" id="shelter-email" name="shelterEmail"
                                            onChange={this.handleChange}
-                                           placeholder="Example input" defaultValue={shelter.email}/>
+                                           placeholder="Example input" defaultValue={shelter.email} required/>
                                 </div>
                                 <div className="col m-2">
                                     <label htmlFor="shelter-phone">Phone number:</label>
@@ -195,11 +198,13 @@ class ShelterEdit extends React.Component {
 
                         <div className="row m-3">
                             <div className="col text-right">
-                                <button type="cancel" className="btn btn-light" value="Cancel" onClick={this.routeChange}>Go back to profile</button>
+                                <button type="cancel" className="btn btn-light" value="Cancel"
+                                        onClick={this.routeChange}>Go back to profile
+                                </button>
                             </div>
                             <div className="col text-left">
                                 <button type="submit" className="btn btn-success" value="Submit"
-                                        >
+                                >
                                     Save changes
                                 </button>
                             </div>

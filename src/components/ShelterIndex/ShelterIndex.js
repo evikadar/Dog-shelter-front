@@ -1,13 +1,16 @@
 import React from 'react'
 import './ShelterIndex.css'
 import NavLink from "react-router-dom/es/NavLink";
+import Pagination from 'react-js-pagination';
 
 class ShelterIndex extends React.Component {
+    DOGS_PER_PAGE = 3;
 
     constructor(props) {
         super(props);
         this.state = {
             isLoaded: false,
+            activePage: 1,
             dogData: [],
             shelterId: props.match.params.id
         };
@@ -34,10 +37,33 @@ class ShelterIndex extends React.Component {
                     <NavLink className="btn btn-dark m-3" to={`/shelter/${this.state.shelterId}/add-dog`}>Add new
                         dog</NavLink>
                 </div>
-                {this.renderDogCards()}
+                <div>
+                    {this.renderDogCards()}
+                </div>
+
+                <div aria-label="Page navigation" className={"d-flex justify-content-center"}>
+                    <Pagination
+                        className={'pagination'}
+                        itemClass='page-item page-link'
+                        prevPageText='prev'
+                        nextPageText='next'
+                        firstPageText='first'
+                        lastPageText='last'
+                        activePage={this.state.activePage}
+                        itemsCountPerPage={this.DOGS_PER_PAGE}
+                        totalItemsCount={this.state.dogData.length}
+                        pageRangeDisplayed={5}
+                        onChange={this.handlePageChange}
+                    />
+                </div>
             </div>
         );
     }
+
+    handlePageChange = (pageNumber) => {
+        console.log(`active page is ${pageNumber}`);
+        this.setState({activePage: pageNumber})
+    };
 
     renderDogCards() {
         return (
@@ -45,7 +71,7 @@ class ShelterIndex extends React.Component {
                 {this.state.dogData.length > 0 ? (
                     this.renderAllDogCards()
                 ) : (
-                    <div>Your dogs are loading...</div>
+                    <div>Upload your first dog!</div>
                 )
                 }
             </div>
@@ -53,9 +79,12 @@ class ShelterIndex extends React.Component {
     }
 
     renderAllDogCards() {
+        let activePage = this.state.activePage;
         let dogCards = [];
-        for (let i = 0; i < this.state.dogData.length; i++) {
-            let dog = this.state.dogData[i];
+        let dogData = this.state.dogData.slice((activePage - 1) * this.DOGS_PER_PAGE, activePage * this.DOGS_PER_PAGE);
+
+        for (let i = 0; i < dogData.length; i++) {
+            let dog = dogData[i];
             dogCards.push(<div>
                 <DogCard dogName={dog.name} dogStatus={dog.status} dogImage={dog.photoPath} dogGender={dog.gender}
                          dogBreed={dog.breed} dogSize={dog.size} dogAge={dog.age} isNeutered={dog.isNeutered}/>
