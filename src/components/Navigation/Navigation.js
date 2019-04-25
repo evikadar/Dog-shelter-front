@@ -21,16 +21,13 @@ class Navigation extends React.Component {
         return (
             <Wrapper>
                 <img alt="logo of a dog" height={50} width={50}
-                     src={`https://banner2.kisspng.com/20180630/ias/kisspng-arctic-wolf-dog-logo-bucky-barnes-drawing-5b37c2d6245b67.1298494215303810141489.jpg`}/>
+                     src={'../../doglogo.png'}/>
                 <ul>
                     <li>
                         <NavLink  exact activeClassName='active' to='/'>Home</NavLink>
                     </li>
                     <li>
                         <NavLink exact activeClassName='active' to='/dogs'>Dogs</NavLink>
-                    </li>
-                    <li>
-                        <NavLink exact activeClassName='active' to='/shelter/1/index'>Log in as Shelter</NavLink>
                     </li>
                     {this.buttonsByLogin()}
                     {this.welcomeMessage()}
@@ -63,18 +60,31 @@ class Navigation extends React.Component {
     welcomeMessage() {
         const logged_in = this.props.userData[0].loggedIn? "" : "not";
         const profilePage = "/profile/" + this.props.userData[0].username;
+        const userRole = this.props.userData[0].userRole;
         if (this.props.userData[0].loggedIn) {
-            return(
-                <li>
-                    <NavLink exact activeClassName='active' to={profilePage}>
-                        Hi {this.props.userData[0].username}! You are {logged_in} logged in as a {this.props.userData[0].userRole}
-                    </NavLink>
-                </li>
-            )
+            if (userRole === "POTENTIAL_PET_OWNER") {
+                return(
+                    <li>
+                        <NavLink exact activeClassName='active' to={profilePage}>
+                            Hi {this.props.userData[0].username}! You are {logged_in} logged in as a {userRole}
+                        </NavLink>
+                    </li>
+                )
+            } else {
+                return(
+                    <li>
+                        <NavLink className='nav-link disabled' to={profilePage}>
+                            Hi {this.props.userData[0].username}! You are {logged_in} logged in as a {userRole}
+                        </NavLink>
+                    </li>
+                )
+
+            }
+
         } else {
             return (
                 <li>
-                    <NavLink to={"/dogs"}>
+                    <NavLink className='nav-link disabled' to={"/dogs"}>
                         Hi {this.props.userData[0].username}! You are {logged_in} logged in.
                     </NavLink>
                 </li>
