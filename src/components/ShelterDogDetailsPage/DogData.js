@@ -4,6 +4,7 @@ class DogData extends React.Component {
 
     render() {
         let dogData = this.props.dogData;
+        console.log(dogData);
         let spanClassName = "cui-star px-2 text-warning";
         return (
             dogData ? (
@@ -12,13 +13,13 @@ class DogData extends React.Component {
                             {dogData.name}
                         </div>
                         <div className={"my-3"}>
-                            {dogData.breed}<span className={spanClassName}/>{dogData.gender}<span className={spanClassName}/>
-                            {dogData.isNeutered ? "Neutered / Spayed" : "Not Neutered / Spayed"} <span className={spanClassName}/>
-                            {dogData.size}
+                            {dogData.breedAsString}<span className={spanClassName}/>{dogData.genderAsString}<span className={spanClassName}/>
+                            {dogData.neutered ? "Neutered / Spayed" : "Not Neutered / Spayed"} <span className={spanClassName}/>
+                            {dogData.sizeAsString}
                         </div>
                         <div className={"my-3"}>
                             <h5>Status</h5>
-                            <div>{dogData.status}</div>
+                            <div>{dogData.statusAsString}</div>
                         </div>
                         <div className={"my-3"}>
                             <h5>Date of Birth</h5>
