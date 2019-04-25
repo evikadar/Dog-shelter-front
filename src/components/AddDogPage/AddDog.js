@@ -129,7 +129,8 @@ class AddDog extends React.Component {
         return (
             <div className="form-row m-3">
                 <div className="col">
-                    <label htmlFor="dogName">Name</label>
+                    <label htmlFor="dogName">Name:  <span
+                        style={{color: 'red'}}>* required</span></label>
                     <input required type="text" className="form-control" id="dogName" name="name"
                            value={this.state.name}
                            placeholder="Enter name" onChange={this.handleInputChange}/>
@@ -150,7 +151,8 @@ class AddDog extends React.Component {
         return (
             <div className="form-row m-3">
                 <div className="col">
-                    <label htmlFor="dateOfBirth">Date of birth</label>
+                    <label htmlFor="dateOfBirth">Date of birth:  <span
+                        style={{color: 'red'}}>* required</span></label>
                     <input id="dateOfBirth" name="dateOfBirth" required type="date" className="form-control"
                            value={this.state.dateOfBirth} placeholder="Enter date of birth"
                            onChange={this.handleInputChange}/>
@@ -171,7 +173,8 @@ class AddDog extends React.Component {
         return (
             <div className="form-row m-3">
                 <div className="col">
-                    <div>Gender</div>
+                    <div>Gender:  <span
+                        style={{color: 'red'}}>* required</span></div>
                     <div className="form-check form-check-inline">
                         <input required className="form-check-input" type="radio" name="gender" id="female"
                                value="FEMALE" onChange={this.handleInputChange}/>
@@ -184,7 +187,8 @@ class AddDog extends React.Component {
                     </div>
                 </div>
                 <div className="col">
-                    <div>Neutered</div>
+                    <div>Neutered?  <span
+                        style={{color: 'red'}}>* required</span></div>
                     <div className="form-check form-check-inline">
                         <input required className="form-check-input" type="radio" name="isNeutered" id="true"
                                value="true" onChange={this.handleInputChange}/>
