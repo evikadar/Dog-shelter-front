@@ -115,11 +115,6 @@ class ShelterDetails extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="m-2 text-center">
-                        <NavLink exact activeClassName='active'
-                                 to={`/shelter/${this.props.match.params.id}/edit`} className="btn btn-dark">
-                            <h4>Edit profile</h4></NavLink>
-                    </div>
                 </div>
             )
         }
@@ -132,7 +127,7 @@ class ShelterLogo extends React.Component {
         return (
             <div>
                 <img className="shelterLogo"
-                     src={"http://localhost:8080/" + this.props.shelterLogo} alt="logo"/>
+                     src={"http://localhost:8080/image/" + this.props.shelterLogo} alt="logo"/>
             </div>
         )
     }

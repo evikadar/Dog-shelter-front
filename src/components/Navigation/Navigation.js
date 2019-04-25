@@ -18,7 +18,6 @@ class Navigation extends React.Component {
     }
 
     render() {
-        console.log(this.state.userData);
         return (
             <Wrapper>
                 <img alt="logo of a dog" height={50} width={50}
@@ -32,7 +31,7 @@ class Navigation extends React.Component {
                     </li>
                     {this.buttonsByLogin()}
                     {this.welcomeMessage()}
-
+                    {this.shelterButtons()}
                 </ul>
             </Wrapper>
         );
@@ -83,7 +82,7 @@ class Navigation extends React.Component {
             }
 
         } else {
-            return(
+            return (
                 <li>
                     <NavLink className='nav-link disabled' to={"/dogs"}>
                         Hi {this.props.userData[0].username}! You are {logged_in} logged in.
@@ -91,8 +90,26 @@ class Navigation extends React.Component {
                 </li>
             )
         }
+    }
 
-
+    shelterButtons() {
+        const isLoggedIn = this.props.userData[0].loggedIn;
+        const userRole = this.props.userData[0].userRole;
+        if (isLoggedIn && userRole === 'SHELTER') {
+            return (
+                <ul className="float-right">
+                    <li>
+                        <NavLink exact activeClassName='active' to='/shelter/1' className='btn btn-outline-light'>My
+                            profile</NavLink>
+                    </li>
+                    <li>
+                        <NavLink exact activeClassName='active' to='/shelter/1/edit'
+                                 className='btn btn-outline-warning'>Edit my
+                            profile</NavLink>
+                    </li>
+                </ul>
+            )
+        }
     }
 }
 

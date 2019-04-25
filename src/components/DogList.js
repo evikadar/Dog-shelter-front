@@ -1,41 +1,67 @@
 import {NavLink} from "react-router-dom";
 import FilterPanel from "./FilterPanel/FilterPanel";
 import React from "react";
-
+import Pagination from 'react-js-pagination';
 
 class DogList extends React.Component {
+    DOGS_PER_PAGE = 3;
+
     constructor(props) {
         super(props);
-        this.state = {data: []};
+        this.state = {
+            data: [],
+            activePage: 1
+        };
         this.refreshDogCards = this.refreshDogCards.bind(this);
     }
 
     refreshDogCards(dogs) {
         this.setState({data: dogs});
         this.makeManyCards();
-    }
+    };
 
     render() {
+        let dogs = this.state.data;
         return (
             <div>
                 <FilterPanel invokeDataRefresh={this.refreshDogCards}/>
                 <div className="card-columns">
                     {this.makeManyCards()}
                 </div>
+                <div aria-label="Page navigation" className={"d-flex justify-content-center"}>
+                    <Pagination
+                        className={'pagination'}
+                        itemClass='page-item page-link'
+                        prevPageText='prev'
+                        nextPageText='next'
+                        firstPageText='first'
+                        lastPageText='last'
+                        activePage={this.state.activePage}
+                        itemsCountPerPage={this.DOGS_PER_PAGE}
+                        totalItemsCount={dogs.length}
+                        pageRangeDisplayed={5}
+                        onChange={this.handlePageChange}
+                    />
+                </div>
             </div>
-
         )
     }
 
+    handlePageChange = (pageNumber) => {
+        console.log(`active page is ${pageNumber}`);
+        this.setState({activePage: pageNumber})
+    };
+
     makeManyCards() {
-        let dogs = this.state.data;
-        let allTheDogs = [];
+        let activePage = this.state.activePage;
+        let dogs = this.state.data.slice((activePage - 1) * this.DOGS_PER_PAGE, activePage * this.DOGS_PER_PAGE);
+        let actualDogs = [];
 
         try {
             if (dogs[0].name) {
 
                 for (let i = 0; i < dogs.length; i++) {
-                    allTheDogs.push(
+                    actualDogs.push(
                         <div>
                             <span className='oneDog'
                                   key={i}>{this.makeACard(dogs[i].name, dogs[i].age, dogs[i].breed, dogs[i].photoPath, dogs[i].id)}</span>
@@ -46,7 +72,7 @@ class DogList extends React.Component {
         } catch (e) {
             console.log(e);
         }
-        return allTheDogs;
+        return actualDogs;
     }
 
     makeACard(dogName, dogAge, dogBreed, dogPhoto, dogId) {
