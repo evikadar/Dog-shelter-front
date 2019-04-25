@@ -30,9 +30,6 @@ class Navigation extends React.Component {
                     <li>
                         <NavLink exact activeClassName='active' to='/dogs'>Dogs</NavLink>
                     </li>
-                    <li>
-                        <NavLink exact activeClassName='active' to='/shelter/1/index'>Log in as Shelter</NavLink>
-                    </li>
                     {this.buttonsByLogin()}
                     {this.welcomeMessage()}
 
