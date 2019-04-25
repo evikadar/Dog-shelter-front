@@ -68,7 +68,8 @@ class Navigation extends React.Component {
         if (isLoggedIn) {
             return (
                 <li onClick={this.props.logOut}>
-                    <NavLink exact activeClassName='active' to='/'>LogOut</NavLink>
+                    <NavLink exact activeClassName='active' to='/' style={{color: 'red'}}>LogOut
+                        </NavLink>
                 </li>
             )
         } else {
