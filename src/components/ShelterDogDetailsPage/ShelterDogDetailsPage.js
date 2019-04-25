@@ -15,7 +15,7 @@ class ShelterDogDetailsPage extends React.Component {
             dogData: null,
             dogDescription: null,
             ownerInfo: null,
-            imagePath: ""
+            imagePath: null
         }
     }
 
@@ -51,7 +51,7 @@ class ShelterDogDetailsPage extends React.Component {
                     <div className="col-6 col-md-4">
                         <div className="card-body">
                             <DogImage className="card" imageClassName="card-img"
-                                      imagePath={this.state.imagePath.length > 0 ? "http://localhost:8080/image/" + this.state.imagePath : "/dummyDogImage.jpg"}/>
+                                      imagePath={this.state.imagePath ? `http://localhost:8080/image/${this.state.imagePath}` : "/dummyDogImage.jpg"}/>
                         </div>
                     </div>
                 </div>

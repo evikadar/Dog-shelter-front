@@ -86,8 +86,10 @@ class ShelterIndex extends React.Component {
         for (let i = 0; i < dogData.length; i++) {
             let dog = dogData[i];
             dogCards.push(<div>
-                <DogCard dogName={dog.name} dogStatus={dog.status} dogImage={dog.photoPath} dogGender={dog.gender}
-                         dogBreed={dog.breed} dogSize={dog.size} dogAge={dog.age} isNeutered={dog.isNeutered}/>
+                <DogCard dogName={dog.name} dogStatus={dog.status}
+                         dogImage={dog.photoPath} dogGender={dog.gender}
+                         dogBreed={dog.breed} dogSize={dog.size} dogAge={dog.age}
+                         isNeutered={dog.isNeutered} dogId={dog.id} shelterId={this.state.shelterId}/>
             </div>)
         }
         return dogCards;
@@ -101,7 +103,8 @@ class DogCard extends React.Component {
             <div className="card border-light mb-3">
                 <div className="card-header">{this.props.dogName}</div>
                 <div className="card-body">
-                    <img className="shelterDogImage card-img-left" src={"http://localhost:8080/image/" + this.props.dogImage}
+                    <img className="shelterDogImage card-img-left"
+                         src={this.props.dogImage ? `http://localhost:8080/image/${this.props.dogImage}` : "/dummyDogImage.jpg"}
                          alt="dog"/>
                     <div className="row">
                         <div className="col">
@@ -133,6 +136,10 @@ class DogCard extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <NavLink className="btn btn-dark m-3"
+                             to={`/shelter/${this.props.shelterId}/dog/${this.props.dogId}`}>
+                        Details
+                    </NavLink>
                 </div>
             </div>
         )
