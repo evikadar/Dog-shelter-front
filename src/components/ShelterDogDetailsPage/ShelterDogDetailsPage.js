@@ -44,27 +44,29 @@ class ShelterDogDetailsPage extends React.Component {
             <div className="container mt-4">
                 <div className="row">
                     <div className="col-12 col-md-8">
-                        <div className="card">
-                            <DogData className="card-body" dogData={this.state.dogData}/>
+                        <div className={"row"}>
+                            <div className={"card col-18 col-md-12"}>
+                                <DogData className="card-body" dogData={this.state.dogData}/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="card col-18 col-md-12">
+                                <DogDescription className="card-body" dogDescription={this.state.dogDescription}/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="card col-18 col-md-12">
+                                <OwnerInfo className="card-body" ownerInfo={this.state.ownerInfo}/>
+                            </div>
                         </div>
                     </div>
                     <div className="col-6 col-md-4">
-                        <div className="card-body">
-                            <DogImage className="card" imageClassName="card-img"
-                                      imagePath={this.state.imagePath ? `http://localhost:8080/image/${this.state.imagePath}` : "/dummyDogImage.jpg"}/>
-                        </div>
+                        <DogImage className="card" imageClassName="card-img"
+                                  imagePath={this.state.imagePath ? `http://localhost:8080/image/${this.state.imagePath}` : "/dummyDogImage.jpg"}/>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="card">
-                        <OwnerInfo className="card-body" ownerInfo={this.state.ownerInfo}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="card">
-                        <DogDescription className="card-body" dogDescription={this.state.dogDescription}/>
-                    </div>
-                </div>
+
+
             </div>
         )
     }

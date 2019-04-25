@@ -5,20 +5,20 @@ class OwnerInfo extends React.Component {
         let ownerInfo = this.props.ownerInfo;
         return (
             <div className={this.props.className}>
-                <h3>Owner/Candidate information</h3>
+                <h4>Owner/Candidate information</h4>
                 {ownerInfo ? (
                     <div>
-                        <div>
-                            <h4>Name</h4>
+                        <div className={"my-3"}>
+                            <h5>Name</h5>
                             <div>{ownerInfo.name}</div>
                         </div>
-                        <div>
-                            <h4>Phone</h4>
+                        <div className={"my-3"}>
+                            <h5>Phone</h5>
                             <div>{ownerInfo.phoneNumber}</div>
                         </div>
-                        <div>
-                            <h4>Email</h4>
-                            <div>{ownerInfo.name}</div>
+                        <div className={"my-3"}>
+                            <h5>Email</h5>
+                            <div>{ownerInfo.email}</div>
                         </div>
                     </div>
                 ) : <div>No information</div>}

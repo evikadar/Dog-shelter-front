@@ -5,19 +5,19 @@ class DogDescription extends React.Component {
         let dogDescription = this.props.dogDescription;
         return (
             <div className={this.props.className}>
-                <h3>Description</h3>
+                <h4>Description</h4>
                 {dogDescription ? (
                     <div>
-                        <div>
-                            <h4>Personality trait</h4>
+                        <div className={"my-3"}>
+                            <h5>Personality trait</h5>
                             <div>{dogDescription.personalityTrait}</div>
                         </div>
-                        <div>
-                            <h4>Dream home</h4>
+                        <div className={"my-3"}>
+                            <h5>Dream home</h5>
                             <div>{dogDescription.dreamHome}</div>
                         </div>
-                        <div>
-                            <h4>Specialties</h4>
+                        <div className={"my-3"}>
+                            <h5>Specialties</h5>
                             <div>{dogDescription.specialFeatures}</div>
                         </div>
                     </div>
