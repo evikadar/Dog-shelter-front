@@ -1,7 +1,7 @@
 import React from "react";
 import FormSelect from "./FormSelect";
 
-class AddDog extends React.Component {
+class EditDog extends React.Component {
 
     dogData = [
         "shelterId", "name", "dateOfBirth",
@@ -14,7 +14,8 @@ class AddDog extends React.Component {
         super(props);
         this.state = {
             isLoaded: false,
-            shelterId: props.match.params.id,
+            shelterId: props.match.params.shelterId,
+            id: props.match.params.id,
             name: "",
             dateOfBirth: "",
             breed: "",
@@ -46,10 +47,33 @@ class AddDog extends React.Component {
                 let statuses = this.getOptionsArray(result.statuses);
                 this.setState(
                     {
-                        isLoaded: true,
                         sizeOptions: sizes,
                         breedOptions: breeds,
                         statusOptions: statuses
+                    }
+                )
+            }).catch(function (err) {
+            console.log(err);
+        });
+        fetch(`http://localhost:8080/shelter/${this.state.shelterId}/dog/${this.state.id}`)
+            .then(response => response.json())
+            .then((result) => {
+                this.setState(
+                    {
+                        isLoaded: true,
+                        name: result.name,
+                        dateOfBirth: result.dateOfBirth,
+                        breed: result.breed,
+                        size: result.size,
+                        gender: result.gender,
+                        isNeutered: result.isNeutered,
+                        status: result.status,
+                        personalityTrait: result.description ? result.description.personalityTrait : null,
+                        dreamHome: result.description ? result.description.dreamHome : null,
+                        specialFeatures: result.description ? result.description.specialFeatures : null,
+                        ownerName: result.owner && result.owner.name ? result.owner.name : "",
+                        ownerPhoneNumber: result.owner && result.owner.phoneNumber ? result.owner.phoneNumber : "",
+                        ownerEmail: result.owner && result.owner.email ? result.owner.email : ""
                     }
                 )
             }).catch(function (err) {
@@ -79,10 +103,11 @@ class AddDog extends React.Component {
         event.preventDefault();
         let data = this.getDogFormData();
         const options = {
-            method: "post",
+            method: "put",
             body: data
         };
-        fetch("http://localhost:8080/shelter/dog", options).then(response => {
+        fetch(`http://localhost:8080/shelter/${this.state.shelterId}/dog/${this.state.id}`, options)
+            .then(response => {
             if (response.ok) {
                 window.location.href = `/shelter/${this.state.shelterId}/index`;
             }
@@ -294,4 +319,4 @@ class AddDog extends React.Component {
     }
 }
 
-export default AddDog;
+export default EditDog;
