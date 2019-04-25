@@ -22,7 +22,7 @@ class Navigation extends React.Component {
         return (
             <Wrapper>
                 <img alt="logo of a dog" height={50} width={50}
-                     src={`https://banner2.kisspng.com/20180630/ias/kisspng-arctic-wolf-dog-logo-bucky-barnes-drawing-5b37c2d6245b67.1298494215303810141489.jpg`}/>
+                     src={'../../doglogo.png'}/>
                 <ul>
                     <li>
                         <NavLink  exact activeClassName='active' to='/'>Home</NavLink>

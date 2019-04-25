@@ -45,7 +45,7 @@ class ShelterIndex extends React.Component {
                 {this.state.dogData.length > 0 ? (
                     this.renderAllDogCards()
                 ) : (
-                    <div>Your dogs are loading...</div>
+                    <div>Upload your first dog!</div>
                 )
                 }
             </div>
