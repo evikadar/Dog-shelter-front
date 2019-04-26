@@ -78,12 +78,12 @@ class ShelterEdit extends React.Component {
                 this.setState({
                     shelterName: details.name,
                     shelterEmail: details.email,
-                    shelterPhoneNumber: details.phoneNumber,
+                    shelterPhoneNumber: details.phoneNumber ? details.phoneNumber : "",
                     shelterAddressCountry: details.address ? details.address.country : "",
                     shelterAddressCity: details.address ? details.address.city : "",
                     shelterAddressAddress: details.address ? details.address.address : "",
-                    shelterAddressZip: details.address ? details.address.zipCode : "",
-                    description: details.shelterDescription,
+                    shelterAddressZip: details.address && details.address.zipCode ? details.address.zipCode : "",
+                    description: details.shelterDescription ? details.shelterDescription : "",
                     isLoaded: true,
                     shelterData: result,
 
